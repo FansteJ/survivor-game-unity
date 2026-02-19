@@ -29,4 +29,9 @@ public class ApiManager : MonoBehaviour
     {
         this.token = token;
     }
+
+    public string GetToken()
+    {
+        return token;
+    }
 }
