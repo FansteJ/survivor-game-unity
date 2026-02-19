@@ -34,6 +34,9 @@ public class LoginUIManager : MonoBehaviour
 
     private void OnError(string error)
     {
-        errorText.SetText(error);
+        if (string.IsNullOrEmpty(error))
+            errorText.SetText("Invalid username or password");
+        else
+            errorText.SetText(error);
     }
 }
