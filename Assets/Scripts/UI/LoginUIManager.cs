@@ -24,12 +24,17 @@ public class LoginUIManager : MonoBehaviour
     
     private void RegisterLogin()
     {
-        AuthManager.Instance.Register(usernameInput.text, passwordInput.text, OnSuccess, OnError);
+        AuthManager.Instance.Register(usernameInput.text, passwordInput.text, OnSuccessRegister, OnError);
     }
 
     private void OnSuccess()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void OnSuccessRegister()
+    {
+        // TODO
     }
 
     private void OnError(string error)
