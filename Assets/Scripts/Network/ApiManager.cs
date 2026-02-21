@@ -7,6 +7,8 @@ public class ApiManager : MonoBehaviour
     public string baseUrl = "http://localhost:8080";
     private string token {  get; set; }
 
+    public UserProfileDTO CurrentProfile { get; private set; }
+
     void Awake()
     {
         if(Instance == null)
@@ -33,5 +35,10 @@ public class ApiManager : MonoBehaviour
     public string GetToken()
     {
         return token;
+    }
+
+    public void SetProfile(UserProfileDTO dto)
+    {
+        CurrentProfile = dto;
     }
 }

@@ -29,7 +29,7 @@ public class LoginUIManager : MonoBehaviour
 
     private void OnSuccess()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Loading");
     }
 
     private void OnSuccessRegister()

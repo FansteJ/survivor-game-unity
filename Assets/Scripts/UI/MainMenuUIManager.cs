@@ -18,24 +18,20 @@ public class MainMenuUIManager : MonoBehaviour
 
     void Start()
     {
-        ProfileManager.Instance.GetProfile(OnSuccess, OnError);
+        UserProfileDTO dto = ApiManager.Instance.CurrentProfile;
+        FillUI(dto);
         // playButton.onClick.AddListener();
         // shopButton.onClick.AddListener();
         // leaderboardButton.onClick.AddListener();
         // logoutButton.onClick.AddListener();
     }
 
-    private void OnSuccess(UserProfileDTO dto)
+    private void FillUI(UserProfileDTO dto)
     {
         usernameText.SetText("Welcome " + dto.username);
         levelText.SetText(dto.level + "LVL");
         xpText.SetText(dto.currentXp + " / " + dto.neededXp);
         goldText.SetText(dto.gold + " Gold");
         gemsText.SetText(dto.gems + " Gems");
-    }
-
-    private void OnError(string error)
-    {
-        Debug.Log("Error: " + error);
     }
 }
