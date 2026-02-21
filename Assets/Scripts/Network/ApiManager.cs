@@ -41,4 +41,10 @@ public class ApiManager : MonoBehaviour
     {
         CurrentProfile = dto;
     }
+
+    public void Logout()
+    {
+        token = null;
+        CurrentProfile = null;
+    }
 }

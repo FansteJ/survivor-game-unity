@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuUIManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class MainMenuUIManager : MonoBehaviour
         // playButton.onClick.AddListener();
         // shopButton.onClick.AddListener();
         // leaderboardButton.onClick.AddListener();
-        // logoutButton.onClick.AddListener();
+        logoutButton.onClick.AddListener(Logout);
     }
 
     private void FillUI(UserProfileDTO dto)
@@ -33,5 +34,11 @@ public class MainMenuUIManager : MonoBehaviour
         xpText.SetText(dto.currentXp + " / " + dto.neededXp);
         goldText.SetText(dto.gold + " Gold");
         gemsText.SetText(dto.gems + " Gems");
+    }
+
+    private void Logout()
+    {
+        ApiManager.Instance.Logout();
+        SceneManager.LoadScene("Login");
     }
 }
