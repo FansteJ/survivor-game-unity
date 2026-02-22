@@ -402,6 +402,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 5
+  jumpforce: 100
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +569,7 @@ GameObject:
   - component: {fileID: 1356382485}
   - component: {fileID: 1356382484}
   - component: {fileID: 1356382483}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
