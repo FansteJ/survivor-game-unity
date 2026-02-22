@@ -21,7 +21,7 @@ public class MainMenuUIManager : MonoBehaviour
     {
         UserProfileDTO dto = ApiManager.Instance.CurrentProfile;
         FillUI(dto);
-        // playButton.onClick.AddListener();
+        playButton.onClick.AddListener(StartGame);
         // shopButton.onClick.AddListener();
         // leaderboardButton.onClick.AddListener();
         logoutButton.onClick.AddListener(Logout);
@@ -40,5 +40,20 @@ public class MainMenuUIManager : MonoBehaviour
     {
         ApiManager.Instance.Logout();
         SceneManager.LoadScene("Login");
+    }
+
+    private void StartGame()
+    {
+        GameSessionManager.Instance.StartGame(OnSuccessStartGame, OnErrorStartGame);
+    }
+
+    private void OnSuccessStartGame(string response)
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    private void OnErrorStartGame(string error)
+    {
+        Debug.LogError(error);
     }
 }

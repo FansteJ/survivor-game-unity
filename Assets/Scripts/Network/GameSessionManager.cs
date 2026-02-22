@@ -8,6 +8,8 @@ public class GameSessionManager : MonoBehaviour
 {
     public static GameSessionManager Instance { get; private set; }
 
+    public string CurrentSessionId { get; private set; }
+
     void Awake()
     {
         if(Instance == null)
@@ -40,6 +42,7 @@ public class GameSessionManager : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
+                CurrentSessionId = request.downloadHandler.text;
                 onSuccess(request.downloadHandler.text);
             }
             else
