@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
             currentTime -= spawnInterval;
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             Vector3 spawnPos = new Vector3(playerTransform.position.x + Mathf.Cos(angle) * spawnRadius,
-                2, playerTransform.position.z + Mathf.Sin(angle) * spawnRadius);
+                playerTransform.position.y + 0.1f, playerTransform.position.z + Mathf.Sin(angle) * spawnRadius);
             if (timeSinceStart >= 120f)
             {
                 SpawnGameObject(enemyPrefabs[2], spawnPos);

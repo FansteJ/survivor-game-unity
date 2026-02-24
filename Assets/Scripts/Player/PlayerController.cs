@@ -29,7 +29,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = direction * speed;
+        float currentYVelocity = rb.linearVelocity.y;
+
+        Vector3 newVelocity = direction * speed;
+        newVelocity.y = currentYVelocity;
+
+        rb.linearVelocity = newVelocity;
     }
 
     private bool IsGrounded()
