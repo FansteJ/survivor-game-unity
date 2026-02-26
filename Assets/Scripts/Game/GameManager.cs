@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         duration += Time.deltaTime;   
     }
 
-    void EnemyKilled(string uuid)
+    public void EnemyKilled(string uuid)
     {
         if (enemiesKilled.ContainsKey(uuid))
             enemiesKilled[uuid]++;
