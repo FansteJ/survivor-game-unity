@@ -210,3 +210,4 @@ MonoBehaviour:
   uuid: 
   maxHealth: 50
   currentHealth: 0
+  coinDrop: 67

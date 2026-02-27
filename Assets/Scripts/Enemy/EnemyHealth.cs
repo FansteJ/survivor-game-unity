@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
+    public int coinDrop;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -24,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         GameManager.Instance.EnemyKilled(uuid);
+        CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
         Destroy(gameObject);
     }
 }
