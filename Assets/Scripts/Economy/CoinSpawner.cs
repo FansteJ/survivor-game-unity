@@ -9,7 +9,7 @@ public class CoinSpawner : MonoBehaviour
     public GameObject coinPrefab25;
     public GameObject coinPrefab100;
 
-    public float spawnRadius = 0.2f;
+    public float spawnRadius = 0.67f;
 
     private void Awake()
     {
@@ -53,6 +53,7 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnGameObject(GameObject coin, Vector3 position)
     {
-        Instantiate(coin, position, Quaternion.identity);
+        GameObject newCoin = Instantiate(coin, position, Quaternion.identity);
+        newCoin.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.Impulse);
     }
 }

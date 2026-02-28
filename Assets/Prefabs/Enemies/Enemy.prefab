@@ -147,7 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 5
   stopDistance: 1.45
-  bloodPrefab: {fileID: 5968282843112744275, guid: 21c016af5f38ada40a03138c9abde379, type: 3}
   damage: 10
   damageCooldown: 1
 --- !u!65 &-4884899750022307930
@@ -187,6 +186,7 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 0
   coinDrop: 67
+  damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
 --- !u!195 &3252521389075552224
 NavMeshAgent:
   m_ObjectHideFlags: 0

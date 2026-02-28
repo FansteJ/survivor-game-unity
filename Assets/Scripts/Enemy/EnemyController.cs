@@ -34,6 +34,17 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(playerTransform.position);
+
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
+
         animator.SetFloat("Speed", agent.velocity.magnitude);
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);

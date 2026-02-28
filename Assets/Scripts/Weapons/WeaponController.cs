@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     {
         weapons = new List<Weapon> ();
         currentTimes = new List<float> ();
-        weapons.Add(new Weapon {attackSpeed = 1, damage = 10, description = "Beginner's weapon", name = "Wooden sword", radius = 1f});
+        weapons.Add(new Weapon {attackSpeed = 1, damage = 10, description = "Beginner's weapon", name = "Wooden sword", radius = 2f});
         currentTimes.Add(0);
     }
 
@@ -36,25 +36,16 @@ public class WeaponController : MonoBehaviour
     void Attack(Weapon weapon)
     {
         Collider[] hits = Physics.OverlapSphere(playerTransform.position, weapon.radius);
-        Collider closest = null;
-        float closestDistance = float.MaxValue;
 
         foreach(Collider hit in hits)
         {
             if (hit.CompareTag("Enemy"))
             {
-                float distance = Vector3.Distance(playerTransform.position, hit.transform.position);
-                if (distance < closestDistance)
+                if(Vector3.Dot(playerTransform.forward, (hit.transform.position - playerTransform.position).normalized) > 0)
                 {
-                    closestDistance = distance;
-                    closest = hit;
+                    hit.GetComponent<EnemyHealth>().TakeDamage(weapon.damage);
                 }
             }
-        }
-
-        if(closest != null)
-        {
-            closest.GetComponent<EnemyHealth>().TakeDamage(weapon.damage);
         }
     }
 }
