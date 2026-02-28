@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
     public float jumpforce = 5.0f;
 
     public LayerMask groundLayer;
-    private bool isGrounded;
+    private float lastJumpTime;
+    public float jumpCooldown = 2f;
 
     Rigidbody rb;
     Vector3 direction;
@@ -24,9 +25,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > lastJumpTime + jumpCooldown)
         {
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+            lastJumpTime = Time.time;
         }
         animator.SetFloat("Speed", direction.magnitude);
         if(direction.magnitude > 0)
@@ -48,6 +50,6 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
+        return Physics.Raycast(transform.position, Vector3.down, 1.01f, groundLayer);
     }
 }

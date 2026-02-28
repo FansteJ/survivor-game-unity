@@ -5,15 +5,12 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
-    public Rigidbody rb;
-
     private void Start()
     {
         currentHealth = maxHealth;
-        rb = GetComponent<Rigidbody>();
     }
 
-    public void TakeDamage(float damage, Vector3 knockbackDirection, float knockbackForce)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
