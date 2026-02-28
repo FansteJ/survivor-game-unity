@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     Vector3 direction;
 
+    private Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        }
+        animator.SetFloat("Speed", direction.magnitude);
+        if(direction.magnitude > 0)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
         }
     }
 
