@@ -27,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
     {
         GameManager.Instance.EnemyKilled(uuid);
         CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
-        Destroy(gameObject);
+        GetComponent<Animator>().SetTrigger("Die");
+        Destroy(gameObject, 1f);
     }
 }

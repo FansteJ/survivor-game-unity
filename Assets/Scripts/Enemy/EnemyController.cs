@@ -3,37 +3,61 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform playerTransform;
+    private Transform playerTransform;
+    private PlayerHealth playerHealth;
+    
     public float speed;
+    public float stopDistance = 1.5f;
     NavMeshAgent agent;
+
+    private Animator animator;
 
     public float damage = 10f;
     public float damageCooldown = 1f;
     private float lastDamageTime;
 
-    public float stopDistance = 0.25f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+
         agent.speed = speed;
         agent.stoppingDistance = stopDistance;
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        GameObject player = GameObject.FindWithTag("Player");
+        playerTransform = player.transform;
+        playerHealth = playerTransform.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
         agent.SetDestination(playerTransform.position);
+        animator.SetFloat("Speed", agent.velocity.magnitude);
+
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+        if (distanceToPlayer <= stopDistance && Time.time >= lastDamageTime + damageCooldown)
+        {
+            AttackPlayer();
+        }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void AttackPlayer()
     {
-        if (other.gameObject.CompareTag("Player") && Time.time > lastDamageTime + damageCooldown)
+        lastDamageTime = Time.time;
+
+        animator.SetTrigger("Attack");
+    }
+
+    public void Hit()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+        if(distanceToPlayer <= stopDistance + 0.5f)
         {
-            lastDamageTime = Time.time;
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            playerHealth.TakeDamage(damage);
         }
     }
 }
