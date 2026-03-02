@@ -14,17 +14,27 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    public Transform cameraTransform;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        cameraTransform = Camera.main.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+        direction = forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal");
+
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > lastJumpTime + jumpCooldown)
         {
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
