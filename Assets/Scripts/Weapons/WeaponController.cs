@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -10,6 +9,25 @@ public class WeaponController : MonoBehaviour
 
     private Animator animator;
     private Weapon currentAttackingWeapon;
+
+    public static WeaponController Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void ApplyDamageUpgrade(float value)
+    {
+        foreach (Weapon weapon in weapons)
+            weapon.damage *= (1 + value);
+    }
+
+    public void ApplyAttackSpeedUpgrade(float value)
+    {
+        foreach (Weapon weapon in weapons)
+            weapon.attackSpeed *= (1 + value);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,7 +74,7 @@ public class WeaponController : MonoBehaviour
             {
                 if(Vector3.Dot(playerTransform.forward, (hit.transform.position - playerTransform.position).normalized) > 0.5f)
                 {
-                    hit.GetComponent<EnemyHealth>().TakeDamage(currentAttackingWeapon.damage);
+                    hit.GetComponent<EnemyHealth>().TakeDamage(currentAttackingWeapon.damage * PlayerStats.Instance.DamageMultiplier);
                 }
             }
         }
