@@ -57,47 +57,66 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.WeaponDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Weapon Damage";
-                upgrade.description = $"+{upgrade.value} damage";
+                upgrade.description = $"Weapon damage: " +
+                    $"{WeaponController.Instance.weapons[0].damage} " +
+                    $"-> {WeaponController.Instance.weapons[0].damage * (1 + upgrade.value)}";
                 break;
+
             case UpgradeType.WeaponAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Attack Speed";
-                upgrade.description = $"+{upgrade.value} attack speed";
+                upgrade.description = $"Weapon attack speed: " +
+                    $"{WeaponController.Instance.weapons[0].attackSpeed} " +
+                    $"-> {WeaponController.Instance.weapons[0].attackSpeed * (1+ upgrade.value)}";
                 break;
+
             case UpgradeType.PlayerDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Player Damage";
-                upgrade.description = $"+{upgrade.value}% damage";
+                upgrade.description = $"Player damage: {PlayerStats.Instance.DamageMultiplier} " +
+                    $"-> {PlayerStats.Instance.DamageMultiplier + upgrade.value}";
                 break;
+
             case UpgradeType.PlayerAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Player Attack Speed";
-                upgrade.description = $"+{upgrade.value} attack speed";
+                upgrade.description = $"Player attack speed: {PlayerStats.Instance.AttackSpeedMultiplier} " +
+                    $"-> {PlayerStats.Instance.AttackSpeedMultiplier + upgrade.value}";
                 break;
+
             case UpgradeType.PlayerMaxHealth:
                 upgrade.value = 5f * multiplier;
                 upgrade.name = "Max Health";
-                upgrade.description = $"+{upgrade.value} max health";
+                upgrade.description = $"Max health: {PlayerHealth.Instance.maxHealth} " +
+                    $"-> {PlayerHealth.Instance.maxHealth + upgrade.value}";
                 break;
+
             case UpgradeType.Luck:
                 upgrade.value = 1f * multiplier;
                 upgrade.name = "Luck";
-                upgrade.description = $"+{upgrade.value} luck";
+                upgrade.description = $"Luck: {PlayerStats.Instance.LuckMultiplier} " +
+                    $"-> {PlayerStats.Instance.LuckMultiplier + upgrade.value}";
                 break;
+
             case UpgradeType.XpGain:
-                upgrade.value = 5f * multiplier;
+                upgrade.value = 0.05f * multiplier;
                 upgrade.name = "XP Gain";
-                upgrade.description = $"+{upgrade.value}% xp gain";
+                upgrade.description = $"XP gain: {PlayerStats.Instance.XPGainMultiplier * 100 }% " +
+                    $"-> {(PlayerStats.Instance.XPGainMultiplier + upgrade.value)*100}%";
                 break;
+
             case UpgradeType.GoldGain:
-                upgrade.value = 5f * multiplier;
+                upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Gold Gain";
-                upgrade.description = $"+{upgrade.value}% gold gain";
+                upgrade.description = $"Gold gain: {PlayerStats.Instance.GoldMultiplier * 100}% " +
+                    $"-> {(PlayerStats.Instance.GoldMultiplier + upgrade.value) * 100}%";
                 break;
+
             case UpgradeType.HealthRegeneration:
                 upgrade.value = 1f * multiplier;
                 upgrade.name = "Health Regen";
-                upgrade.description = $"+{upgrade.value} hp/s";
+                upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen} hp/s " +
+                    $"-> {PlayerStats.Instance.HealthRegen + upgrade.value} hp/s";
                 break;
         }
 
@@ -107,9 +126,20 @@ public class UpgradeManager : MonoBehaviour
     public List<UpgradeOption> GetThreeUpgrades()
     {
         List<UpgradeOption> upgrades = new List<UpgradeOption>();
-        for (int i = 0; i < 3; i++)
+        while (upgrades.Count < 3)
         {
-            upgrades.Add(GetRandomUpgrade());
+            UpgradeOption newUpgrade = GetRandomUpgrade();
+            bool isDuplicate = false;
+            foreach (UpgradeOption upgrade in upgrades)
+            {
+                if (upgrade.upgradeType == newUpgrade.upgradeType)
+                {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate)
+                upgrades.Add(newUpgrade);
         }
         return upgrades;
     }

@@ -32,6 +32,10 @@ public class ChestUIManager : MonoBehaviour
             TMP_Text[] texts = upgradeCard.GetComponentsInChildren<TMP_Text>();
             texts[0].text = upgradeOption.name;
             texts[1].text = upgradeOption.description;
+
+            Image cardImage = upgradeCard.GetComponent<Image>();
+            cardImage.color = GetRarityColor(upgradeOption.rarity);
+
             UpgradeCard card = upgradeCard.AddComponent<UpgradeCard>();
             card.upgrade = upgradeOption;
             upgradeCard.GetComponent<Button>().onClick.AddListener(card.OnClick);
@@ -56,4 +60,16 @@ public class ChestUIManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    private Color GetRarityColor(Rarity rarity)
+    {
+        switch (rarity)
+        {
+            case Rarity.Common: return new Color(0.4f, 0.4f, 0.4f, 0.85f);
+            case Rarity.Uncommon: return new Color(0.1f, 0.5f, 0.1f, 0.85f);
+            case Rarity.Rare: return new Color(0.1f, 0.3f, 0.7f, 0.85f);
+            case Rarity.Epic: return new Color(0.5f, 0.1f, 0.7f, 0.85f);
+            case Rarity.Legendary: return new Color(0.8f, 0.6f, 0.0f, 0.85f);
+            default: return Color.gray;
+        }
+    }
 }
