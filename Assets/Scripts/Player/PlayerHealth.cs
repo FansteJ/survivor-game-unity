@@ -12,7 +12,6 @@ public class PlayerHealth : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         } else
         {
             Destroy(gameObject);
@@ -22,6 +21,14 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+    }
+
+    private void Update()
+    {
+        if(PlayerStats.Instance.HealthRegen > 0)
+        {
+            Heal(PlayerStats.Instance.HealthRegen * Time.deltaTime);
+        }
     }
 
     public void AddMaxHealth(float value)

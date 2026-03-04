@@ -12,7 +12,6 @@ public class CoinManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -22,7 +21,6 @@ public class CoinManager : MonoBehaviour
 
     public void AddCoin(int value)
     {
-        balance += value;
-        Debug.Log("Balance: " + balance);
+        balance += Mathf.RoundToInt(value * PlayerStats.Instance.GoldMultiplier);
     }
 }

@@ -47,7 +47,7 @@ public class WeaponController : MonoBehaviour
         foreach (Weapon weapon in weapons)
         {
             currentTimes[i] += Time.deltaTime;
-            if (currentTimes[i] >= 1f / weapon.attackSpeed)
+            if (currentTimes[i] >= 1f / (weapon.attackSpeed * PlayerStats.Instance.AttackSpeedMultiplier))
             {
                 currentTimes[i] = 0;
                 StartAttackAnimation(weapons[i]);

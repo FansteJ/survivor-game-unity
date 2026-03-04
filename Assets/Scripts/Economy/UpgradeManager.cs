@@ -20,27 +20,43 @@ public class UpgradeManager : MonoBehaviour
 
     private Rarity GetRandomRarity()
     {
+        int rolls = 1 + Mathf.FloorToInt(PlayerStats.Instance.LuckMultiplier / 5f);
+        Rarity best = Rarity.Common;
+        for (int i = 0; i < rolls; i++)
+        {
+            Rarity r = RollRarity();
+            if (r > best) best = r;
+        }
+        return best;
+    }
+
+    private Rarity RollRarity()
+    {
         float value = Random.value;
         Rarity rarity;
 
         if (value < 0.5)
         {
             rarity = Rarity.Common;
-        } else if(value < 0.75)
+        }
+        else if (value < 0.75)
         {
             rarity = Rarity.Uncommon;
-        } else if(value < 0.9)
+        }
+        else if (value < 0.9)
         {
             rarity = Rarity.Rare;
-        } else if(value < 0.98)
+        }
+        else if (value < 0.98)
         {
             rarity = Rarity.Epic;
-        } else
+        }
+        else
         {
             rarity = Rarity.Legendary;
         }
 
-            return rarity;
+        return rarity;
     }
 
     private UpgradeOption GetRandomUpgrade()
@@ -58,65 +74,65 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Weapon Damage";
                 upgrade.description = $"Weapon damage: " +
-                    $"{WeaponController.Instance.weapons[0].damage} " +
-                    $"-> {WeaponController.Instance.weapons[0].damage * (1 + upgrade.value)}";
+                    $"{WeaponController.Instance.weapons[0].damage:F1} " +
+                    $"-> {WeaponController.Instance.weapons[0].damage * (1 + upgrade.value):F1}";
                 break;
 
             case UpgradeType.WeaponAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Attack Speed";
                 upgrade.description = $"Weapon attack speed: " +
-                    $"{WeaponController.Instance.weapons[0].attackSpeed} " +
-                    $"-> {WeaponController.Instance.weapons[0].attackSpeed * (1+ upgrade.value)}";
+                    $"{WeaponController.Instance.weapons[0].attackSpeed:F1} " +
+                    $"-> {WeaponController.Instance.weapons[0].attackSpeed * (1+ upgrade.value):F1}";
                 break;
 
             case UpgradeType.PlayerDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Player Damage";
-                upgrade.description = $"Player damage: {PlayerStats.Instance.DamageMultiplier} " +
-                    $"-> {PlayerStats.Instance.DamageMultiplier + upgrade.value}";
+                upgrade.description = $"Player damage: {PlayerStats.Instance.DamageMultiplier:F1} " +
+                    $"-> {PlayerStats.Instance.DamageMultiplier + upgrade.value:F1}";
                 break;
 
             case UpgradeType.PlayerAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Player Attack Speed";
-                upgrade.description = $"Player attack speed: {PlayerStats.Instance.AttackSpeedMultiplier} " +
-                    $"-> {PlayerStats.Instance.AttackSpeedMultiplier + upgrade.value}";
+                upgrade.description = $"Player attack speed: {PlayerStats.Instance.AttackSpeedMultiplier:F1} " +
+                    $"-> {PlayerStats.Instance.AttackSpeedMultiplier + upgrade.value:F1}";
                 break;
 
             case UpgradeType.PlayerMaxHealth:
                 upgrade.value = 5f * multiplier;
                 upgrade.name = "Max Health";
-                upgrade.description = $"Max health: {PlayerHealth.Instance.maxHealth} " +
-                    $"-> {PlayerHealth.Instance.maxHealth + upgrade.value}";
+                upgrade.description = $"Max health: {PlayerHealth.Instance.maxHealth:F0} " +
+                    $"-> {PlayerHealth.Instance.maxHealth + upgrade.value:F0}";
                 break;
 
             case UpgradeType.Luck:
                 upgrade.value = 1f * multiplier;
                 upgrade.name = "Luck";
-                upgrade.description = $"Luck: {PlayerStats.Instance.LuckMultiplier} " +
-                    $"-> {PlayerStats.Instance.LuckMultiplier + upgrade.value}";
+                upgrade.description = $"Luck: {PlayerStats.Instance.LuckMultiplier:F0} " +
+                    $"-> {PlayerStats.Instance.LuckMultiplier + upgrade.value:F0}";
                 break;
 
             case UpgradeType.XpGain:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "XP Gain";
-                upgrade.description = $"XP gain: {PlayerStats.Instance.XPGainMultiplier * 100 }% " +
-                    $"-> {(PlayerStats.Instance.XPGainMultiplier + upgrade.value)*100}%";
+                upgrade.description = $"XP gain: {PlayerStats.Instance.XPGainMultiplier * 100:F0}% " +
+                    $"-> {(PlayerStats.Instance.XPGainMultiplier + upgrade.value)*100:F0}%";
                 break;
 
             case UpgradeType.GoldGain:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Gold Gain";
-                upgrade.description = $"Gold gain: {PlayerStats.Instance.GoldMultiplier * 100}% " +
-                    $"-> {(PlayerStats.Instance.GoldMultiplier + upgrade.value) * 100}%";
+                upgrade.description = $"Gold gain: {PlayerStats.Instance.GoldMultiplier * 100:F0}% " +
+                    $"-> {(PlayerStats.Instance.GoldMultiplier + upgrade.value) * 100:F0}%";
                 break;
 
             case UpgradeType.HealthRegeneration:
                 upgrade.value = 1f * multiplier;
                 upgrade.name = "Health Regen";
-                upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen} hp/s " +
-                    $"-> {PlayerStats.Instance.HealthRegen + upgrade.value} hp/s";
+                upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen:F0} hp/s " +
+                    $"-> {PlayerStats.Instance.HealthRegen + upgrade.value:F0} hp/s";
                 break;
         }
 

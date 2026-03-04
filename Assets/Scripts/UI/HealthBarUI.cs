@@ -18,7 +18,7 @@ public class HealthBarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthSlider.value = playerHealth.currentHealth / playerHealth.maxHealth * 100;
+        healthSlider.value = Mathf.RoundToInt(playerHealth.currentHealth / playerHealth.maxHealth * 100);
         healthText.SetText(playerHealth.currentHealth + " / " + playerHealth.maxHealth);
     }
 }
