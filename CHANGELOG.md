@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.2.0...v1.3.0) (2026-03-05)
+
+
+### Features
+
+* add balance UI ([096af65](https://github.com/FansteJ/survivor-game-unity/commit/096af65f5fa5367f4e443a3bc48e92c04afb5b8e))
+* add chest spawner with dynamic pricing ([e0ad02a](https://github.com/FansteJ/survivor-game-unity/commit/e0ad02a4e19498b5cb8bede662a2d5ea7d02732d))
+* add chest system with upgrade cards and player stats ([a2f3c6e](https://github.com/FansteJ/survivor-game-unity/commit/a2f3c6e5a7db1c2eba22bfbbab0aca1a4882d17c))
+* add coins, CoinPickup, CoinSpawner, CoinManager ([1ac56fa](https://github.com/FansteJ/survivor-game-unity/commit/1ac56fa40abd638c058d359f6a290bbe0c83f860))
+* add enemy AI movement ([8f12de0](https://github.com/FansteJ/survivor-game-unity/commit/8f12de0cdf3b88041a61fe41e1750a22ea29d0bf))
+* add enemy animations ([f2f0eec](https://github.com/FansteJ/survivor-game-unity/commit/f2f0eec9bd214addddd36a0ebe1e50a40b70d09e))
+* add enemy spawner ([b0bd758](https://github.com/FansteJ/survivor-game-unity/commit/b0bd758e16c7342707ce6d0b778254618387ea01))
+* add EnemyHealth ([5eb82dc](https://github.com/FansteJ/survivor-game-unity/commit/5eb82dc197b17fa7d84a89db3906a7b220c1c052))
+* add GameManager with session tracking and game over ([ad52c5f](https://github.com/FansteJ/survivor-game-unity/commit/ad52c5f65dc03881248e25df2f0081cc7c99cb1e))
+* add health bar UI ([a06a6c6](https://github.com/FansteJ/survivor-game-unity/commit/a06a6c6683b87b4d146b3b0589fd3126201c7fbf))
+* add health system and enemy damage ([14a6274](https://github.com/FansteJ/survivor-game-unity/commit/14a627460a9279e58812f2e327473de829740f2e))
+* add navmesh pathfinding, player animations and movement improvement ([b2d53a1](https://github.com/FansteJ/survivor-game-unity/commit/b2d53a14d93d7ec363cd2924c1521132490f608c))
+* add orbit camera and camera relative player movement ([7af16a4](https://github.com/FansteJ/survivor-game-unity/commit/7af16a43e6ae9175cfee978680ba20bd01eca22f))
+* add player attack animation ([1d93b43](https://github.com/FansteJ/survivor-game-unity/commit/1d93b430207aa12b5d8196d8af7b956103c9b772))
+* add player jumping ([a3cda0e](https://github.com/FansteJ/survivor-game-unity/commit/a3cda0ec384c97bfaec913356547b3b613161a86))
+* add player movement and camera follow ([d97220b](https://github.com/FansteJ/survivor-game-unity/commit/d97220b0219aaeb41b5e2d1f2d15b4fd8cbc0b66))
+* add player walk and idle animations and movement rotation ([4218fad](https://github.com/FansteJ/survivor-game-unity/commit/4218fad975c18f53a7fb3a251fea2641f75bc689))
+* add weapon system with auto attack ([86bbb41](https://github.com/FansteJ/survivor-game-unity/commit/86bbb410de62f11c2a6801ae31e04e57ee5bd162))
+* implement player stats and luck system ([f183b6f](https://github.com/FansteJ/survivor-game-unity/commit/f183b6f8dc3b1d78837f28b384812826dd426cbc))
+* improve chest UI visuals and upgrade descriptions ([abf0d45](https://github.com/FansteJ/survivor-game-unity/commit/abf0d45f619a6e4c751ba4b9ed1059fb3b679aed))
+* modify sword attack and add enemy hit flash and damage numbers ([76efa70](https://github.com/FansteJ/survivor-game-unity/commit/76efa70beeb5d9cb2af5e0392203cd46115c5bca))
+
 ## [1.2.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.1.0...v1.2.0) (2026-02-22)
 
 
