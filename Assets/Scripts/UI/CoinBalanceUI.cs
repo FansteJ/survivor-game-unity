@@ -8,6 +8,6 @@ public class CoinBalanceUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goldText.text = CoinManager.Instance.Balance.ToString();
+        goldText.text = Mathf.FloorToInt(CoinManager.Instance.Balance).ToString();
     }
 }

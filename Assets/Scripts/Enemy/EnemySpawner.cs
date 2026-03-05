@@ -28,10 +28,10 @@ public class EnemySpawner : MonoBehaviour
                 playerTransform.position.y + 0.1f, playerTransform.position.z + Mathf.Sin(angle) * spawnRadius);
             if (timeSinceStart >= 120f)
             {
-                SpawnGameObject(enemyPrefabs[2], spawnPos);
+                SpawnGameObject(enemyPrefabs[0], spawnPos);
             } else if(timeSinceStart >= 60f)
             {
-                SpawnGameObject(enemyPrefabs[1], spawnPos);
+                SpawnGameObject(enemyPrefabs[0], spawnPos);
             } else if(timeSinceStart >= 5f)
             {
                 SpawnGameObject(enemyPrefabs[0], spawnPos);

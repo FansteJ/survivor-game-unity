@@ -4,8 +4,8 @@ public class CoinManager : MonoBehaviour
 {
     public static CoinManager Instance { get; private set; }
 
-    private int balance;
-    public int Balance => balance;
+    private float balance;
+    public float Balance => balance;
 
     private void Awake()
     {
@@ -21,6 +21,11 @@ public class CoinManager : MonoBehaviour
 
     public void AddCoin(int value)
     {
-        balance += Mathf.RoundToInt(value * PlayerStats.Instance.GoldMultiplier);
+        balance += value * PlayerStats.Instance.GoldMultiplier;
+    }
+
+    public void SpendCoins(int amount)
+    {
+        balance -= amount;
     }
 }

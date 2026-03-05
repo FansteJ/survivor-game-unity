@@ -74,30 +74,31 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Weapon Damage";
                 upgrade.description = $"Weapon damage: " +
-                    $"{WeaponController.Instance.weapons[0].damage:F1} " +
-                    $"-> {WeaponController.Instance.weapons[0].damage * (1 + upgrade.value):F1}";
+                    $"{WeaponController.Instance.weapons[0].damage:F2} " +
+                    $"-> {WeaponController.Instance.weapons[0].damage * (1 + upgrade.value):F2}";
                 break;
 
             case UpgradeType.WeaponAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Attack Speed";
                 upgrade.description = $"Weapon attack speed: " +
-                    $"{WeaponController.Instance.weapons[0].attackSpeed:F1} " +
-                    $"-> {WeaponController.Instance.weapons[0].attackSpeed * (1+ upgrade.value):F1}";
+                    $"{WeaponController.Instance.weapons[0].attackSpeed:F2} " +
+                    $"-> {WeaponController.Instance.weapons[0].attackSpeed * (1+ upgrade.value):F2}";
                 break;
 
             case UpgradeType.PlayerDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Player Damage";
-                upgrade.description = $"Player damage: {PlayerStats.Instance.DamageMultiplier:F1} " +
-                    $"-> {PlayerStats.Instance.DamageMultiplier + upgrade.value:F1}";
+                upgrade.description = $"Player damage: {PlayerStats.Instance.DamageMultiplier:F2} " +
+                    $"-> {PlayerStats.Instance.DamageMultiplier + upgrade.value:F2}";
                 break;
 
             case UpgradeType.PlayerAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Player Attack Speed";
-                upgrade.description = $"Player attack speed: {PlayerStats.Instance.AttackSpeedMultiplier:F1} " +
-                    $"-> {PlayerStats.Instance.AttackSpeedMultiplier + upgrade.value:F1}";
+                upgrade.description = $"Player attack speed: " +
+                    $"{PlayerStats.Instance.AttackSpeedMultiplier:F2} " +
+                    $"-> {PlayerStats.Instance.AttackSpeedMultiplier + upgrade.value:F2}";
                 break;
 
             case UpgradeType.PlayerMaxHealth:
