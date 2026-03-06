@@ -82,9 +82,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1258883397076928546}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8009419068921728926}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
@@ -100,9 +97,6 @@ PrefabInstance:
       addedObject: {fileID: -8414694992075145342}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6119575420121257828}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -8062695689495501983}
   m_SourcePrefab: {fileID: 100100000, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
 --- !u!1 &1254494051094020328 stripped
@@ -110,29 +104,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
   m_PrefabInstance: {fileID: 2137435625769532857}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &1258883397076928546
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 0.29
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.43, z: 0}
 --- !u!114 &8009419068921728926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +156,7 @@ MonoBehaviour:
   uuid: 
   maxHealth: 50
   currentHealth: 0
-  coinDrop: 67
+  coinDrop: 10
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
 --- !u!195 &3252521389075552224
 NavMeshAgent:
@@ -236,27 +207,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &-6119575420121257828
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 192
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &-8062695689495501983
 Animator:
   serializedVersion: 7

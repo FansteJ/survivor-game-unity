@@ -20,13 +20,13 @@ public class WeaponController : MonoBehaviour
     public void ApplyDamageUpgrade(float value)
     {
         foreach (Weapon weapon in weapons)
-            weapon.damage *= (1 + value);
+            weapon.damage += value;
     }
 
     public void ApplyAttackSpeedUpgrade(float value)
     {
         foreach (Weapon weapon in weapons)
-            weapon.attackSpeed *= (1 + value);
+            weapon.attackSpeed += value;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,7 +34,7 @@ public class WeaponController : MonoBehaviour
     {
         weapons = new List<Weapon> ();
         currentTimes = new List<float> ();
-        weapons.Add(new Weapon {attackSpeed = 1, damage = 10, description = "Beginner's weapon", name = "Wooden sword", radius = 2f});
+        weapons.Add(new Weapon {attackSpeed = 1, damage = 10, description = "Beginner's weapon", name = "Wooden sword", radius = 4f});
         currentTimes.Add(0);
 
         animator = GetComponent<Animator> ();

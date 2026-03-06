@@ -59,10 +59,10 @@ public class UpgradeManager : MonoBehaviour
         return rarity;
     }
 
-    private UpgradeOption GetRandomUpgrade()
+    private NormalUpgradeOption GetRandomUpgrade()
     {
-        UpgradeOption upgrade = new UpgradeOption();
-        upgrade.upgradeType =  (UpgradeType)Random.Range(0, System.Enum.GetValues(typeof(UpgradeType)).Length);
+        NormalUpgradeOption upgrade = new NormalUpgradeOption();
+        upgrade.upgradeType =  (NormalUpgradeType)Random.Range(0, System.Enum.GetValues(typeof(NormalUpgradeType)).Length);
         upgrade.rarity = GetRandomRarity();
 
         float[] rarityMultipliers = { 1f, 2f, 4f, 7f, 10f };
@@ -70,30 +70,30 @@ public class UpgradeManager : MonoBehaviour
 
         switch (upgrade.upgradeType)
         {
-            case UpgradeType.WeaponDamage:
+            case NormalUpgradeType.WeaponDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Weapon Damage";
                 upgrade.description = $"Weapon damage: " +
                     $"{WeaponController.Instance.weapons[0].damage:F2} " +
-                    $"-> {WeaponController.Instance.weapons[0].damage * (1 + upgrade.value):F2}";
+                    $"-> {WeaponController.Instance.weapons[0].damage + upgrade.value:F2}";
                 break;
 
-            case UpgradeType.WeaponAttackSpeed:
+            case NormalUpgradeType.WeaponAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Attack Speed";
                 upgrade.description = $"Weapon attack speed: " +
                     $"{WeaponController.Instance.weapons[0].attackSpeed:F2} " +
-                    $"-> {WeaponController.Instance.weapons[0].attackSpeed * (1+ upgrade.value):F2}";
+                    $"-> {WeaponController.Instance.weapons[0].attackSpeed + upgrade.value:F2}";
                 break;
 
-            case UpgradeType.PlayerDamage:
+            case NormalUpgradeType.PlayerDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Player Damage";
                 upgrade.description = $"Player damage: {PlayerStats.Instance.DamageMultiplier:F2} " +
                     $"-> {PlayerStats.Instance.DamageMultiplier + upgrade.value:F2}";
                 break;
 
-            case UpgradeType.PlayerAttackSpeed:
+            case NormalUpgradeType.PlayerAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Player Attack Speed";
                 upgrade.description = $"Player attack speed: " +
@@ -101,35 +101,35 @@ public class UpgradeManager : MonoBehaviour
                     $"-> {PlayerStats.Instance.AttackSpeedMultiplier + upgrade.value:F2}";
                 break;
 
-            case UpgradeType.PlayerMaxHealth:
+            case NormalUpgradeType.PlayerMaxHealth:
                 upgrade.value = 5f * multiplier;
                 upgrade.name = "Max Health";
                 upgrade.description = $"Max health: {PlayerHealth.Instance.maxHealth:F0} " +
                     $"-> {PlayerHealth.Instance.maxHealth + upgrade.value:F0}";
                 break;
 
-            case UpgradeType.Luck:
+            case NormalUpgradeType.Luck:
                 upgrade.value = 1f * multiplier;
                 upgrade.name = "Luck";
                 upgrade.description = $"Luck: {PlayerStats.Instance.LuckMultiplier:F0} " +
                     $"-> {PlayerStats.Instance.LuckMultiplier + upgrade.value:F0}";
                 break;
 
-            case UpgradeType.XpGain:
+            case NormalUpgradeType.XpGain:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "XP Gain";
                 upgrade.description = $"XP gain: {PlayerStats.Instance.XPGainMultiplier * 100:F0}% " +
                     $"-> {(PlayerStats.Instance.XPGainMultiplier + upgrade.value)*100:F0}%";
                 break;
 
-            case UpgradeType.GoldGain:
+            case NormalUpgradeType.GoldGain:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Gold Gain";
                 upgrade.description = $"Gold gain: {PlayerStats.Instance.GoldMultiplier * 100:F0}% " +
                     $"-> {(PlayerStats.Instance.GoldMultiplier + upgrade.value) * 100:F0}%";
                 break;
 
-            case UpgradeType.HealthRegeneration:
+            case NormalUpgradeType.HealthRegeneration:
                 upgrade.value = 1f * multiplier;
                 upgrade.name = "Health Regen";
                 upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen:F0} hp/s " +
@@ -140,14 +140,63 @@ public class UpgradeManager : MonoBehaviour
         return upgrade;
     }
 
+    private SpecialUpgradeOption GetRandomSpecialUpgrade()
+    {
+        SpecialUpgradeOption upgrade = new SpecialUpgradeOption();
+        upgrade.upgradeType = (SpecialUpgradeType)Random.Range(0, System.Enum.GetValues(typeof(SpecialUpgradeType)).Length);
+        upgrade.rarity = GetRandomRarity();
+
+        float[] rarityMultipliers = { 1f, 2f, 4f, 7f, 10f };
+        float multiplier = rarityMultipliers[(int)upgrade.rarity];
+
+        switch (upgrade.upgradeType)
+        {
+            case SpecialUpgradeType.Coinflip:
+                upgrade.value = 50f * multiplier;
+                upgrade.name = "Coinflip";
+                upgrade.description = $"50/50: Win or lose {upgrade.value:F0} coins";
+                break;
+            case SpecialUpgradeType.BloodPact:
+                upgrade.value = multiplier;
+                upgrade.name = "Blood Pact";
+                upgrade.description = $"+{upgrade.value * 10:F0}% damage, -{30:F0}% max HP";
+                break;
+        }
+        return upgrade;
+    }
+
+    public List<UpgradeOption> GetLevelUpUpgrades()
+    {
+        List<UpgradeOption> upgrades = new List<UpgradeOption>();
+        while (upgrades.Count < 2)
+        {
+            SpecialUpgradeOption newUpgrade = GetRandomSpecialUpgrade();
+            bool isDuplicate = false;
+            foreach (SpecialUpgradeOption upgrade in upgrades)
+            {
+                if(upgrade.upgradeType == newUpgrade.upgradeType)
+                {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate)
+            {
+                upgrades.Add(newUpgrade);
+            }
+        }
+        upgrades.Add(GetRandomUpgrade());
+        return upgrades;
+    }
+
     public List<UpgradeOption> GetThreeUpgrades()
     {
         List<UpgradeOption> upgrades = new List<UpgradeOption>();
         while (upgrades.Count < 3)
         {
-            UpgradeOption newUpgrade = GetRandomUpgrade();
+            NormalUpgradeOption newUpgrade = GetRandomUpgrade();
             bool isDuplicate = false;
-            foreach (UpgradeOption upgrade in upgrades)
+            foreach (NormalUpgradeOption upgrade in upgrades)
             {
                 if (upgrade.upgradeType == newUpgrade.upgradeType)
                 {

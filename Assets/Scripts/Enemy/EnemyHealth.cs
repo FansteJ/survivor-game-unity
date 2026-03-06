@@ -9,21 +9,27 @@ public class EnemyHealth : MonoBehaviour
     public float currentHealth;
 
     public int coinDrop;
+    public float xpReward = 10f;
 
     private Renderer[] renderers;
     private Color originalColor;
     public GameObject damageNumberPrefab;
+    private Animator animator;
 
     private void Start()
     {
         currentHealth = maxHealth;
-
+        animator = GetComponent<Animator>();
         renderers = GetComponentsInChildren<Renderer>();
         originalColor = renderers[0].material.color;
     }
 
     public void TakeDamage(float damage)
     {
+        if (currentHealth <= 0)
+        {
+            return;
+        }
         currentHealth -= damage;
         GameObject dmgNum = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
         dmgNum.GetComponentInChildren<TMP_Text>().text = $"-{damage}";
@@ -37,10 +43,16 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        Collider col = GetComponent<Collider>();
+        col.enabled = false;
+        GetComponent<EnemyController>().enabled = false;
+        this.enabled = false;
+
         GameManager.Instance.EnemyKilled(uuid);
         CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
+        ExperienceManager.Instance.AddXP(xpReward);
 
-        GetComponent<Animator>().SetTrigger("Die");
+        animator.SetTrigger("Die");
         Destroy(gameObject, 1f);
     }
 
