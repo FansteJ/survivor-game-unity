@@ -32,7 +32,7 @@ public class EnemyHealth : MonoBehaviour
         }
         currentHealth -= damage;
         GameObject dmgNum = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
-        dmgNum.GetComponentInChildren<TMP_Text>().text = $"-{damage}";
+        dmgNum.GetComponentInChildren<TMP_Text>().text = $"-{damage:F1}";
         StartCoroutine(FlashRed());
         if (currentHealth <= 0)
         {

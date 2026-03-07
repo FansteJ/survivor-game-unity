@@ -4,7 +4,9 @@ public class ExperienceManager : MonoBehaviour
 {
     public static ExperienceManager Instance { get; private set; }
     private float currentXP;
+    public float CurrentXP => currentXP;
     private int currentLevel;
+    public float CurrentLevel => currentLevel;
 
     private void Awake()
     {
@@ -27,7 +29,6 @@ public class ExperienceManager : MonoBehaviour
             currentLevel++;
             OnLevelUp();
         }
-        Debug.Log($"XP: {currentXP}/{GetXPForNextLevel()} Level: {currentLevel}");
     }
 
     public float GetXPForNextLevel()
