@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,8 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     private float duration;
+    public float Duration => duration;
     private Dictionary<string, int> enemiesKilled;
-
+    public int TotalEnemiesKilled => enemiesKilled.Values.Sum();
     private void Awake()
     {
         if(Instance == null)
@@ -44,8 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0;
-
         if (GameSessionManager.Instance == null || GameSessionManager.Instance.CurrentSessionId == null)
         {
             Debug.LogWarning("No active game session, skipping FinishGame");

@@ -6,6 +6,8 @@ public class CoinManager : MonoBehaviour
 
     private float balance;
     public float Balance => balance;
+    private float totalCoinsCollected;
+    public float TotalCoinsCollected => totalCoinsCollected;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class CoinManager : MonoBehaviour
     public void AddCoin(int value)
     {
         balance += value * PlayerStats.Instance.GoldMultiplier;
+        totalCoinsCollected += value * PlayerStats.Instance.GoldMultiplier;
     }
 
     public void SpendCoins(int amount)

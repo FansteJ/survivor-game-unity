@@ -71,7 +71,7 @@ public class UpgradeManager : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case NormalUpgradeType.WeaponDamage:
-                upgrade.value = 0.05f * multiplier;
+                upgrade.value = 0.5f * multiplier;
                 upgrade.name = "Weapon Damage";
                 upgrade.description = $"Weapon damage: " +
                     $"{WeaponController.Instance.weapons[0].damage:F2} " +

@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
+
     private void Awake()
     {
         if(Instance == null)
@@ -59,6 +60,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        GameManager.Instance.GameOver();
+        Time.timeScale = 0;
+        GameOverUIManager.Instance.ShowGameOver();
     }
 }
