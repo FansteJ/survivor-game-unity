@@ -5,11 +5,7 @@ public class CoinPickup : MonoBehaviour
     public float rotationSpeed = 90f;
     public int value = 1;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public GameObject prefab;
 
     // Update is called once per frame
     void Update()
@@ -21,8 +17,13 @@ public class CoinPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            PoolManager.Instance.Return(prefab, gameObject);
             CoinManager.Instance.AddCoin(value);
         }
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
     }
 }

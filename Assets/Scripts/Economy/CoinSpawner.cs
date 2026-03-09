@@ -16,7 +16,6 @@ public class CoinSpawner : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -53,7 +52,8 @@ public class CoinSpawner : MonoBehaviour
 
     private void SpawnGameObject(GameObject coin, Vector3 position)
     {
-        GameObject newCoin = Instantiate(coin, position, Quaternion.identity);
+        GameObject newCoin = PoolManager.Instance.Get(coin, position);
+        newCoin.GetComponent<CoinPickup>().prefab = coin;
         newCoin.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.Impulse);
     }
 }

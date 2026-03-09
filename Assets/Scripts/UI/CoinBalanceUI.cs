@@ -5,9 +5,19 @@ public class CoinBalanceUI : MonoBehaviour
 {
     public TMP_Text goldText;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        goldText.text = Mathf.FloorToInt(CoinManager.Instance.Balance).ToString();
+        CoinManager.Instance.OnBalanceChanged += UpdateBalance;
+        UpdateBalance();
+    }
+
+    void UpdateBalance()
+    {
+        goldText.text = CoinManager.Instance.Balance.ToString("F0");
+    }
+
+    private void OnDestroy()
+    {
+        CoinManager.Instance.OnBalanceChanged -= UpdateBalance;
     }
 }

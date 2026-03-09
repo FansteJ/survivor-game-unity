@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ExperienceManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class ExperienceManager : MonoBehaviour
     public float CurrentXP => currentXP;
     private int currentLevel;
     public float CurrentLevel => currentLevel;
+
+    public event Action OnXPChanged;
+    public event Action OnLevelUpEvent;
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class ExperienceManager : MonoBehaviour
             currentLevel++;
             OnLevelUp();
         }
+        OnXPChanged?.Invoke();
     }
 
     public float GetXPForNextLevel()
@@ -40,5 +45,6 @@ public class ExperienceManager : MonoBehaviour
     {
         PlayerHealth.Instance.AddMaxHealth(0.2f * PlayerHealth.Instance.maxHealth);
         ChestUIManager.Instance.ShowChest(UpgradeManager.Instance.GetLevelUpUpgrades());
+        OnLevelUpEvent?.Invoke();
     }
 }

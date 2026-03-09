@@ -9,6 +9,8 @@ public class DamageNumber : MonoBehaviour
 
     public TMP_Text text;
 
+    public GameObject prefab;
+
     // Update is called once per frame
     void Update()
     {
@@ -16,7 +18,12 @@ public class DamageNumber : MonoBehaviour
         text.alpha -= Time.deltaTime * fadeSpeed;
         if (text.alpha <= 0f)
         {
-            Destroy(gameObject);
+            PoolManager.Instance.Return(prefab, gameObject);
         }
+    }
+
+    private void OnEnable()
+    {
+        text.alpha = 1f;
     }
 }

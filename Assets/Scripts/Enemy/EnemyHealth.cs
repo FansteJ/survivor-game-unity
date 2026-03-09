@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -31,8 +32,10 @@ public class EnemyHealth : MonoBehaviour
             return;
         }
         currentHealth -= damage;
-        GameObject dmgNum = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1f, Quaternion.identity);
-        dmgNum.GetComponentInChildren<TMP_Text>().text = $"-{damage:F1}";
+        GameObject dmgNum = PoolManager.Instance.Get(damageNumberPrefab, transform.position + Vector3.up * 1f);
+        DamageNumber dn = dmgNum.GetComponent<DamageNumber>();
+        dn.prefab = damageNumberPrefab;
+        dn.text.text = $"-{damage:F1}";
         StartCoroutine(FlashRed());
         if (currentHealth <= 0)
         {

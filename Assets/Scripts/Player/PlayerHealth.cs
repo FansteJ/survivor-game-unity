@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -7,21 +8,18 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
+    public event Action OnHealthChange;
 
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
+            currentHealth = maxHealth;
         } else
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        currentHealth = maxHealth;
     }
 
     private void Update()
@@ -36,21 +34,25 @@ public class PlayerHealth : MonoBehaviour
     {
         maxHealth += value;
         currentHealth += value;
+        OnHealthChange?.Invoke();
     }
 
     public void RemoveMaxHealth(float value)
     {
         maxHealth -= value;
+        OnHealthChange?.Invoke();
     }
 
     public void Heal(float value)
     {
         currentHealth = Mathf.Min(currentHealth + value, maxHealth);
+        OnHealthChange?.Invoke();
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        OnHealthChange?.Invoke();
         if (currentHealth <= 0)
         {
             currentHealth = 0;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CoinManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class CoinManager : MonoBehaviour
     public float Balance => balance;
     private float totalCoinsCollected;
     public float TotalCoinsCollected => totalCoinsCollected;
+
+    public event Action OnBalanceChanged;
 
     private void Awake()
     {
@@ -25,10 +28,12 @@ public class CoinManager : MonoBehaviour
     {
         balance += value * PlayerStats.Instance.GoldMultiplier;
         totalCoinsCollected += value * PlayerStats.Instance.GoldMultiplier;
+        OnBalanceChanged?.Invoke();
     }
 
     public void SpendCoins(int amount)
     {
         balance -= amount;
+        OnBalanceChanged?.Invoke();
     }
 }
