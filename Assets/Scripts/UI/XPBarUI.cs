@@ -27,7 +27,7 @@ public class XPBarUI : MonoBehaviour
     {
         while (Mathf.Abs(XPSlider.value - target) > 0.001f)
         {
-            XPSlider.value = Mathf.Lerp(XPSlider.value, target, Time.deltaTime * 5f);
+            XPSlider.value = Mathf.Lerp(XPSlider.value, target, Time.unscaledDeltaTime * 5f);
             yield return null;
         }
         XPSlider.value = target;

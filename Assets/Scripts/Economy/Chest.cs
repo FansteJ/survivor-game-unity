@@ -7,31 +7,43 @@ public class Chest : MonoBehaviour
     private bool playerInRange;
     public GameObject interactPrompt;
     public TMP_Text promptText;
+    public Animator animator;
 
+    private bool isOpened = false;
+    private static int lastInteractedFrame = -1;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        promptText.color = CoinManager.Instance.Balance >= ChestSpawner.Instance.GetNextChestCost()
-            ? Color.white: Color.red;
-        if (playerInRange && Input.GetKeyDown(KeyCode.E) 
-            && CoinManager.Instance.Balance >= (int)ChestSpawner.Instance.GetNextChestCost())
+        if (playerInRange && !isOpened)
         {
-            interactPrompt.SetActive(false);
-            OpenChest();
-        } 
+            promptText.color = CoinManager.Instance.Balance >= ChestSpawner.Instance.GetNextChestCost()
+                ? Color.white : Color.red;
+
+            if (Input.GetKeyDown(KeyCode.E) && CoinManager.Instance.Balance >= (int)ChestSpawner.Instance.GetNextChestCost())
+            {
+                if (Time.frameCount == lastInteractedFrame)
+                    return;
+
+                lastInteractedFrame = Time.frameCount;
+
+                interactPrompt.SetActive(false);
+                OpenChest();
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isOpened)
         {
-            // prikazi cenu chesta
             interactPrompt.SetActive(true);
             promptText.text = $"[E] Open ({(int)ChestSpawner.Instance.GetNextChestCost()} coins)";
             playerInRange = true;
@@ -48,10 +60,17 @@ public class Chest : MonoBehaviour
     }
 
     private void OpenChest(){
+        isOpened = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Open");
+        }
+
         CoinManager.Instance.SpendCoins((int)ChestSpawner.Instance.GetNextChestCost());
         List<UpgradeOption> upgrades = UpgradeManager.Instance.GetThreeUpgrades();
         ChestUIManager.Instance.ShowChest(upgrades);
         ChestSpawner.Instance.ChestOpened();
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 2f);
     }
 }

@@ -27,7 +27,7 @@ public class HealthBarUI : MonoBehaviour
     {
         while (Mathf.Abs(healthSlider.value - target) > 0.001f)
         {
-            healthSlider.value = Mathf.Lerp(healthSlider.value, target, Time.deltaTime * 5f);
+            healthSlider.value = Mathf.Lerp(healthSlider.value, target, Time.unscaledDeltaTime * 5f);
             yield return null;
         }
         healthSlider.value = target;

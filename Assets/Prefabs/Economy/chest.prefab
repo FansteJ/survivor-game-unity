@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 5485157706345247709}
   - component: {fileID: 65777646311745152}
   - component: {fileID: -6861795403674901886}
+  - component: {fileID: -8147873019560972425}
   m_Layer: 0
   m_Name: chest
   m_TagString: Untagged
@@ -242,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Chest
   interactPrompt: {fileID: 8488035372062845097}
   promptText: {fileID: 744945242501136907}
+  animator: {fileID: 0}
 --- !u!54 &-6861795403674901886
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -267,8 +269,30 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!95 &-8147873019560972425
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382531216425384237}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 78e500109b2fa0c419e49344744da5b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6649888826990369635
 GameObject:
   m_ObjectHideFlags: 0
