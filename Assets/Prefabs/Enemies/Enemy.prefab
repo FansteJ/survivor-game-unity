@@ -157,7 +157,10 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 0
   coinDrop: 10
+  xpReward: 10
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
+  xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
+  prefab: {fileID: 0}
 --- !u!195 &3252521389075552224
 NavMeshAgent:
   m_ObjectHideFlags: 0

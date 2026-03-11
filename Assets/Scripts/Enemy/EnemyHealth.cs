@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour
     public float xpReward = 10f;
 
     public GameObject damageNumberPrefab;
+    public GameObject xpOrbPrefab;
     public GameObject prefab;
 
     private Renderer[] renderers;
@@ -96,7 +97,11 @@ public class EnemyHealth : MonoBehaviour
 
         GameManager.Instance.EnemyKilled(uuid);
         CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
-        ExperienceManager.Instance.AddXP(xpReward);
+        GameObject orb = PoolManager.Instance.Get(xpOrbPrefab, transform.position);
+        XpOrb orbScript = orb.GetComponent<XpOrb>();
+        
+        orbScript.prefab = xpOrbPrefab;
+        orbScript.xpAmount = xpReward;
 
         animator.SetBool("IsDead", true);
 

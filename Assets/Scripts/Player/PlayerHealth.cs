@@ -40,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
     public void RemoveMaxHealth(float value)
     {
         maxHealth -= value;
+        currentHealth = Mathf.Min(maxHealth, currentHealth);
         OnHealthChange?.Invoke();
     }
 
