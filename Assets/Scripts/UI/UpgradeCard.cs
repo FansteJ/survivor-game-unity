@@ -63,7 +63,7 @@ public class UpgradeCard : MonoBehaviour
                     CoinManager.Instance.SpendCoins((int)upgrade.value);
                 break;
             case SpecialUpgradeType.BloodPact:
-                PlayerStats.Instance.AddDamageMultiplier(PlayerStats.Instance.DamageMultiplier * 0.1f);
+                PlayerStats.Instance.AddDamageMultiplier(PlayerStats.Instance.DamageMultiplier * upgrade.value * 0.1f);
                 PlayerHealth.Instance.RemoveMaxHealth(PlayerHealth.Instance.maxHealth * 0.3f);
                 break;
         }

@@ -3463,7 +3463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a989828079f89b4d861cfa69b44c5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 1000
+  maxHealth: 2000
   currentHealth: 0
 --- !u!114 &1221838338
 MonoBehaviour:
@@ -4097,7 +4097,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 683965523}
   m_FillRect: {fileID: 721402428}
   m_HandleRect: {fileID: 683965522}
@@ -4141,8 +4141,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   playerTransform: {fileID: 1221838339}
-  spawnRadius: 10
-  spawnInterval: 4
+  spawnRadius: 25
+  spawnInterval: 2
   timeSinceStart: 0
   currentTime: 0
 --- !u!4 &1453744412
