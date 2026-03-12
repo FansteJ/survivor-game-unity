@@ -74,16 +74,16 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.value = 0.5f * multiplier;
                 upgrade.name = "Weapon Damage";
                 upgrade.description = $"Weapon damage: " +
-                    $"{WeaponController.Instance.weapons[0].damage:F2} " +
-                    $"-> {WeaponController.Instance.weapons[0].damage + upgrade.value:F2}";
+                    $"{WeaponController.Instance.activeWeapons[0].damage:F2} " +
+                    $"-> {WeaponController.Instance.activeWeapons[0].damage + upgrade.value:F2}";
                 break;
 
             case NormalUpgradeType.WeaponAttackSpeed:
                 upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Attack Speed";
                 upgrade.description = $"Weapon attack speed: " +
-                    $"{WeaponController.Instance.weapons[0].attackSpeed:F2} " +
-                    $"-> {WeaponController.Instance.weapons[0].attackSpeed + upgrade.value:F2}";
+                    $"{WeaponController.Instance.activeWeapons[0].attackSpeed:F2} " +
+                    $"-> {WeaponController.Instance.activeWeapons[0].attackSpeed + upgrade.value:F2}";
                 break;
 
             case NormalUpgradeType.PlayerDamage:
@@ -154,7 +154,7 @@ public class UpgradeManager : MonoBehaviour
             case SpecialUpgradeType.Coinflip:
                 upgrade.value = 50f * multiplier;
                 upgrade.name = "Coinflip";
-                upgrade.description = $"50/50: Win or lose {upgrade.value:F0} coins";
+                upgrade.description = $"70/30: Win or lose {upgrade.value:F0} coins";
                 break;
             case SpecialUpgradeType.BloodPact:
                 upgrade.value = multiplier;

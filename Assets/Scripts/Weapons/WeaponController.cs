@@ -3,81 +3,56 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public List<Weapon> weapons;
-    public Transform playerTransform;
-    public List<float> currentTimes;
-
-    private Animator animator;
-    private Weapon currentAttackingWeapon;
-
     public static WeaponController Instance { get; private set; }
+
+    public List<WeaponBase> activeWeapons;
+
 
     private void Awake()
     {
         Instance = this;
     }
 
+
+
+    void Start()
+    {
+        activeWeapons = new List<WeaponBase> ();
+        RefreshActiveWeapons();
+    }
+
+    public void RefreshActiveWeapons()
+    {
+        activeWeapons.Clear ();
+
+        activeWeapons.AddRange(GetComponentsInChildren<WeaponBase>(false));
+
+        foreach(WeaponBase weapon in activeWeapons)
+        {
+            weapon.Initialize(transform);
+        }
+    }
+
     public void ApplyDamageUpgrade(float value)
     {
-        foreach (Weapon weapon in weapons)
+        foreach (WeaponBase weapon in activeWeapons)
             weapon.damage += value;
     }
 
     public void ApplyAttackSpeedUpgrade(float value)
     {
-        foreach (Weapon weapon in weapons)
+        foreach (WeaponBase weapon in activeWeapons)
             weapon.attackSpeed += value;
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        weapons = new List<Weapon> ();
-        currentTimes = new List<float> ();
-        weapons.Add(new Weapon {attackSpeed = 1, damage = 10, description = "Beginner's weapon", name = "Wooden sword", radius = 4f});
-        currentTimes.Add(0);
-
-        animator = GetComponent<Animator> ();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        int i = 0;
-        foreach (Weapon weapon in weapons)
-        {
-            currentTimes[i] += Time.deltaTime;
-            if (currentTimes[i] >= 1f / (weapon.attackSpeed * PlayerStats.Instance.AttackSpeedMultiplier))
-            {
-                currentTimes[i] = 0;
-                StartAttackAnimation(weapons[i]);
-            }
-            i++;
-        }
-    }
-
-    void StartAttackAnimation(Weapon weapon)
-    {
-        currentAttackingWeapon = weapon;
-        animator.SetTrigger("Attack");
     }
 
     public void OnHitEvent()
     {
-        if (currentAttackingWeapon == null) return;
-
-        Collider[] hits = Physics.OverlapSphere(playerTransform.position, currentAttackingWeapon.radius);
-
-        foreach(Collider hit in hits)
+        foreach (WeaponBase weapon in activeWeapons)
         {
-            if (hit.CompareTag("Enemy"))
+            if (weapon is SwordWeapon sword)
             {
-                if(Vector3.Dot(playerTransform.forward, (hit.transform.position - playerTransform.position).normalized) > 0.5f)
-                {
-                    hit.GetComponent<EnemyHealth>().TakeDamage(currentAttackingWeapon.damage * PlayerStats.Instance.DamageMultiplier);
-                }
+                sword.PerformCleave();
             }
         }
     }
-
 }

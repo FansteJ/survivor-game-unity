@@ -57,7 +57,7 @@ public class UpgradeCard : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case SpecialUpgradeType.Coinflip:
-                if (Random.value > 0.5f)
+                if (Random.value > 0.3f)
                     CoinManager.Instance.AddCoin((int)upgrade.value);
                 else
                     CoinManager.Instance.SpendCoins((int)upgrade.value);

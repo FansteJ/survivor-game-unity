@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class SwordWeapon : WeaponBase
+{
+    private Animator playerAnimator;
+
+    public override void Initialize(Transform player)
+    {
+        base.Initialize(player);
+        playerAnimator = player.GetComponent<Animator>();
+    }
+
+    protected override void Attack()
+    {
+        playerAnimator.SetTrigger("Attack");
+    }
+
+    public void PerformCleave()
+    {
+        Collider[] hits = Physics.OverlapSphere(playerTransform.position, radius);
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                if (Vector3.Dot(playerTransform.forward, (hit.transform.position - playerTransform.position).normalized) > 0.5f)
+                {
+                    hit.GetComponent<EnemyHealth>().TakeDamage(damage * PlayerStats.Instance.DamageMultiplier);
+                }
+            }
+        }
+    }
+}

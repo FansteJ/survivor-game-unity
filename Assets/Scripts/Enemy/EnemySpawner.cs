@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -32,12 +33,16 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnGameObject(GameObject enemyPrefab, Vector3 position)
     {
-        GameObject spawnedEnemy = PoolManager.Instance.Get(enemyPrefab, position);
+        NavMeshHit hit;
 
-        EnemyHealth health = spawnedEnemy.GetComponent<EnemyHealth>();
-        if (health != null)
+        if (NavMesh.SamplePosition(position, out hit, 2f, NavMesh.AllAreas))
         {
-            health.prefab = enemyPrefab;
+            GameObject spawnedEnemy = PoolManager.Instance.Get(enemyPrefab, hit.position);
+            EnemyHealth health = spawnedEnemy.GetComponent<EnemyHealth>();
+            if (health != null)
+            {
+                health.prefab = enemyPrefab;
+            }
         }
     }
 }
