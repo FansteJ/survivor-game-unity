@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
     public static WeaponController Instance { get; private set; }
 
     public List<WeaponBase> activeWeapons;
+    public List<WeaponBase> allWeapons;
 
 
     private void Awake()
@@ -18,6 +19,9 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         activeWeapons = new List<WeaponBase> ();
+        allWeapons = new List<WeaponBase> ();
+        allWeapons.AddRange(GetComponentsInChildren<WeaponBase>(true));
+
         RefreshActiveWeapons();
     }
 

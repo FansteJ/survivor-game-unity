@@ -10,6 +10,8 @@ public class Fireball : MonoBehaviour
     public float damage;
     [HideInInspector]
     public GameObject prefab;
+    [HideInInspector]
+    public Transform target;
 
     private void OnEnable()
     {
@@ -18,6 +20,12 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
+        if (target != null && target.gameObject.activeInHierarchy)
+        {
+            Vector3 targetPosition = target.position + Vector3.up * 0.5f;
+
+            transform.LookAt(targetPosition);
+        }
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
@@ -28,7 +36,7 @@ public class Fireball : MonoBehaviour
             EnemyHealth health = other.GetComponent<EnemyHealth>();
             if (health != null)
             {
-                health.TakeDamage(damage);
+                health.TakeDamage(damage * PlayerStats.Instance.DamageMultiplier);
             }
 
             StopAllCoroutines();

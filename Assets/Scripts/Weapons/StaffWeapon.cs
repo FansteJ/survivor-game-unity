@@ -46,6 +46,7 @@ public class StaffWeapon : WeaponBase
             {
                 fb.damage = this.damage;
                 fb.prefab = this.projectilePrefab;
+                fb.target = targetCollider.transform;
             }
         }
     }

@@ -1,6 +1,5 @@
 public enum NormalUpgradeType
 {
-    WeaponDamage, WeaponAttackSpeed,
     PlayerDamage, PlayerAttackSpeed, PlayerMaxHealth, Luck, XpGain, GoldGain, HealthRegeneration
 }
 

@@ -2104,7 +2104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &826896181
 Transform:
   m_ObjectHideFlags: 0
@@ -2135,7 +2135,7 @@ MonoBehaviour:
   weaponName: Staff
   damage: 10
   attackSpeed: 1
-  radius: 4
+  radius: 15
   projectilePrefab: {fileID: 4166607228376506587, guid: 89499f6814ab8524dbf31acf0d4e8b8c, type: 3}
   obstacleMask:
     serializedVersion: 2
@@ -3596,6 +3596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   activeWeapons: []
+  allWeapons: []
 --- !u!95 &1221838343
 Animator:
   serializedVersion: 7

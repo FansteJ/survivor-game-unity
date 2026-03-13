@@ -13,6 +13,9 @@ public class UpgradeCard : MonoBehaviour
         else if (upgrade is SpecialUpgradeOption special)
         {
             ApplySpecialUpgrade(special);
+        } else if(upgrade is WeaponUpgradeOption weaponUpgrade)
+        {
+            ApplyWeaponUpgrade(weaponUpgrade);
         }
 
         ChestUIManager.Instance.HideChest();
@@ -22,12 +25,6 @@ public class UpgradeCard : MonoBehaviour
     {
         switch (upgrade.upgradeType)
         {
-            case NormalUpgradeType.WeaponDamage:
-                WeaponController.Instance.ApplyDamageUpgrade(upgrade.value);
-                break;
-            case NormalUpgradeType.WeaponAttackSpeed:
-                WeaponController.Instance.ApplyAttackSpeedUpgrade(upgrade.value);
-                break;
             case NormalUpgradeType.PlayerDamage:
                 PlayerStats.Instance.AddDamageMultiplier(upgrade.value);
                 break;
@@ -66,6 +63,20 @@ public class UpgradeCard : MonoBehaviour
                 PlayerStats.Instance.AddDamageMultiplier(PlayerStats.Instance.DamageMultiplier * upgrade.value * 0.1f);
                 PlayerHealth.Instance.RemoveMaxHealth(PlayerHealth.Instance.maxHealth * 0.3f);
                 break;
+        }
+    }
+
+    private void ApplyWeaponUpgrade(WeaponUpgradeOption upgrade)
+    {
+        if (upgrade.isUnlock)
+        {
+            upgrade.targetWeapon.gameObject.SetActive(true);
+            WeaponController.Instance.RefreshActiveWeapons();
+        }
+        else
+        {
+            upgrade.targetWeapon.damage += upgrade.damageIncrease;
+            upgrade.targetWeapon.attackSpeed += upgrade.speedIncrease;
         }
     }
 }

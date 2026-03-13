@@ -70,22 +70,6 @@ public class UpgradeManager : MonoBehaviour
 
         switch (upgrade.upgradeType)
         {
-            case NormalUpgradeType.WeaponDamage:
-                upgrade.value = 0.5f * multiplier;
-                upgrade.name = "Weapon Damage";
-                upgrade.description = $"Weapon damage: " +
-                    $"{WeaponController.Instance.activeWeapons[0].damage:F2} " +
-                    $"-> {WeaponController.Instance.activeWeapons[0].damage + upgrade.value:F2}";
-                break;
-
-            case NormalUpgradeType.WeaponAttackSpeed:
-                upgrade.value = 0.1f * multiplier;
-                upgrade.name = "Attack Speed";
-                upgrade.description = $"Weapon attack speed: " +
-                    $"{WeaponController.Instance.activeWeapons[0].attackSpeed:F2} " +
-                    $"-> {WeaponController.Instance.activeWeapons[0].attackSpeed + upgrade.value:F2}";
-                break;
-
             case NormalUpgradeType.PlayerDamage:
                 upgrade.value = 0.05f * multiplier;
                 upgrade.name = "Player Damage";
@@ -192,13 +176,16 @@ public class UpgradeManager : MonoBehaviour
     public List<UpgradeOption> GetThreeUpgrades()
     {
         List<UpgradeOption> upgrades = new List<UpgradeOption>();
+
+        upgrades.Add(GetRandomWeaponUpgrade());
+
         while (upgrades.Count < 3)
         {
             NormalUpgradeOption newUpgrade = GetRandomUpgrade();
             bool isDuplicate = false;
-            foreach (NormalUpgradeOption upgrade in upgrades)
+            foreach (var upgrade in upgrades)
             {
-                if (upgrade.upgradeType == newUpgrade.upgradeType)
+                if (upgrade is NormalUpgradeOption normalUpgrade && normalUpgrade.upgradeType == newUpgrade.upgradeType)
                 {
                     isDuplicate = true;
                     break;
@@ -208,6 +195,38 @@ public class UpgradeManager : MonoBehaviour
                 upgrades.Add(newUpgrade);
         }
         return upgrades;
+    }
+
+    private WeaponUpgradeOption GetRandomWeaponUpgrade()
+    {
+        WeaponUpgradeOption upgrade = new WeaponUpgradeOption();
+        upgrade.rarity = GetRandomRarity();
+
+        List<WeaponBase> allWeapons = WeaponController.Instance.allWeapons;
+        WeaponBase chosenWeapon = allWeapons[Random.Range(0, allWeapons.Count)];
+
+        upgrade.targetWeapon = chosenWeapon;
+        upgrade.isUnlock = !chosenWeapon.gameObject.activeInHierarchy;
+
+        float[] rarityMultipliers = { 1f, 2f, 4f, 7f, 10f };
+        float multiplier = rarityMultipliers[(int)upgrade.rarity];
+
+        if (upgrade.isUnlock)
+        {
+            upgrade.name = $"Unlock {chosenWeapon.name}";
+            upgrade.description = $"Equip the mighty {chosenWeapon.name}!";
+        }
+        else
+        {
+            upgrade.damageIncrease = 2f * multiplier;
+            upgrade.speedIncrease = 0.05f * multiplier;
+
+            upgrade.name = $"{chosenWeapon.name} Up!";
+            upgrade.description = $"Dmg: {chosenWeapon.damage:F1} -> {chosenWeapon.damage + upgrade.damageIncrease:F1}\n" +
+                                  $"Spd: {chosenWeapon.attackSpeed:F2} -> {chosenWeapon.attackSpeed + upgrade.speedIncrease:F2}";
+        }
+
+        return upgrade;
     }
 
 }
