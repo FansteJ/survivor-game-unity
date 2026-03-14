@@ -4192,13 +4192,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e202eb669a80c384fb63750d38eee300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefabs:
-  - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+  waves:
+  - waveName: Morning
+    waveDuration: 60
+    spawnInterval: 3
+    enemiesToSpawn:
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 1254494051094020328, guid: 755aec57ad6896442852793c906577ec, type: 3}
+  - waveName: Afternoon
+    waveDuration: 120
+    spawnInterval: 1.5
+    enemiesToSpawn:
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+  - waveName: Night
+    waveDuration: 180
+    spawnInterval: 0.5
+    enemiesToSpawn:
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+  - waveName: Full Moon
+    waveDuration: 100
+    spawnInterval: 0.5
+    enemiesToSpawn:
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   playerTransform: {fileID: 1221838339}
   spawnRadius: 25
-  spawnInterval: 2
-  timeSinceStart: 0
-  currentTime: 0
 --- !u!4 &1453744412
 Transform:
   m_ObjectHideFlags: 0

@@ -1,34 +1,68 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class Wave
+{
+    public string waveName;
+    public float waveDuration;
+    public float spawnInterval;
+    public GameObject[] enemiesToSpawn;
+}
+
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
+    [Header("Wave Settings")]
+    public Wave[] waves;
+
+    [Header("Spawner Settings")]
     public Transform playerTransform;
-    public float spawnRadius;
-    public float spawnInterval;
-    public float timeSinceStart;
-    public float currentTime;
+    public float spawnRadius = 20f;
+
+    private int currentWaveIndex = 0;
+    private float waveTimer = 0f;
+    private float spawnTimer = 0f;
 
     void Update()
     {
-        timeSinceStart += Time.deltaTime;
-        currentTime += Time.deltaTime;
+        if (currentWaveIndex >= waves.Length)
+            currentWaveIndex--;
 
-        if (currentTime >= spawnInterval)
+        Wave currentWave = waves[currentWaveIndex];
+
+        waveTimer += Time.deltaTime;
+        spawnTimer += Time.deltaTime;
+
+        if (spawnTimer >= currentWave.spawnInterval)
         {
-            currentTime -= spawnInterval;
-            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-            Vector3 spawnPos = new Vector3(
-                playerTransform.position.x + Mathf.Cos(angle) * spawnRadius,
-                playerTransform.position.y + 0.1f,
-                playerTransform.position.z + Mathf.Sin(angle) * spawnRadius
-            );
-
-            if (timeSinceStart >= 120f) SpawnGameObject(enemyPrefabs[0], spawnPos);
-            else if (timeSinceStart >= 60f) SpawnGameObject(enemyPrefabs[0], spawnPos);
-            else if (timeSinceStart >= 5f) SpawnGameObject(enemyPrefabs[0], spawnPos);
+            spawnTimer -= currentWave.spawnInterval;
+            SpawnRandomEnemyFromWave(currentWave);
         }
+
+        if (waveTimer >= currentWave.waveDuration)
+        {
+            currentWaveIndex++;
+            waveTimer = 0f;
+
+            if (currentWaveIndex < waves.Length)
+                Debug.Log($"New wave begins: {waves[currentWaveIndex].waveName}");
+        }
+    }
+
+    private void SpawnRandomEnemyFromWave(Wave wave)
+    {
+        if (wave.enemiesToSpawn.Length == 0) return;
+
+        GameObject randomEnemyPrefab = wave.enemiesToSpawn[Random.Range(0, wave.enemiesToSpawn.Length)];
+
+        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+        Vector3 spawnPos = new Vector3(
+            playerTransform.position.x + Mathf.Cos(angle) * spawnRadius,
+            playerTransform.position.y + 0.1f,
+            playerTransform.position.z + Mathf.Sin(angle) * spawnRadius
+        );
+
+        SpawnGameObject(randomEnemyPrefab, spawnPos);
     }
 
     private void SpawnGameObject(GameObject enemyPrefab, Vector3 position)
