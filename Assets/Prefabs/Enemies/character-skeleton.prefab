@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
   shootingRange: 8
   fireRate: 2.5
-  projectilePrefab: {fileID: 4975084654260411281, guid: d409f0c2e60563f4595ad29ba6b2d9ed, type: 3}
+  projectilePrefab: {fileID: 1572679668879852239, guid: 8ec297efa7e0e8746bcc3d7ad7d77a45, type: 3}
   firePoint: {fileID: 0}
 --- !u!114 &1381970170779114374
 MonoBehaviour:
@@ -232,7 +232,7 @@ Animator:
   m_GameObject: {fileID: 8709429057763935659}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d309ad15efe6c0c429b95e6ea7c4fcdd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 82d8e2ab78ba4d743b9f86fd667a6825, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

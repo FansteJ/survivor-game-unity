@@ -21,7 +21,7 @@ public class EnemyProjectile : MonoBehaviour
         currentLifetime += Time.deltaTime;
         if (currentLifetime >= lifetime)
         {
-            gameObject.SetActive(false);
+            PoolManager.Instance.Return(prefab, gameObject);
         }
     }
 
@@ -35,10 +35,6 @@ public class EnemyProjectile : MonoBehaviour
                 playerHealth.TakeDamage(damage);
             }
 
-            PoolManager.Instance.Return(prefab, gameObject);
-        }
-        else if (other.CompareTag("Obstacle"))
-        {
             PoolManager.Instance.Return(prefab, gameObject);
         }
     }

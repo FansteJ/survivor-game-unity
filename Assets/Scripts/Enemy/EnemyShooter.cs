@@ -32,8 +32,24 @@ public class EnemyShooter : MonoBehaviour
         if (!agent.enabled || playerTransform == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        bool canSeePlayer = false;
 
         if (distanceToPlayer <= shootingRange)
+        {
+            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+
+            Vector3 rayStart = transform.position + Vector3.up * 0.7f;
+
+            if (Physics.Raycast(rayStart, directionToPlayer, out RaycastHit hit, shootingRange))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    canSeePlayer = true;
+                }
+            }
+        }
+
+        if (distanceToPlayer <= shootingRange && canSeePlayer)
         {
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
@@ -64,7 +80,7 @@ public class EnemyShooter : MonoBehaviour
     {
         if (projectilePrefab == null) return;
 
-        Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position + Vector3.up * 1.5f;
+        Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position + Vector3.up * 0.7f;
 
         GameObject bullet = PoolManager.Instance.Get(projectilePrefab, spawnPos);
         bullet.GetComponent<EnemyProjectile>().prefab = projectilePrefab;

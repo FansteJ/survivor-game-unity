@@ -1800,7 +1800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6ff1e35784c9e9439594c54dfa61079, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.6449814
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6ff1e35784c9e9439594c54dfa61079, type: 3}
       propertyPath: m_LocalScale.z
@@ -4198,7 +4198,6 @@ MonoBehaviour:
     spawnInterval: 3
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
-    - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
   - waveName: Afternoon
     waveDuration: 120
     spawnInterval: 1.5
@@ -4206,7 +4205,7 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
-    - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
+    - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
   - waveName: Night
     waveDuration: 180
     spawnInterval: 0.5
@@ -4214,7 +4213,7 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
-    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
     - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
   - waveName: Full Moon
     waveDuration: 100
@@ -4222,6 +4221,8 @@ MonoBehaviour:
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
+    - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
     - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
   playerTransform: {fileID: 1221838339}
   spawnRadius: 25
