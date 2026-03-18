@@ -25,7 +25,13 @@ public class Fireball : MonoBehaviour
             Vector3 targetPosition = target.position + Vector3.up * 0.5f;
 
             transform.LookAt(targetPosition);
+        } else
+        {
+            StopAllCoroutines();
+            PoolManager.Instance.Return(prefab, gameObject);
+            return;
         }
+
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
