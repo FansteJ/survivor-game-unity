@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.3.0...v1.4.0) (2026-03-20)
+
+
+### Features
+
+* add Bone projectile, trail and rotation, modify enemy spawner and fix enemy ghost attack ([1452299](https://github.com/FansteJ/survivor-game-unity/commit/1452299e6e66a036d208464a2430b7a1c778a577))
+* add Chest animation, fix chest opening issues, modify XP and Health UIs ([44e4234](https://github.com/FansteJ/survivor-game-unity/commit/44e4234a7196fa2320fab23949bd776655c9a596))
+* add experience system, level up chest and special upgrades ([74b3d0c](https://github.com/FansteJ/survivor-game-unity/commit/74b3d0cbd350dbe42f10177ff4bbecd2a5d5ff91))
+* add game over UI with run statistics ([fdb2f7a](https://github.com/FansteJ/survivor-game-unity/commit/fdb2f7ac94d4a2d250aa8236623c53d3ae16e624))
+* add object pooling for damage numbers and coins, improve UI ([88294a2](https://github.com/FansteJ/survivor-game-unity/commit/88294a20b9a1fddbbb9213925d7621f7157aaac5))
+* add object pooling for enemies ([8896a32](https://github.com/FansteJ/survivor-game-unity/commit/8896a32bee276ff791a8425246a86149386765e0))
+* add Skeleton shooter and enemy projectile ([c6c9739](https://github.com/FansteJ/survivor-game-unity/commit/c6c9739f130ed6ab009248fcb09f6e8238d9cb45))
+* add terrain ([b181e12](https://github.com/FansteJ/survivor-game-unity/commit/b181e124957547f946e93aa05120e3ad160a7de1))
+* add XP bar UI ([22dce87](https://github.com/FansteJ/survivor-game-unity/commit/22dce871dedf5d66d80cb80c1ae6d2a3d3c77300))
+* implement xp orb with pooling, pop effect and acceleration ([f0c1a38](https://github.com/FansteJ/survivor-game-unity/commit/f0c1a381314a2dc61694c47793d18ae8bb325684))
+* improve map, fix enemy rotation and chest spawning ([b4474ec](https://github.com/FansteJ/survivor-game-unity/commit/b4474ece609b895be0537ec6208d0a5740d47ba7))
+* modify EnemySpawner and add new enemy type Orc ([ea19ae0](https://github.com/FansteJ/survivor-game-unity/commit/ea19ae000cd31da69a81d9acfb2a94d50c3e41f7))
+* refactor weapon implementation, add staff weapon and fireball ([7f9a6ee](https://github.com/FansteJ/survivor-game-unity/commit/7f9a6ee2a7884fb8f8a88deee30b64b93888bfb4))
+* refactor weapon upgrades, add weapon unlock to possible upgrades, add homing logic to Fireball ([c60cb4b](https://github.com/FansteJ/survivor-game-unity/commit/c60cb4b1f59a456e77ac201c2939422b32bef1dc))
+
+
+### Bug Fixes
+
+* fix enemy orc animations and hitting the player ([247b8a8](https://github.com/FansteJ/survivor-game-unity/commit/247b8a8dc84a943001c884ec9c6e47e02232d9a3))
+* fix player animations and fireball flight ([73f1e86](https://github.com/FansteJ/survivor-game-unity/commit/73f1e8697e21ab778e92b8ab9c67cc946098a9df))
+
 ## [1.3.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.2.0...v1.3.0) (2026-03-05)
 
 
