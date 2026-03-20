@@ -55,17 +55,25 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject randomEnemyPrefab = wave.enemiesToSpawn[Random.Range(0, wave.enemiesToSpawn.Length)];
 
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        Vector3 spawnPos = new Vector3(
-            playerTransform.position.x + Mathf.Cos(angle) * spawnRadius,
-            playerTransform.position.y + 0.1f,
-            playerTransform.position.z + Mathf.Sin(angle) * spawnRadius
-        );
+        int maxAttempts = 10;
 
-        SpawnGameObject(randomEnemyPrefab, spawnPos);
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+            Vector3 spawnPos = new Vector3(
+                playerTransform.position.x + Mathf.Cos(angle) * spawnRadius,
+                playerTransform.position.y + 2f,
+                playerTransform.position.z + Mathf.Sin(angle) * spawnRadius
+            );
+
+            if (SpawnGameObject(randomEnemyPrefab, spawnPos))
+            {
+                return;
+            }
+        }
     }
 
-    private void SpawnGameObject(GameObject enemyPrefab, Vector3 position)
+    private bool SpawnGameObject(GameObject enemyPrefab, Vector3 position)
     {
         NavMeshHit hit;
 
@@ -77,6 +85,8 @@ public class EnemySpawner : MonoBehaviour
             {
                 health.prefab = enemyPrefab;
             }
+            return true;
         }
+        return false;
     }
 }

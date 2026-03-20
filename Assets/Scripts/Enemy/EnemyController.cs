@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
         {
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
+            FaceTarget();
         }
         else
         {
@@ -65,6 +66,17 @@ public class EnemyController : MonoBehaviour
         {
             AttackPlayer();
         }
+    }
+
+    private void FaceTarget()
+    {
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+
+        direction.y = 0;
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
     private void AttackPlayer()

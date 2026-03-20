@@ -27,7 +27,6 @@ public class ChestSpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime;
@@ -41,8 +40,8 @@ public class ChestSpawner : MonoBehaviour
     private void SpawnChest()
     {
         existingChests++;
-        Instantiate(chestPrefab, new Vector3(Random.Range(-20f, 20f), 10, 
-            Random.Range(-20f, 20f)), Quaternion.identity);
+        Instantiate(chestPrefab, new Vector3(Random.Range(50f, 150f), 15, 
+            Random.Range(50f, 150f)), Quaternion.identity);
     }
 
     public void ChestOpened()
