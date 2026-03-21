@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public string uuid;
     public float maxHealth;
     public float currentHealth;
+    public bool IsDead => currentHealth <= 0f;
 
     public int coinDrop;
     public float xpReward = 10f;

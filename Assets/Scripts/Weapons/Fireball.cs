@@ -10,8 +10,17 @@ public class Fireball : MonoBehaviour
     public float damage;
     [HideInInspector]
     public GameObject prefab;
-    [HideInInspector]
-    public Transform target;
+
+    private Transform target;
+    private EnemyHealth targetHealth;
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+        if (target != null)
+        {
+            targetHealth = target.GetComponent<EnemyHealth>();
+        }
+    }
 
     private void OnEnable()
     {
@@ -20,19 +29,16 @@ public class Fireball : MonoBehaviour
 
     private void Update()
     {
-        if (target != null && target.gameObject.activeInHierarchy)
+        if (target != null && target.gameObject.activeInHierarchy && targetHealth != null && !targetHealth.IsDead)
         {
             Vector3 targetPosition = target.position + Vector3.up * 0.5f;
-
             transform.LookAt(targetPosition);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         } else
         {
             StopAllCoroutines();
             PoolManager.Instance.Return(prefab, gameObject);
-            return;
         }
-
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

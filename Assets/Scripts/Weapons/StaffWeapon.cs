@@ -15,8 +15,13 @@ public class StaffWeapon : WeaponBase
 
         foreach (Collider hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
+            if (hit.CompareTag("Enemy") && hit.TryGetComponent<EnemyHealth>(out EnemyHealth enemyHealth))
             {
+                if (enemyHealth.IsDead)
+                {
+                    continue;
+                }
+
                 float distance = Vector3.Distance(playerTransform.position, hit.transform.position);
 
                 if (distance < minDistance)
@@ -46,7 +51,7 @@ public class StaffWeapon : WeaponBase
             {
                 fb.damage = this.damage;
                 fb.prefab = this.projectilePrefab;
-                fb.target = targetCollider.transform;
+                fb.SetTarget(targetCollider.transform);
             }
         }
     }
