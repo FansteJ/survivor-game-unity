@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6577976099323523496}
   - component: {fileID: 5135126393545177443}
   - component: {fileID: 3488995169865999577}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,8 @@ GameObject:
   - component: {fileID: 65777646311745152}
   - component: {fileID: -6861795403674901886}
   - component: {fileID: -8147873019560972425}
-  m_Layer: 0
+  - component: {fileID: -8030640494983568040}
+  m_Layer: 9
   m_Name: chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,6 +294,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!208 &-8030640494983568040
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382531216425384237}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.1, y: 0.1, z: 0.06}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.1, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &6649888826990369635
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +321,7 @@ GameObject:
   - component: {fileID: 8469584622552618292}
   - component: {fileID: 3689982214980482240}
   - component: {fileID: 744945242501136907}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OpenText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +459,7 @@ GameObject:
   - component: {fileID: 519667018961997513}
   - component: {fileID: 68144555681764007}
   - component: {fileID: 8366040570227064030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

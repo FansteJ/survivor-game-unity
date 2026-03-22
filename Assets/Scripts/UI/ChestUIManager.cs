@@ -12,6 +12,8 @@ public class ChestUIManager : MonoBehaviour
 
     public GameObject chestUI;
 
+    public bool IsUIOpen { get; private set; }
+
     private void Awake()
     {
         if(Instance == null)
@@ -45,6 +47,7 @@ public class ChestUIManager : MonoBehaviour
     public void ShowChest(List<UpgradeOption> upgrades)
     {
         Time.timeScale = 0;
+        IsUIOpen = true;
         ShowUpgradeCards(upgrades);
         chestUI.SetActive(true);
     }
@@ -55,6 +58,7 @@ public class ChestUIManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        IsUIOpen = false;
 
         chestUI.SetActive(false);
         Time.timeScale = 1;

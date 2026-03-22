@@ -10,7 +10,6 @@ public class Chest : MonoBehaviour
     public Animator animator;
 
     private bool isOpened = false;
-    private static int lastInteractedFrame = -1;
 
     private void Start()
     {
@@ -24,16 +23,19 @@ public class Chest : MonoBehaviour
     {
         if (playerInRange && !isOpened)
         {
+            if (ChestUIManager.Instance.IsUIOpen)
+            {
+                if (interactPrompt.activeSelf) interactPrompt.SetActive(false);
+                return;
+            }
+
+            if (!interactPrompt.activeSelf) interactPrompt.SetActive(true);
+
             promptText.color = CoinManager.Instance.Balance >= ChestSpawner.Instance.GetNextChestCost()
                 ? Color.white : Color.red;
 
             if (Input.GetKeyDown(KeyCode.E) && CoinManager.Instance.Balance >= (int)ChestSpawner.Instance.GetNextChestCost())
             {
-                if (Time.frameCount == lastInteractedFrame)
-                    return;
-
-                lastInteractedFrame = Time.frameCount;
-
                 interactPrompt.SetActive(false);
                 OpenChest();
             }
@@ -44,7 +46,10 @@ public class Chest : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isOpened)
         {
-            interactPrompt.SetActive(true);
+            if (!ChestUIManager.Instance.IsUIOpen)
+            {
+                interactPrompt.SetActive(true);
+            }
             promptText.text = $"[E] Open ({(int)ChestSpawner.Instance.GetNextChestCost()} coins)";
             playerInRange = true;
         }

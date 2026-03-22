@@ -62,7 +62,7 @@ public class EnemySpawner : MonoBehaviour
             float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
             Vector3 spawnPos = new Vector3(
                 playerTransform.position.x + Mathf.Cos(angle) * spawnRadius,
-                playerTransform.position.y + 2f,
+                playerTransform.position.y,
                 playerTransform.position.z + Mathf.Sin(angle) * spawnRadius
             );
 
@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
     {
         NavMeshHit hit;
 
-        if (NavMesh.SamplePosition(position, out hit, 2f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(position, out hit, 20f, NavMesh.AllAreas))
         {
             GameObject spawnedEnemy = PoolManager.Instance.Get(enemyPrefab, hit.position);
             EnemyHealth health = spawnedEnemy.GetComponent<EnemyHealth>();
