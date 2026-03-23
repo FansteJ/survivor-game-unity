@@ -3866,9 +3866,9 @@ MonoBehaviour:
   waves:
   - waveName: Morning
     waveDuration: 60
-    spawnInterval: 3
+    spawnInterval: 15
     enemiesToSpawn:
-    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 4887620666218667177, guid: c8881e8fe92444344a55e07b79680c37, type: 3}
   - waveName: Afternoon
     waveDuration: 120
     spawnInterval: 1.5
