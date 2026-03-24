@@ -3868,7 +3868,7 @@ MonoBehaviour:
     waveDuration: 60
     spawnInterval: 15
     enemiesToSpawn:
-    - {fileID: 4887620666218667177, guid: c8881e8fe92444344a55e07b79680c37, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   - waveName: Afternoon
     waveDuration: 120
     spawnInterval: 1.5
@@ -3878,7 +3878,7 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
   - waveName: Night
-    waveDuration: 180
+    waveDuration: 120
     spawnInterval: 0.5
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
@@ -3887,12 +3887,12 @@ MonoBehaviour:
     - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
     - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
   - waveName: Full Moon
-    waveDuration: 100
+    waveDuration: 120
     spawnInterval: 0.5
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
-    - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
+    - {fileID: 4887620666218667177, guid: c8881e8fe92444344a55e07b79680c37, type: 3}
     - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
     - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
   playerTransform: {fileID: 1221838339}

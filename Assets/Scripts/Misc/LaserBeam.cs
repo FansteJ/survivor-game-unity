@@ -29,10 +29,11 @@ public class LaserBeam : MonoBehaviour
     {
         if (laserMaterial == null) return;
 
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position + Vector3.up * laserHeight);
+
         Vector2 currentOffset = laserMaterial.mainTextureOffset;
-
-        currentOffset.y -= Time.deltaTime * scrollSpeed;
-
+        currentOffset.x -= Time.deltaTime * scrollSpeed;
         laserMaterial.mainTextureOffset = currentOffset;
     }
 }
