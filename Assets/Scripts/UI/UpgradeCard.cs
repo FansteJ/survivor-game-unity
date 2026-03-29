@@ -63,6 +63,12 @@ public class UpgradeCard : MonoBehaviour
                 PlayerStats.Instance.AddDamageMultiplier(PlayerStats.Instance.DamageMultiplier * upgrade.value * 0.1f);
                 PlayerHealth.Instance.RemoveMaxHealth(PlayerHealth.Instance.maxHealth * 0.3f);
                 break;
+            case SpecialUpgradeType.Vampirism:
+                PlayerStats.Instance.AddLifeSteal(upgrade.value);
+                break;
+            case SpecialUpgradeType.Devourer:
+                PlayerStats.Instance.AddDevourer(upgrade.value);
+                break;
         }
     }
 

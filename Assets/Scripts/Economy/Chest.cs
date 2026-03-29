@@ -9,6 +9,8 @@ public class Chest : MonoBehaviour
     public TMP_Text promptText;
     public Animator animator;
 
+    private Outline outlineScript;
+
     private bool isOpened = false;
 
     private void Start()
@@ -16,6 +18,12 @@ public class Chest : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
+        }
+
+        outlineScript = GetComponent<Outline>();
+        if (outlineScript != null)
+        {
+            outlineScript.enabled = true;
         }
     }
 
@@ -52,6 +60,11 @@ public class Chest : MonoBehaviour
             }
             promptText.text = $"[E] Open ({(int)ChestSpawner.Instance.GetNextChestCost()} coins)";
             playerInRange = true;
+
+            if (outlineScript != null)
+            {
+                outlineScript.enabled = false;
+            }
         }
     }
 
@@ -61,11 +74,21 @@ public class Chest : MonoBehaviour
         {
             interactPrompt.SetActive(false);
             playerInRange = false;
+
+            if (outlineScript != null)
+            {
+                outlineScript.enabled = true;
+            }
         }
     }
 
     private void OpenChest(){
         isOpened = true;
+
+        if (outlineScript != null)
+        {
+            outlineScript.enabled = false;
+        }
 
         if (animator != null)
         {

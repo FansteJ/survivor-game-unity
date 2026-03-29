@@ -86,7 +86,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case NormalUpgradeType.PlayerMaxHealth:
-                upgrade.value = 5f * multiplier;
+                upgrade.value = 50f * multiplier;
                 upgrade.name = "Max Health";
                 upgrade.description = $"Max health: {PlayerHealth.Instance.maxHealth:F0} " +
                     $"-> {PlayerHealth.Instance.maxHealth + upgrade.value:F0}";
@@ -100,14 +100,14 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case NormalUpgradeType.XpGain:
-                upgrade.value = 0.05f * multiplier;
+                upgrade.value = 0.1f * multiplier;
                 upgrade.name = "XP Gain";
                 upgrade.description = $"XP gain: {PlayerStats.Instance.XPGainMultiplier * 100:F0}% " +
                     $"-> {(PlayerStats.Instance.XPGainMultiplier + upgrade.value)*100:F0}%";
                 break;
 
             case NormalUpgradeType.GoldGain:
-                upgrade.value = 0.05f * multiplier;
+                upgrade.value = 0.1f * multiplier;
                 upgrade.name = "Gold Gain";
                 upgrade.description = $"Gold gain: {PlayerStats.Instance.GoldMultiplier * 100:F0}% " +
                     $"-> {(PlayerStats.Instance.GoldMultiplier + upgrade.value) * 100:F0}%";
@@ -144,6 +144,18 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.value = multiplier;
                 upgrade.name = "Blood Pact";
                 upgrade.description = $"+{upgrade.value * 10:F0}% damage, -{30:F0}% max HP";
+                break;
+            case SpecialUpgradeType.Vampirism:
+                upgrade.value = 0.03f * multiplier;
+                upgrade.name = "Vampirism";
+                upgrade.description = $"Life steal: {PlayerStats.Instance.LifeSteal:F2} " +
+                    $"-> {PlayerStats.Instance.LifeSteal + upgrade.value:F2}";
+                break;
+            case SpecialUpgradeType.Devourer:
+                upgrade.value = 0.5f * multiplier;
+                upgrade.name = "Devourer";
+                upgrade.description = $"Max HP on kill: +{PlayerStats.Instance.Devourer:F0} " +
+                    $"-> +{PlayerStats.Instance.Devourer + upgrade.value:F0}";
                 break;
         }
         return upgrade;

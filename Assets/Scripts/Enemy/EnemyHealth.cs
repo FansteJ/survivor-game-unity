@@ -76,6 +76,11 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0) return;
 
         currentHealth -= damage;
+        if(PlayerStats.Instance.LifeSteal > 0)
+        {
+            PlayerHealth.Instance.Heal(damage * PlayerStats.Instance.LifeSteal);
+        }
+
         GameObject dmgNum = PoolManager.Instance.Get(damageNumberPrefab, transform.position + Vector3.up * 1f);
         DamageNumber dn = dmgNum.GetComponent<DamageNumber>();
         dn.prefab = damageNumberPrefab;
@@ -96,6 +101,10 @@ public class EnemyHealth : MonoBehaviour
         if (controller != null) controller.enabled = false;
         if (agent != null) agent.enabled = false;
 
+        if (PlayerStats.Instance.Devourer > 0)
+        {
+            PlayerHealth.Instance.AddMaxHealth(PlayerStats.Instance.Devourer);
+        }
         GameManager.Instance.EnemyKilled(uuid);
         CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
         GameObject orb = PoolManager.Instance.Get(xpOrbPrefab, transform.position);

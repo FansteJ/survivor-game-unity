@@ -37,6 +37,12 @@ public class ChestUIManager : MonoBehaviour
 
             Image cardImage = upgradeCard.GetComponent<Image>();
             cardImage.color = GetRarityColor(upgradeOption.rarity);
+            if(upgradeOption is WeaponUpgradeOption wUpgrade && wUpgrade.isUnlock)
+            {
+                cardImage.color = Color.aquamarine;
+                texts[0].color = Color.black;
+                texts[1].color = Color.black;
+            }
 
             UpgradeCard card = upgradeCard.AddComponent<UpgradeCard>();
             card.upgrade = upgradeOption;

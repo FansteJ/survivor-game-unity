@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     private float xpGainMultiplier = 1f;
     private float goldGainMultiplier = 1f;
     private float healthRegen = 0f;
+    private float lifeSteal = 0f;
+    private float devourer = 0f;
 
     public float DamageMultiplier => damageMultiplier;
     public float AttackSpeedMultiplier => attackSpeedMultiplier;
@@ -17,6 +19,8 @@ public class PlayerStats : MonoBehaviour
     public float XPGainMultiplier => xpGainMultiplier;
     public float GoldMultiplier => goldGainMultiplier;
     public float HealthRegen => healthRegen;
+    public float LifeSteal => lifeSteal;
+    public float Devourer => devourer;
 
     private void Awake()
     {
@@ -37,4 +41,6 @@ public class PlayerStats : MonoBehaviour
     public void AddGoldMultiplier(float value) { goldGainMultiplier += value; }
     public void AddHealthRegen(float value) { healthRegen += value; }
     public void AddMaxHealth(float value) { GetComponent<PlayerHealth>().AddMaxHealth(value); }
+    public void AddLifeSteal(float value) { lifeSteal += value; }
+    public void AddDevourer(float value) {  devourer += value; }
 }
