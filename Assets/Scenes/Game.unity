@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09331d0acfd05ab4cb6113a482a37cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinManager
+  activeCoins: []
 --- !u!4 &101090210
 Transform:
   m_ObjectHideFlags: 0

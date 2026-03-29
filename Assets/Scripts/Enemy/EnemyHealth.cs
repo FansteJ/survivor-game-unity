@@ -12,10 +12,12 @@ public class EnemyHealth : MonoBehaviour
 
     public int coinDrop;
     public float xpReward = 10f;
+    [Range(0f, 1f)] public float magnetDropChance = 0.005f;
 
     public GameObject damageNumberPrefab;
     public GameObject xpOrbPrefab;
     public GameObject prefab;
+    public GameObject magnetPrefab;
 
     private Renderer[] renderers;
     private Color originalColor;
@@ -112,6 +114,11 @@ public class EnemyHealth : MonoBehaviour
         
         orbScript.prefab = xpOrbPrefab;
         orbScript.xpAmount = xpReward;
+
+        if (Random.value < magnetDropChance)
+        {
+            Instantiate(magnetPrefab, transform.position + Vector3.up * 0.5f, magnetPrefab.transform.rotation);
+        }
 
         animator.SetBool("IsDead", true);
 

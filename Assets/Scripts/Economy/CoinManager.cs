@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class CoinManager : MonoBehaviour
     public float TotalCoinsCollected => totalCoinsCollected;
 
     public event Action OnBalanceChanged;
+
+    public List<CoinPickup> activeCoins = new List<CoinPickup>();
 
     private void Awake()
     {
@@ -35,5 +38,28 @@ public class CoinManager : MonoBehaviour
     {
         balance -= amount;
         OnBalanceChanged?.Invoke();
+    }
+
+    public void RegisterCoin(CoinPickup coin)
+    {
+        if (!activeCoins.Contains(coin))
+        {
+            activeCoins.Add(coin);
+        }
+    }
+
+    public void UnregisterCoin(CoinPickup coin)
+    {
+        activeCoins.Remove(coin);
+    }
+    public void TriggerMagnet(Transform playerTransform)
+    {
+        foreach (CoinPickup coin in activeCoins)
+        {
+            if (coin != null)
+            {
+                coin.StartMagnetMode(playerTransform);
+            }
+        }
     }
 }
