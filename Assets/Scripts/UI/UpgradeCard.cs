@@ -46,6 +46,10 @@ public class UpgradeCard : MonoBehaviour
             case NormalUpgradeType.HealthRegeneration:
                 PlayerStats.Instance.AddHealthRegen(upgrade.value);
                 break;
+            case NormalUpgradeType.Critical:
+                PlayerStats.Instance.AddCritChance(upgrade.value * 0.05f * (1 - PlayerStats.Instance.CritChance));
+                PlayerStats.Instance.AddCritDamage(upgrade.value * 0.1f);
+                break;
         }
     }
 
@@ -68,6 +72,9 @@ public class UpgradeCard : MonoBehaviour
                 break;
             case SpecialUpgradeType.Devourer:
                 PlayerStats.Instance.AddDevourer(upgrade.value);
+                break;
+            case SpecialUpgradeType.LethalStrike:
+                PlayerStats.Instance.AddLethalStrikeChance(upgrade.value * 0.01f * (1f - PlayerStats.Instance.LethalStrikeChance));
                 break;
         }
     }

@@ -1,6 +1,6 @@
 public enum NormalUpgradeType
 {
-    PlayerDamage, PlayerAttackSpeed, PlayerMaxHealth, Luck, XpGain, GoldGain, HealthRegeneration
+    PlayerDamage, PlayerAttackSpeed, PlayerMaxHealth, Luck, XpGain, GoldGain, HealthRegeneration, Critical
 }
 
 public class NormalUpgradeOption : UpgradeOption

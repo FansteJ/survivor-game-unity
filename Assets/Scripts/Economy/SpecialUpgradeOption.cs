@@ -1,6 +1,6 @@
 public enum SpecialUpgradeType
 {
-    Coinflip, BloodPact, Vampirism, Devourer
+    Coinflip, BloodPact, Vampirism, Devourer, LethalStrike
 }
 
 public class SpecialUpgradeOption : UpgradeOption

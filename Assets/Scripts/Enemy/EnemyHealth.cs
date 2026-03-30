@@ -77,6 +77,20 @@ public class EnemyHealth : MonoBehaviour
     {
         if (currentHealth <= 0) return;
 
+        bool isCrit = false;
+        bool isLethal = false;
+
+        if (PlayerStats.Instance.LethalStrikeChance > 0 && Random.value < PlayerStats.Instance.LethalStrikeChance)
+        {
+            isLethal = true;
+            damage = currentHealth;
+        }
+        else if (Random.value < PlayerStats.Instance.CritChance)
+        {
+            isCrit = true;
+            damage *= PlayerStats.Instance.CritDamage;
+        }
+
         currentHealth -= damage;
         if(PlayerStats.Instance.LifeSteal > 0)
         {
@@ -86,7 +100,22 @@ public class EnemyHealth : MonoBehaviour
         GameObject dmgNum = PoolManager.Instance.Get(damageNumberPrefab, transform.position + Vector3.up * 1f);
         DamageNumber dn = dmgNum.GetComponent<DamageNumber>();
         dn.prefab = damageNumberPrefab;
-        dn.text.text = $"-{damage:F1}";
+
+        if (isLethal)
+        {
+            dn.text.text = "LETHAL!";
+            dn.text.color = Color.red;
+        }
+        else if (isCrit)
+        {
+            dn.text.text = $"{damage:F1}!";
+            dn.text.color = Color.yellow;
+        }
+        else
+        {
+            dn.text.text = $"-{damage:F1}";
+            dn.text.color = Color.white;
+        }
 
         StartCoroutine(FlashRed());
 

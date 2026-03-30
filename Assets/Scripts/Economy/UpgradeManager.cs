@@ -118,6 +118,22 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen:F0} hp/s " +
                     $"-> {PlayerStats.Instance.HealthRegen + upgrade.value:F0} hp/s";
                 break;
+            case NormalUpgradeType.Critical:
+                upgrade.value = multiplier;
+                upgrade.name = "Critical Mastery";
+
+                float chanceGain = upgrade.value * 0.05f * (1f - PlayerStats.Instance.CritChance);
+                float damageGain = upgrade.value * 0.1f;
+
+                float currentChancePct = PlayerStats.Instance.CritChance * 100f;
+                float nextChancePct = (PlayerStats.Instance.CritChance + chanceGain) * 100f;
+
+                float currentDmgPct = PlayerStats.Instance.CritDamage * 100f;
+                float nextDmgPct = (PlayerStats.Instance.CritDamage + damageGain) * 100f;
+
+                upgrade.description = $"Critical Chance: {currentChancePct:F1}% -> {nextChancePct:F1}%\n" +
+                                      $"Critical Damage: {currentDmgPct:F0}% -> {nextDmgPct:F0}%";
+                break;
         }
 
         return upgrade;
@@ -154,6 +170,17 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.name = "Devourer";
                 upgrade.description = $"Max HP on kill: +{PlayerStats.Instance.Devourer:F0} " +
                     $"-> +{PlayerStats.Instance.Devourer + upgrade.value:F0}";
+                break;
+            case SpecialUpgradeType.LethalStrike:
+                upgrade.value = multiplier;
+                upgrade.name = "Lethal Strike";
+
+                float lethalGain = upgrade.value * 0.01f * (1f - PlayerStats.Instance.LethalStrikeChance);
+
+                float currentLethalPct = PlayerStats.Instance.LethalStrikeChance * 100f;
+                float nextLethalPct = (PlayerStats.Instance.LethalStrikeChance + lethalGain) * 100f;
+
+                upgrade.description = $"Instant Kill Chance: {currentLethalPct:F1}% -> {nextLethalPct:F1}%";
                 break;
         }
         return upgrade;

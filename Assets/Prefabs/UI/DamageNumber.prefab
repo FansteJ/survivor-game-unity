@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0, y: 0.01}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8459790449214412237
 CanvasRenderer:
@@ -175,7 +175,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 17.73319, y: 0.7196}
-  m_SizeDelta: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 1.25, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3777259718002216877
 Canvas:
@@ -215,3 +215,4 @@ MonoBehaviour:
   speed: 1
   fadeSpeed: 1
   text: {fileID: 4954267235061698793}
+  prefab: {fileID: 0}

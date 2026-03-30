@@ -12,6 +12,9 @@ public class PlayerStats : MonoBehaviour
     private float healthRegen = 0f;
     private float lifeSteal = 0f;
     private float devourer = 0f;
+    private float critChance = 0.05f;
+    private float critDamage = 2.0f;
+    private float lethalStrikeChance = 0.00f;
 
     public float DamageMultiplier => damageMultiplier;
     public float AttackSpeedMultiplier => attackSpeedMultiplier;
@@ -21,6 +24,9 @@ public class PlayerStats : MonoBehaviour
     public float HealthRegen => healthRegen;
     public float LifeSteal => lifeSteal;
     public float Devourer => devourer;
+    public float CritChance => critChance;
+    public float CritDamage => critDamage;
+    public float LethalStrikeChance => lethalStrikeChance;
 
     private void Awake()
     {
@@ -43,4 +49,7 @@ public class PlayerStats : MonoBehaviour
     public void AddMaxHealth(float value) { GetComponent<PlayerHealth>().AddMaxHealth(value); }
     public void AddLifeSteal(float value) { lifeSteal += value; }
     public void AddDevourer(float value) {  devourer += value; }
+    public void AddCritChance(float value) { critChance += value; }
+    public void AddCritDamage(float value) { critDamage += value; }
+    public void AddLethalStrikeChance(float value) { lethalStrikeChance += value; }
 }
