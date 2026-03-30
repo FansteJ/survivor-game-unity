@@ -11,8 +11,7 @@ public class MageEnemyController : MonoBehaviour
     [Header("Mage Settings")]
     public float speed = 3.5f;
     public float attackRange = 15f;
-    public float magicDamage = 100f;
-    public float castTime = 4f;
+    public float castTime = 5f;
     public float magicCooldown = 5f;
 
     private NavMeshAgent agent;
@@ -128,7 +127,7 @@ public class MageEnemyController : MonoBehaviour
         if (playerHealth != null)
         {
             // TODO strike player with lightning
-            playerHealth.TakeDamage(magicDamage);
+            playerHealth.TakeDamage(playerHealth.maxHealth * 0.05f);
         }
 
         lastCastTime = Time.time;

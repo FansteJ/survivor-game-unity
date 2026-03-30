@@ -81,8 +81,7 @@ public class UpgradeCard : MonoBehaviour
         }
         else
         {
-            upgrade.targetWeapon.damage += upgrade.damageIncrease;
-            upgrade.targetWeapon.attackSpeed += upgrade.speedIncrease;
+            upgrade.targetWeapon.Upgrade(upgrade.multiplier);
         }
     }
 }

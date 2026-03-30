@@ -55,4 +55,19 @@ public class StaffWeapon : WeaponBase
             }
         }
     }
+
+    public override string GetNextLevelDescription(int levelMultiplier = 1)
+    {
+        float nextDmg = damage + (5f * levelMultiplier);
+        float nextAttackSpeed = attackSpeed + (0.1f * levelMultiplier);
+
+        return $"Damage: {damage:F1} -> {nextDmg:F1}\nAttack Speed: {attackSpeed:F2} -> {nextAttackSpeed:F2}";
+    }
+
+    public override void Upgrade(int levelMultiplier)
+    {
+        currentLevel += levelMultiplier;
+        damage += 5f * levelMultiplier;
+        attackSpeed += 0.1f * levelMultiplier;
+    }
 }

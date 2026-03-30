@@ -37,18 +37,6 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public void ApplyDamageUpgrade(float value)
-    {
-        foreach (WeaponBase weapon in activeWeapons)
-            weapon.damage += value;
-    }
-
-    public void ApplyAttackSpeedUpgrade(float value)
-    {
-        foreach (WeaponBase weapon in activeWeapons)
-            weapon.attackSpeed += value;
-    }
-
     public void OnHitEvent()
     {
         foreach (WeaponBase weapon in activeWeapons)

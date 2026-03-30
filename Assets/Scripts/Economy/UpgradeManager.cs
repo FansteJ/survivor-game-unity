@@ -65,8 +65,7 @@ public class UpgradeManager : MonoBehaviour
         upgrade.upgradeType =  (NormalUpgradeType)Random.Range(0, System.Enum.GetValues(typeof(NormalUpgradeType)).Length);
         upgrade.rarity = GetRandomRarity();
 
-        float[] rarityMultipliers = { 1f, 2f, 4f, 7f, 10f };
-        float multiplier = rarityMultipliers[(int)upgrade.rarity];
+        int multiplier = (int)upgrade.rarity + 1;
 
         switch (upgrade.upgradeType)
         {
@@ -130,8 +129,7 @@ public class UpgradeManager : MonoBehaviour
         upgrade.upgradeType = (SpecialUpgradeType)Random.Range(0, System.Enum.GetValues(typeof(SpecialUpgradeType)).Length);
         upgrade.rarity = GetRandomRarity();
 
-        float[] rarityMultipliers = { 1f, 2f, 4f, 7f, 10f };
-        float multiplier = rarityMultipliers[(int)upgrade.rarity];
+        int multiplier = (int)upgrade.rarity + 1;
 
         switch (upgrade.upgradeType)
         {
@@ -220,8 +218,7 @@ public class UpgradeManager : MonoBehaviour
         upgrade.targetWeapon = chosenWeapon;
         upgrade.isUnlock = !chosenWeapon.gameObject.activeInHierarchy;
 
-        float[] rarityMultipliers = { 1f, 2f, 4f, 7f, 10f };
-        float multiplier = rarityMultipliers[(int)upgrade.rarity];
+        int multiplier = (int)upgrade.rarity + 1;
 
         if (upgrade.isUnlock)
         {
@@ -230,12 +227,9 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            upgrade.damageIncrease = 2f * multiplier;
-            upgrade.speedIncrease = 0.05f * multiplier;
-
-            upgrade.name = $"{chosenWeapon.name} Up!";
-            upgrade.description = $"Dmg: {chosenWeapon.damage:F1} -> {chosenWeapon.damage + upgrade.damageIncrease:F1}\n" +
-                                  $"Spd: {chosenWeapon.attackSpeed:F2} -> {chosenWeapon.attackSpeed + upgrade.speedIncrease:F2}";
+            upgrade.name = $"{chosenWeapon.weaponName} LvL {chosenWeapon.currentLevel + multiplier}";
+            upgrade.description = chosenWeapon.GetNextLevelDescription(multiplier);
+            upgrade.multiplier = multiplier;
         }
 
         return upgrade;
