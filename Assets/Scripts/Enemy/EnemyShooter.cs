@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyShooter : MonoBehaviour
+public class EnemyShooter : MonoBehaviour, IDamageScaler
 {
     private Transform playerTransform;
     private NavMeshAgent agent;
@@ -11,6 +11,8 @@ public class EnemyShooter : MonoBehaviour
     public float shootingRange = 8f;
     public float fireRate = 2.5f;
     private float nextFireTime;
+    public float baseDamage = 25f;
+    public float currentDamage = 25f;
 
     public GameObject projectilePrefab;
     public Transform firePoint;
@@ -36,16 +38,36 @@ public class EnemyShooter : MonoBehaviour
 
         if (distanceToPlayer <= shootingRange)
         {
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+            Vector3 targetPos = playerTransform.position + Vector3.up * 1f;
+            Vector3 rayStart = transform.position + Vector3.up * 1f;
 
-            Vector3 rayStart = transform.position + Vector3.up * 0.7f;
+            Vector3 directionToPlayer = (targetPos - rayStart).normalized;
+            rayStart += directionToPlayer * 0.5f;
 
-            if (Physics.Raycast(rayStart, directionToPlayer, out RaycastHit hit, shootingRange))
+            RaycastHit[] hits = Physics.RaycastAll(rayStart, directionToPlayer, shootingRange);
+
+            float playerDistance = Mathf.Infinity;
+            float closestObstacleDistance = Mathf.Infinity;
+
+            foreach (RaycastHit hit in hits)
             {
+                if (hit.collider.isTrigger) continue;
                 if (hit.collider.CompareTag("Player"))
                 {
-                    canSeePlayer = true;
+                    playerDistance = hit.distance;
                 }
+                else if (!hit.collider.CompareTag("Enemy"))
+                {
+                    if (hit.distance < closestObstacleDistance)
+                    {
+                        closestObstacleDistance = hit.distance;
+                    }
+                }
+            }
+
+            if (playerDistance != Mathf.Infinity && playerDistance < closestObstacleDistance)
+            {
+                canSeePlayer = true;
             }
         }
 
@@ -83,8 +105,15 @@ public class EnemyShooter : MonoBehaviour
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position + Vector3.up * 0.7f;
 
         GameObject bullet = PoolManager.Instance.Get(projectilePrefab, spawnPos);
-        bullet.GetComponent<EnemyProjectile>().prefab = projectilePrefab;
+        EnemyProjectile proj = bullet.GetComponent<EnemyProjectile>();
+        proj.prefab = projectilePrefab;
+        proj.damage = currentDamage;
 
         bullet.transform.LookAt(playerTransform.position + Vector3.up * 1f);
+    }
+
+    public void SetDamageMultiplier(float multiplier)
+    {
+        currentDamage = baseDamage * multiplier;
     }
 }

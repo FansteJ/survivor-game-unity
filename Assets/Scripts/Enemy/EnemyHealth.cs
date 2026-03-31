@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public string uuid;
     public float maxHealth;
+    private float baseMaxHealth;
     public float currentHealth;
     public bool IsDead => currentHealth <= 0f;
 
@@ -38,6 +39,8 @@ public class EnemyHealth : MonoBehaviour
         {
             originalColor = renderers[0].material.color;
         }
+
+        baseMaxHealth = maxHealth;
     }
 
     private void OnEnable()
@@ -176,5 +179,18 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         foreach (Renderer r in renderers)
             r.material.color = originalColor;
+    }
+
+    public void SetDifficultyParameters(float hpMultiplier, float dmgMultiplier)
+    {
+        maxHealth = baseMaxHealth * hpMultiplier;
+        currentHealth = maxHealth;
+
+        IDamageScaler damageScaler = GetComponent<IDamageScaler>();
+
+        if (damageScaler != null)
+        {
+            damageScaler.SetDamageMultiplier(dmgMultiplier);
+        }
     }
 }

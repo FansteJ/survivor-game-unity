@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 8469584622552618292}
   - component: {fileID: 3689982214980482240}
   - component: {fileID: 744945242501136907}
+  - component: {fileID: 4979307154260004648}
   m_Layer: 9
   m_Name: OpenText
   m_TagString: Untagged
@@ -466,6 +467,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4979307154260004648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6649888826990369635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30e0f066ec6903418223ad1d8cf9a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Billboard
 --- !u!1 &8488035372062845097
 GameObject:
   m_ObjectHideFlags: 0

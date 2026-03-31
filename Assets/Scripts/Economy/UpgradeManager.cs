@@ -175,7 +175,7 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.value = multiplier;
                 upgrade.name = "Lethal Strike";
 
-                float lethalGain = upgrade.value * 0.01f * (1f - PlayerStats.Instance.LethalStrikeChance);
+                float lethalGain = upgrade.value * 0.001f * (1f - PlayerStats.Instance.LethalStrikeChance);
 
                 float currentLethalPct = PlayerStats.Instance.LethalStrikeChance * 100f;
                 float nextLethalPct = (PlayerStats.Instance.LethalStrikeChance + lethalGain) * 100f;

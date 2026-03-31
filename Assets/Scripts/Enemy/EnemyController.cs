@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamageScaler
 {
     private Transform playerTransform;
     private PlayerHealth playerHealth;
@@ -11,7 +11,8 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
 
-    public float damage = 10f;
+    public float baseDamage = 10f;
+    public float currentDamage = 10f;
     public float damageCooldown = 1f;
     private float lastDamageTime;
 
@@ -93,7 +94,7 @@ public class EnemyController : MonoBehaviour
 
         if (distanceToPlayer <= stopDistance + 0.5f)
         {
-            playerHealth.TakeDamage(damage);
+            playerHealth.TakeDamage(baseDamage);
         }
     }
 
@@ -103,5 +104,10 @@ public class EnemyController : MonoBehaviour
         {
             agent.enabled = false;
         }
+    }
+
+    public void SetDamageMultiplier(float multiplier)
+    {
+        currentDamage = baseDamage * multiplier;
     }
 }

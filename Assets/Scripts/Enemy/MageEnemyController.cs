@@ -127,7 +127,7 @@ public class MageEnemyController : MonoBehaviour
         if (playerHealth != null)
         {
             // TODO strike player with lightning
-            playerHealth.TakeDamage(playerHealth.maxHealth * 0.05f);
+            playerHealth.TakeDamage(Mathf.Max(playerHealth.currentHealth * 0.05f, playerHealth.maxHealth * 0.01f));
         }
 
         lastCastTime = Time.time;

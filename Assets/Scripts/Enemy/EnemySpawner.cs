@@ -23,10 +23,20 @@ public class EnemySpawner : MonoBehaviour
     private float waveTimer = 0f;
     private float spawnTimer = 0f;
 
+    [Header("Endless Mode Settings")]
+    public int currentLoop = 0;
+    public float currentHpMultiplier = 1f;
+    public float currentDmgMultiplier = 1f;
+
     void Update()
     {
         if (currentWaveIndex >= waves.Length)
-            currentWaveIndex--;
+        {
+            currentWaveIndex = waves.Length - 1;
+            currentLoop++;
+            currentHpMultiplier *= 1.5f;
+            currentDmgMultiplier *= 1.3f;
+        }
 
         Wave currentWave = waves[currentWaveIndex];
 
@@ -84,6 +94,7 @@ public class EnemySpawner : MonoBehaviour
             if (health != null)
             {
                 health.prefab = enemyPrefab;
+                health.SetDifficultyParameters(currentHpMultiplier, currentDmgMultiplier);
             }
             return true;
         }

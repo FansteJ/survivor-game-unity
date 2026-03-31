@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 533096685}
   - component: {fileID: 533096684}
   - component: {fileID: 533096688}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: IceAura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4050,6 +4050,8 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
     - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   - waveName: Full Moon
     waveDuration: 120
     spawnInterval: 0.5
@@ -4059,8 +4061,14 @@ MonoBehaviour:
     - {fileID: 4887620666218667177, guid: c8881e8fe92444344a55e07b79680c37, type: 3}
     - {fileID: 8709429057763935659, guid: 9b112dcda774bbe438cb3bd44e8d7565, type: 3}
     - {fileID: 1462668397480986487, guid: 3c4da00452f738e4f8da868cf83b44b1, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   playerTransform: {fileID: 1221838339}
   spawnRadius: 25
+  currentLoop: 0
+  currentHpMultiplier: 1
+  currentDmgMultiplier: 1
 --- !u!4 &1453744412
 Transform:
   m_ObjectHideFlags: 0
