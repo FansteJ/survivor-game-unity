@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class WeaponBase : MonoBehaviour
 {
     public string weaponName;
-    public int currentLevel = 1;
     public float damage = 10f;
     public float attackSpeed = 1f;
     public float radius = 4f;
@@ -28,6 +27,6 @@ public abstract class WeaponBase : MonoBehaviour
     }
 
     protected abstract void Attack();
-    public abstract string GetNextLevelDescription(int levelMultiplier = 1);
-    public abstract void Upgrade(int levelMultiplier);
+    public abstract string GetNextLevelDescription(float multiplier = 1);
+    public abstract void Upgrade(float multiplier);
 }

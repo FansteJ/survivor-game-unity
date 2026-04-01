@@ -65,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
         upgrade.upgradeType =  (NormalUpgradeType)Random.Range(0, System.Enum.GetValues(typeof(NormalUpgradeType)).Length);
         upgrade.rarity = GetRandomRarity();
 
-        int multiplier = (int)upgrade.rarity + 1;
+        float multiplier = (int)upgrade.rarity/2f + 1f;
 
         switch (upgrade.upgradeType)
         {
@@ -85,14 +85,14 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case NormalUpgradeType.PlayerMaxHealth:
-                upgrade.value = 50f * multiplier;
+                upgrade.value = multiplier * 0.04f * PlayerHealth.Instance.maxHealth;
                 upgrade.name = "Max Health";
                 upgrade.description = $"Max health: {PlayerHealth.Instance.maxHealth:F0} " +
                     $"-> {PlayerHealth.Instance.maxHealth + upgrade.value:F0}";
                 break;
 
             case NormalUpgradeType.Luck:
-                upgrade.value = 1f * multiplier;
+                upgrade.value = multiplier * 2f - 1f;
                 upgrade.name = "Luck";
                 upgrade.description = $"Luck: {PlayerStats.Instance.LuckMultiplier:F0} " +
                     $"-> {PlayerStats.Instance.LuckMultiplier + upgrade.value:F0}";
@@ -113,7 +113,7 @@ public class UpgradeManager : MonoBehaviour
                 break;
 
             case NormalUpgradeType.HealthRegeneration:
-                upgrade.value = 1f * multiplier;
+                upgrade.value = multiplier * 0.002f * PlayerHealth.Instance.maxHealth;
                 upgrade.name = "Health Regen";
                 upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen:F0} hp/s " +
                     $"-> {PlayerStats.Instance.HealthRegen + upgrade.value:F0} hp/s";
@@ -145,12 +145,12 @@ public class UpgradeManager : MonoBehaviour
         upgrade.upgradeType = (SpecialUpgradeType)Random.Range(0, System.Enum.GetValues(typeof(SpecialUpgradeType)).Length);
         upgrade.rarity = GetRandomRarity();
 
-        int multiplier = (int)upgrade.rarity + 1;
+        float multiplier = (int)upgrade.rarity / 2f + 1f;
 
         switch (upgrade.upgradeType)
         {
             case SpecialUpgradeType.Coinflip:
-                upgrade.value = 50f * multiplier;
+                upgrade.value = 0.5f * multiplier * CoinManager.Instance.Balance;
                 upgrade.name = "Coinflip";
                 upgrade.description = $"70/30: Win or lose {upgrade.value:F0} coins";
                 break;
@@ -160,7 +160,7 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.description = $"+{upgrade.value * 10:F0}% damage, -{30:F0}% max HP";
                 break;
             case SpecialUpgradeType.Vampirism:
-                upgrade.value = 0.03f * multiplier;
+                upgrade.value = 0.02f * multiplier * (1f - PlayerStats.Instance.LifeSteal);
                 upgrade.name = "Vampirism";
                 upgrade.description = $"Life steal: {PlayerStats.Instance.LifeSteal:F2} " +
                     $"-> {PlayerStats.Instance.LifeSteal + upgrade.value:F2}";
@@ -168,19 +168,17 @@ public class UpgradeManager : MonoBehaviour
             case SpecialUpgradeType.Devourer:
                 upgrade.value = 0.5f * multiplier;
                 upgrade.name = "Devourer";
-                upgrade.description = $"Max HP on kill: +{PlayerStats.Instance.Devourer:F0} " +
-                    $"-> +{PlayerStats.Instance.Devourer + upgrade.value:F0}";
+                upgrade.description = $"Max HP on kill: +{PlayerStats.Instance.Devourer:F1} " +
+                    $"-> +{PlayerStats.Instance.Devourer + upgrade.value:F1}";
                 break;
             case SpecialUpgradeType.LethalStrike:
-                upgrade.value = multiplier;
+                upgrade.value = multiplier * 0.001f * (1f - PlayerStats.Instance.LethalStrikeChance);
                 upgrade.name = "Lethal Strike";
 
-                float lethalGain = upgrade.value * 0.001f * (1f - PlayerStats.Instance.LethalStrikeChance);
-
                 float currentLethalPct = PlayerStats.Instance.LethalStrikeChance * 100f;
-                float nextLethalPct = (PlayerStats.Instance.LethalStrikeChance + lethalGain) * 100f;
+                float nextLethalPct = (PlayerStats.Instance.LethalStrikeChance + upgrade.value) * 100f;
 
-                upgrade.description = $"Instant Kill Chance: {currentLethalPct:F1}% -> {nextLethalPct:F1}%";
+                upgrade.description = $"Instant Kill Chance: {currentLethalPct:F2}% -> {nextLethalPct:F2}%";
                 break;
         }
         return upgrade;
@@ -245,7 +243,7 @@ public class UpgradeManager : MonoBehaviour
         upgrade.targetWeapon = chosenWeapon;
         upgrade.isUnlock = !chosenWeapon.gameObject.activeInHierarchy;
 
-        int multiplier = (int)upgrade.rarity + 1;
+        float multiplier = (int)upgrade.rarity/2f + 1f;
 
         if (upgrade.isUnlock)
         {
@@ -254,7 +252,7 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            upgrade.name = $"{chosenWeapon.weaponName} LvL {chosenWeapon.currentLevel + multiplier}";
+            upgrade.name = $"{chosenWeapon.weaponName} upgrade";
             upgrade.description = chosenWeapon.GetNextLevelDescription(multiplier);
             upgrade.multiplier = multiplier;
         }

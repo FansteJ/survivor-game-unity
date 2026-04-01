@@ -12,7 +12,11 @@ public class SwordWeapon : WeaponBase
 
     protected override void Attack()
     {
-        playerAnimator.SetTrigger("Attack");
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetFloat("CleaveSpeed", attackSpeed * PlayerStats.Instance.AttackSpeedMultiplier);
+            playerAnimator.SetTrigger("Attack");
+        }
     }
 
     public void PerformCleave()
@@ -30,18 +34,17 @@ public class SwordWeapon : WeaponBase
         }
     }
 
-    public override string GetNextLevelDescription(int levelMultiplier = 1)
+    public override string GetNextLevelDescription(float multiplier)
     {
-        float nextDmg = damage + (2f * levelMultiplier);
-        float nextAttackSpeed = attackSpeed + (0.1f * levelMultiplier);
+        float nextDmg = damage + (2f * multiplier);
+        float nextAttackSpeed = attackSpeed + (0.1f * multiplier);
 
         return $"Damage: {damage:F1} -> {nextDmg:F1}\nAttack Speed: {attackSpeed:F2} -> {nextAttackSpeed:F2}";
     }
 
-    public override void Upgrade(int levelMultiplier)
+    public override void Upgrade(float multiplier)
     {
-        currentLevel += levelMultiplier;
-        damage += 2f * levelMultiplier;
-        attackSpeed += 0.1f * levelMultiplier;
+        damage += 2f * multiplier;
+        attackSpeed += 0.1f * multiplier;
     }
 }

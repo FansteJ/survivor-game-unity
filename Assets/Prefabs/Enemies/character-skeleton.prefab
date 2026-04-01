@@ -128,8 +128,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ea9630526573f428a169056e0c59d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
-  shootingRange: 8
+  shootingRange: 6
   fireRate: 2.5
+  baseDamage: 25
+  currentDamage: 20
   projectilePrefab: {fileID: 1572679668879852239, guid: 8ec297efa7e0e8746bcc3d7ad7d77a45, type: 3}
   firePoint: {fileID: 0}
 --- !u!114 &1381970170779114374
@@ -145,11 +147,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   uuid: 
-  maxHealth: 100
+  maxHealth: 75
   currentHealth: 0
   coinDrop: 25
   xpReward: 25
-  magnetDropChance: 0.005
+  magnetDropChance: 0.0075
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
   xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
   prefab: {fileID: 0}

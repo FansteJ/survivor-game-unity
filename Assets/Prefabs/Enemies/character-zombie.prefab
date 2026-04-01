@@ -299,7 +299,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MageEnemyController
   speed: 3.5
   attackRange: 30
-  magicDamage: 50
   castTime: 4
   magicCooldown: 5
   blueLaserVFX: {fileID: 5784329069836609462}
@@ -320,7 +319,7 @@ MonoBehaviour:
   currentHealth: 0
   coinDrop: 15
   xpReward: 15
-  magnetDropChance: 0.005
+  magnetDropChance: 0.01
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
   xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
   prefab: {fileID: 0}

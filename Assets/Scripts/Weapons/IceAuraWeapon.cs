@@ -93,23 +93,21 @@ public class IceAura : WeaponBase
         }
     }
 
-    public override string GetNextLevelDescription(int levelMultiplier = 1)
+    public override string GetNextLevelDescription(float multiplier = 1)
     {
-        float nextDmg = damage + (1f * levelMultiplier);
+        float nextDmg = damage + (1f * multiplier);
 
-        float slowUpgradeFactor = 0.05f * levelMultiplier;
+        float slowUpgradeFactor = 0.05f * multiplier;
         float nextSlowFloat = slowPercent + (1f - slowPercent) * slowUpgradeFactor;
 
         return $"Damage: {damage:F1} -> {nextDmg:F1}\nSlow: {(slowPercent * 100f):F0}% -> {(nextSlowFloat * 100f):F0}%";
     }
 
-    public override void Upgrade(int levelMultiplier)
+    public override void Upgrade(float multiplier)
     {
-        currentLevel += levelMultiplier;
+        damage += 1f * multiplier;
 
-        damage += 1f * levelMultiplier;
-
-        float slowUpgradeFactor = 0.05f * levelMultiplier;
+        float slowUpgradeFactor = 0.05f * multiplier;
         slowPercent += (1f - slowPercent) * slowUpgradeFactor;
     }
 }

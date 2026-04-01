@@ -187,7 +187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 3
   stopDistance: 1.45
-  damage: 50
+  baseDamage: 100
+  currentDamage: 100
   damageCooldown: 2
 --- !u!65 &401377480005009375
 BoxCollider:
@@ -223,11 +224,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   uuid: 
-  maxHealth: 300
+  maxHealth: 500
   currentHealth: 0
-  coinDrop: 50
-  xpReward: 50
-  magnetDropChance: 0.005
+  coinDrop: 100
+  xpReward: 100
+  magnetDropChance: 0.01
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
   xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
   prefab: {fileID: 0}
@@ -244,7 +245,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 60
+  avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
