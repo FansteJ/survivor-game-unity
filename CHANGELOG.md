@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.4.0...v1.5.0) (2026-04-01)
+
+
+### Features
+
+* add animations for Mage enemy ([4a815bc](https://github.com/FansteJ/survivor-game-unity/commit/4a815bc8685f262a4098b75300cd6769f4ae88ac))
+* add chest outline, vampirism and devourer upgrades ([3e86548](https://github.com/FansteJ/survivor-game-unity/commit/3e86548d3ded26858ee54d1e0871d9925db129c5))
+* add Critical and Lethal Strike ([62a8688](https://github.com/FansteJ/survivor-game-unity/commit/62a86888ac40a14d0e973286174fd3cb663b4d48))
+* add Ice Aura weapon ([78e63fb](https://github.com/FansteJ/survivor-game-unity/commit/78e63fb2eb57a34285bd529d6c07818dd253cf64))
+* add increasing difficulty, improve UI, balance changes, fix EnemyShooter ([9b6befb](https://github.com/FansteJ/survivor-game-unity/commit/9b6befbe5821480bd0ca48db6762d4ce9685e674))
+* add Mage enemy ([e4deccb](https://github.com/FansteJ/survivor-game-unity/commit/e4deccb24f22231e5126b84c9d8a4610149aafb1))
+* add magnet ([2254543](https://github.com/FansteJ/survivor-game-unity/commit/22545430b8c9c482827f66cd5ffe9c181a9a1a0e))
+
+
+### Bug Fixes
+
+* fix fireball shooting dead enemies ([f76a684](https://github.com/FansteJ/survivor-game-unity/commit/f76a68475a3a2ad52d592543abe90df50cad9cb6))
+* fix sword attack speed, balance update ([4c3c151](https://github.com/FansteJ/survivor-game-unity/commit/4c3c15166a639fec9252992e7e94481c2e4d76fd))
+* fix upgrades UI overlap, chest physics and Enemy Spawner ([1937cda](https://github.com/FansteJ/survivor-game-unity/commit/1937cdab9e722861d385c0d2ab8d2ef03de56de8))
+
 ## [1.4.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.3.0...v1.4.0) (2026-03-20)
 
 
