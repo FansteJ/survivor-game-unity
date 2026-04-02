@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -36,15 +35,15 @@ public class GameManager : MonoBehaviour
         duration += Time.deltaTime;   
     }
 
-    public void EnemyKilled(string uuid)
+    public void EnemyKilled(string enemyTypeId)
     {
-        if (enemiesKilled.ContainsKey(uuid))
-            enemiesKilled[uuid]++;
+        if (enemiesKilled.ContainsKey(enemyTypeId))
+            enemiesKilled[enemyTypeId]++;
         else
-            enemiesKilled.Add(uuid, 1);
+            enemiesKilled.Add(enemyTypeId, 1);
     }
 
-    public void GameOver()
+    public void SaveRunData()
     {
         if (GameSessionManager.Instance == null || GameSessionManager.Instance.CurrentSessionId == null)
         {
@@ -56,7 +55,7 @@ public class GameManager : MonoBehaviour
         FinishGameSessionRequest request = new FinishGameSessionRequest();
         request.gameSessionId = GameSessionManager.Instance.CurrentSessionId;
         request.durationSeconds = (int) duration;
-        request.levelReached = 1;
+        request.levelReached = ExperienceManager.Instance.CurrentLevel;
 
         List<EnemyKillDTO> enemyKillDTOs = new List<EnemyKillDTO>();
         foreach (string key in enemiesKilled.Keys)
@@ -68,9 +67,12 @@ public class GameManager : MonoBehaviour
         GameSessionManager.Instance.FinishGame(request, OnSuccess, OnError);
     }
 
-    void OnSuccess()
+    void OnSuccess(UserProfileDTO updatedProfile)
     {
-        Time.timeScale = 1;
+        Debug.Log("Run saved!");
+
+        ApiManager.Instance.SetProfile(updatedProfile);
+   
         SceneManager.LoadScene("MainMenu");
     }
 

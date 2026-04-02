@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverUIManager : MonoBehaviour
@@ -37,6 +38,8 @@ public class GameOverUIManager : MonoBehaviour
 
     private void MainMenu()
     {
-        GameManager.Instance.GameOver();
+        Time.timeScale = 1;
+        mainMenuButton.interactable = false;
+        GameManager.Instance.SaveRunData();
     }
 }

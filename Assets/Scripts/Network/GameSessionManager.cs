@@ -42,7 +42,7 @@ public class GameSessionManager : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                CurrentSessionId = request.downloadHandler.text;
+                CurrentSessionId = request.downloadHandler.text.Replace("\"", "").Trim();
                 onSuccess(request.downloadHandler.text);
             }
             else
@@ -52,12 +52,12 @@ public class GameSessionManager : MonoBehaviour
         }
     }
 
-    public void FinishGame(FinishGameSessionRequest finishRequest, Action onSuccess, Action<string> onError)
+    public void FinishGame(FinishGameSessionRequest finishRequest, Action<UserProfileDTO> onSuccess, Action<string> onError)
     {
         StartCoroutine(FinishGameCoroutine(finishRequest, onSuccess, onError));
     }
 
-    IEnumerator FinishGameCoroutine(FinishGameSessionRequest finishRequest, Action onSuccess, Action<string> onError)
+    IEnumerator FinishGameCoroutine(FinishGameSessionRequest finishRequest, Action<UserProfileDTO> onSuccess, Action<string> onError)
     {
         string token = ApiManager.Instance.GetToken();
         string url = ApiManager.Instance.baseUrl + "/api/game/finish";
@@ -75,7 +75,8 @@ public class GameSessionManager : MonoBehaviour
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                onSuccess();
+                UserProfileDTO dto = JsonUtility.FromJson<UserProfileDTO>(request.downloadHandler.text);
+                onSuccess(dto);
             }
             else
             {

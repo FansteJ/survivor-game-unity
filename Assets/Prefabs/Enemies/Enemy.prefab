@@ -118,7 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 5
   stopDistance: 1.45
-  damage: 10
+  baseDamage: 10
+  currentDamage: 10
   damageCooldown: 1
 --- !u!65 &-4884899750022307930
 BoxCollider:
@@ -153,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf5524a5f9bfb949a5ab19d079f02f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  uuid: 
+  enemyTypeId: ghost
   maxHealth: 50
   currentHealth: 0
   coinDrop: 10

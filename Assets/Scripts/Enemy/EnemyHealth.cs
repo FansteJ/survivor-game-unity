@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public string uuid;
+    public string enemyTypeId;
     public float maxHealth;
     private float baseMaxHealth;
     public float currentHealth;
@@ -139,7 +139,7 @@ public class EnemyHealth : MonoBehaviour
         {
             PlayerHealth.Instance.AddMaxHealth(PlayerStats.Instance.Devourer);
         }
-        GameManager.Instance.EnemyKilled(uuid);
+        GameManager.Instance.EnemyKilled(enemyTypeId);
         CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
         GameObject orb = PoolManager.Instance.Get(xpOrbPrefab, transform.position);
         XpOrb orbScript = orb.GetComponent<XpOrb>();

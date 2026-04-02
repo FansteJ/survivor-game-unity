@@ -7,7 +7,7 @@ public class ExperienceManager : MonoBehaviour
     private float currentXP;
     public float CurrentXP => currentXP;
     private int currentLevel;
-    public float CurrentLevel => currentLevel;
+    public int CurrentLevel => currentLevel;
 
     public event Action OnXPChanged;
     public event Action OnLevelUpEvent;
