@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     private float luck = 0f;
     private float xpGainMultiplier = 1f;
     private float goldGainMultiplier = 1f;
-    private float healthRegen = 0f;
+    private float healthRegen = 0.5f;
     private float lifeSteal = 0f;
     private float devourer = 0f;
     private float critChance = 0.05f;

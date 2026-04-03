@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 7f;
     public float jumpforce = 5.0f;
 
     public LayerMask groundLayer;

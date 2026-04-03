@@ -160,13 +160,13 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.description = $"+{upgrade.value * 10:F0}% damage, -{30:F0}% max HP";
                 break;
             case SpecialUpgradeType.Vampirism:
-                upgrade.value = 0.02f * multiplier * (1f - PlayerStats.Instance.LifeSteal);
+                upgrade.value = 0.01f * multiplier * (1f - PlayerStats.Instance.LifeSteal);
                 upgrade.name = "Vampirism";
                 upgrade.description = $"Life steal: {PlayerStats.Instance.LifeSteal:F2} " +
                     $"-> {PlayerStats.Instance.LifeSteal + upgrade.value:F2}";
                 break;
             case SpecialUpgradeType.Devourer:
-                upgrade.value = 0.5f * multiplier;
+                upgrade.value = 0.2f * multiplier;
                 upgrade.name = "Devourer";
                 upgrade.description = $"Max HP on kill: +{PlayerStats.Instance.Devourer:F1} " +
                     $"-> +{PlayerStats.Instance.Devourer + upgrade.value:F1}";

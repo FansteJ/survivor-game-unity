@@ -43,7 +43,6 @@ public class ExperienceManager : MonoBehaviour
 
     private void OnLevelUp()
     {
-        PlayerHealth.Instance.AddMaxHealth(0.1f * PlayerHealth.Instance.maxHealth);
         ChestUIManager.Instance.ShowChest(UpgradeManager.Instance.GetLevelUpUpgrades());
         OnLevelUpEvent?.Invoke();
     }

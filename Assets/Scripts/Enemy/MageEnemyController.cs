@@ -9,7 +9,7 @@ public class MageEnemyController : MonoBehaviour
     private EnemyHealth myHealth;
 
     [Header("Mage Settings")]
-    public float speed = 3.5f;
+    public float speed = 2f;
     public float attackRange = 15f;
     public float castTime = 5f;
     public float magicCooldown = 5f;

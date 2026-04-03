@@ -27,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
     public int currentLoop = 0;
     public float currentHpMultiplier = 1f;
     public float currentDmgMultiplier = 1f;
+    public int difficulty = 5;
 
     void Update()
     {
@@ -46,7 +47,12 @@ public class EnemySpawner : MonoBehaviour
         if (spawnTimer >= currentWave.spawnInterval)
         {
             spawnTimer -= currentWave.spawnInterval;
-            SpawnRandomEnemyFromWave(currentWave);
+            for(int i = 0; i < difficulty; i++)
+            {
+                SpawnRandomEnemyFromWave(currentWave);
+                if (currentWaveIndex == 4)
+                    break;
+            }
         }
 
         if (waveTimer >= currentWave.waveDuration)

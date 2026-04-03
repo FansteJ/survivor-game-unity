@@ -7,6 +7,9 @@ public class EnemyShooter : MonoBehaviour, IDamageScaler
     private NavMeshAgent agent;
     private Animator animator;
 
+    [Header("Movement Settings")]
+    public float speed = 1.5f;
+
     [Header("Shooting Settings")]
     public float shootingRange = 8f;
     public float fireRate = 2.5f;
@@ -26,6 +29,14 @@ public class EnemyShooter : MonoBehaviour, IDamageScaler
         if (player != null)
         {
             playerTransform = player.transform;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (agent != null)
+        {
+            agent.speed = speed;
         }
     }
 

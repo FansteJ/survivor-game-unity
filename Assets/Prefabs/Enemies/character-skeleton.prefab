@@ -9,6 +9,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ab84daf83f2ae874daa22ec013cc2bdf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ab84daf83f2ae874daa22ec013cc2bdf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ab84daf83f2ae874daa22ec013cc2bdf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ab84daf83f2ae874daa22ec013cc2bdf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.82566
       objectReference: {fileID: 0}
@@ -128,9 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ea9630526573f428a169056e0c59d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyShooter
-  shootingRange: 6
+  speed: 1.5
+  shootingRange: 2
   fireRate: 2.5
-  baseDamage: 25
+  baseDamage: 20
   currentDamage: 20
   projectilePrefab: {fileID: 1572679668879852239, guid: 8ec297efa7e0e8746bcc3d7ad7d77a45, type: 3}
   firePoint: {fileID: 0}
@@ -147,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   enemyTypeId: skeleton
-  maxHealth: 75
+  maxHealth: 50
   currentHealth: 0
   coinDrop: 25
   xpReward: 25

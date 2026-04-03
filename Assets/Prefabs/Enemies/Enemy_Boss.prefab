@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &2137435625769532857
+--- !u!1001 &4915572823177836069
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.19463
+      value: 90.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.709
+      value: 4.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.491
+      value: 61.63519
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy_Boss
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_Layer
@@ -94,52 +94,55 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8009419068921728926}
+      addedObject: {fileID: 4208399923601375509}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -4884899750022307930}
+      addedObject: {fileID: 7359114472908111885}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -528533072128659177}
+      addedObject: {fileID: 8110999755824376419}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3252521389075552224}
+      addedObject: {fileID: 3705802450251224697}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8414694992075145342}
+      addedObject: {fileID: 5685104637898511617}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8062695689495501983}
+      addedObject: {fileID: 5391837914241512441}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 509210220883392167}
   m_SourcePrefab: {fileID: 100100000, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
---- !u!1 &1254494051094020328 stripped
+--- !u!1 &5257660789524335476 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
-  m_PrefabInstance: {fileID: 2137435625769532857}
+  m_PrefabInstance: {fileID: 4915572823177836069}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8009419068921728926
+--- !u!114 &4208399923601375509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
+  m_GameObject: {fileID: 5257660789524335476}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 677cbda1c5c210e43bde2100828b5338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  speed: 2.5
-  stopDistance: 1.45
-  baseDamage: 10
-  currentDamage: 10
+  speed: 6
+  stopDistance: 2
+  baseDamage: 100
+  currentDamage: 100
   damageCooldown: 1
---- !u!65 &-4884899750022307930
+--- !u!65 &7359114472908111885
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
+  m_GameObject: {fileID: 5257660789524335476}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -154,35 +157,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.64, z: 0.44}
   m_Center: {x: 0, y: 0.43, z: 0}
---- !u!114 &-528533072128659177
+--- !u!114 &8110999755824376419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
+  m_GameObject: {fileID: 5257660789524335476}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaf5524a5f9bfb949a5ab19d079f02f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   enemyTypeId: ghost
-  maxHealth: 25
+  maxHealth: 2500
   currentHealth: 0
-  coinDrop: 5
-  xpReward: 5
-  magnetDropChance: 0.005
+  coinDrop: 500
+  xpReward: 500
+  magnetDropChance: 0.25
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
   xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
   prefab: {fileID: 0}
   magnetPrefab: {fileID: 1383855854077609611, guid: 653953586d84b564497c01ed440ba463, type: 3}
---- !u!195 &3252521389075552224
+--- !u!195 &3705802450251224697
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
+  m_GameObject: {fileID: 5257660789524335476}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
@@ -198,13 +201,13 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &-8414694992075145342
+--- !u!54 &5685104637898511617
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
+  m_GameObject: {fileID: 5257660789524335476}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -225,14 +228,14 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!95 &-8062695689495501983
+--- !u!95 &5391837914241512441
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
+  m_GameObject: {fileID: 5257660789524335476}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d309ad15efe6c0c429b95e6ea7c4fcdd, type: 2}
@@ -247,3 +250,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &509210220883392167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5257660789524335476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3561cba67ae7c469265c01ce945534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBoss

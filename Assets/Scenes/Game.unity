@@ -3022,7 +3022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43deb7a02de17b94bb97eadd8545fb6f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 43deb7a02de17b94bb97eadd8545fb6f, type: 3}
       propertyPath: m_LocalScale.z
@@ -3524,7 +3524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a989828079f89b4d861cfa69b44c5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  maxHealth: 2000
+  maxHealth: 250
   currentHealth: 0
 --- !u!114 &1221838338
 MonoBehaviour:
@@ -3538,7 +3538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233de4e1c20c0a845a1878963957c762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  speed: 10
+  speed: 7
   jumpforce: 13
   groundLayer:
     serializedVersion: 2
@@ -4028,12 +4028,12 @@ MonoBehaviour:
   waves:
   - waveName: Morning
     waveDuration: 80
-    spawnInterval: 3
+    spawnInterval: 6
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   - waveName: Afternoon
     waveDuration: 80
-    spawnInterval: 1.5
+    spawnInterval: 3
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
@@ -4043,7 +4043,7 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
   - waveName: Night
     waveDuration: 80
-    spawnInterval: 0.5
+    spawnInterval: 2
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
@@ -4054,9 +4054,10 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 8381328626066031310, guid: 44ff7dc367b40344cbf92a752575f1dd, type: 3}
   - waveName: Full Moon
     waveDuration: 80
-    spawnInterval: 0.5
+    spawnInterval: 2
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
@@ -4069,9 +4070,15 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 8381328626066031310, guid: 44ff7dc367b40344cbf92a752575f1dd, type: 3}
+  - waveName: Full Moon
+    waveDuration: 30
+    spawnInterval: 20
+    enemiesToSpawn:
+    - {fileID: 5257660789524335476, guid: 73f3d87f0f90f5548a76080ed83ad0ff, type: 3}
   - waveName: Full Moon
     waveDuration: 80
-    spawnInterval: 0.25
+    spawnInterval: 1.5
     enemiesToSpawn:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
@@ -4092,11 +4099,14 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
+    - {fileID: 8381328626066031310, guid: 44ff7dc367b40344cbf92a752575f1dd, type: 3}
   playerTransform: {fileID: 1221838339}
   spawnRadius: 25
   currentLoop: 0
   currentHpMultiplier: 1
   currentDmgMultiplier: 1
+  difficulty: 3
 --- !u!4 &1453744412
 Transform:
   m_ObjectHideFlags: 0
@@ -4850,7 +4860,7 @@ MonoBehaviour:
   weaponName: Sword
   damage: 10
   attackSpeed: 1
-  radius: 4
+  radius: 6
 --- !u!1 &2078909848
 GameObject:
   m_ObjectHideFlags: 0

@@ -166,6 +166,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100.506
       objectReference: {fileID: 0}
@@ -297,8 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ed3c57d38bb3843b24c0ed624660c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MageEnemyController
-  speed: 3.5
-  attackRange: 30
+  speed: 2
+  attackRange: 20
   castTime: 4
   magicCooldown: 5
   blueLaserVFX: {fileID: 5784329069836609462}
@@ -315,10 +327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   enemyTypeId: zombie
-  maxHealth: 50
+  maxHealth: 35
   currentHealth: 0
-  coinDrop: 15
-  xpReward: 15
+  coinDrop: 5
+  xpReward: 25
   magnetDropChance: 0.01
   damageNumberPrefab: {fileID: 8872134388855345865, guid: 90a92fbc18e355d45bf9924e7d32aa3a, type: 3}
   xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
