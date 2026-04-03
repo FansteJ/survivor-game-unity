@@ -6,6 +6,7 @@ public class EnemyKillDTO
 {
     public string enemyTypeId;
     public int count;
+    public int loopNumber;
 }
 
 [System.Serializable]

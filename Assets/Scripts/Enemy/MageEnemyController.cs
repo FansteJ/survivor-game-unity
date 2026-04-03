@@ -43,7 +43,7 @@ public class MageEnemyController : MonoBehaviour
 
         if (agent != null)
         {
-            agent.speed = speed;
+            agent.speed = speed * Random.Range(0.8f, 1.2f);
             agent.stoppingDistance = attackRange;
             agent.enabled = true;
             agent.ResetPath();

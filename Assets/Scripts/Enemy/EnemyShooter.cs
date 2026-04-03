@@ -36,7 +36,7 @@ public class EnemyShooter : MonoBehaviour, IDamageScaler
     {
         if (agent != null)
         {
-            agent.speed = speed;
+            agent.speed = speed * Random.Range(0.8f, 1.2f);
         }
     }
 

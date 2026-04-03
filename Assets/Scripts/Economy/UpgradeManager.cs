@@ -115,8 +115,8 @@ public class UpgradeManager : MonoBehaviour
             case NormalUpgradeType.HealthRegeneration:
                 upgrade.value = multiplier * 0.002f * PlayerHealth.Instance.maxHealth;
                 upgrade.name = "Health Regen";
-                upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen:F0} hp/s " +
-                    $"-> {PlayerStats.Instance.HealthRegen + upgrade.value:F0} hp/s";
+                upgrade.description = $"Health regen: {PlayerStats.Instance.HealthRegen:F1} hp/s " +
+                    $"-> {PlayerStats.Instance.HealthRegen + upgrade.value:F1} hp/s";
                 break;
             case NormalUpgradeType.Critical:
                 upgrade.value = multiplier;

@@ -15,13 +15,44 @@ public class LoginUIManager : MonoBehaviour
     {
         loginButton.onClick.AddListener(SendLogin);
         registerButton.onClick.AddListener(RegisterLogin);
+
+        usernameInput.onSubmit.AddListener(OnUsernameEnter);
+        passwordInput.onSubmit.AddListener(OnPasswordEnter);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (usernameInput.isFocused)
+            {
+                passwordInput.Select();
+                passwordInput.ActivateInputField();
+            }
+            else if (passwordInput.isFocused)
+            {
+                usernameInput.Select();
+                usernameInput.ActivateInputField();
+            }
+        }
+    }
+
+    private void OnUsernameEnter(string text)
+    {
+        passwordInput.Select();
+        passwordInput.ActivateInputField();
+    }
+
+    private void OnPasswordEnter(string text)
+    {
+        SendLogin();
     }
 
     private void SendLogin()
     {
         AuthManager.Instance.Login(usernameInput.text, passwordInput.text, OnSuccess, OnError);
     }
-    
+
     private void RegisterLogin()
     {
         AuthManager.Instance.Register(usernameInput.text, passwordInput.text, OnSuccessRegister, OnError);
@@ -34,11 +65,13 @@ public class LoginUIManager : MonoBehaviour
 
     private void OnSuccessRegister()
     {
-        // TODO
+        errorText.color = Color.green;
+        errorText.SetText("Register successful!");
     }
 
     private void OnError(string error)
     {
+        errorText.color = Color.red;
         if (string.IsNullOrEmpty(error))
             errorText.SetText("Invalid username or password");
         else

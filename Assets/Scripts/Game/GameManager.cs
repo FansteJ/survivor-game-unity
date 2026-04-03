@@ -9,8 +9,11 @@ public class GameManager : MonoBehaviour
     
     private float duration;
     public float Duration => duration;
-    private Dictionary<string, int> enemiesKilled;
-    public int TotalEnemiesKilled => enemiesKilled.Values.Sum();
+
+    public int CurrentLoop { get; private set; } = 1;
+
+    private Dictionary<string, EnemyKillDTO> killsTracker;
+    public int TotalEnemiesKilled => killsTracker.Values.Sum(k => k.count);
     private void Awake()
     {
         if(Instance == null)
@@ -23,24 +26,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        enemiesKilled = new Dictionary<string, int>();
+        killsTracker = new Dictionary<string, EnemyKillDTO>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         duration += Time.deltaTime;   
     }
 
+    public void AdvanceLoop()
+    {
+        CurrentLoop++;
+        Debug.Log("Entered Loop " + CurrentLoop + "!");
+    }
+
     public void EnemyKilled(string enemyTypeId)
     {
-        if (enemiesKilled.ContainsKey(enemyTypeId))
-            enemiesKilled[enemyTypeId]++;
+        string key = enemyTypeId + "_" + CurrentLoop;
+
+        if (killsTracker.ContainsKey(key))
+        {
+            killsTracker[key].count++;
+        }
         else
-            enemiesKilled.Add(enemyTypeId, 1);
+        {
+            killsTracker.Add(key, new EnemyKillDTO
+            {
+                enemyTypeId = enemyTypeId,
+                count = 1,
+                loopNumber = CurrentLoop
+            });
+        }
     }
 
     public void SaveRunData()
@@ -57,13 +75,8 @@ public class GameManager : MonoBehaviour
         request.durationSeconds = (int) duration;
         request.levelReached = ExperienceManager.Instance.CurrentLevel;
 
-        List<EnemyKillDTO> enemyKillDTOs = new List<EnemyKillDTO>();
-        foreach (string key in enemiesKilled.Keys)
-        {
-            enemyKillDTOs.Add(new EnemyKillDTO { enemyTypeId = key, count = enemiesKilled[key] }); 
-        }
+        request.enemiesKilled = killsTracker.Values.ToList();
 
-        request.enemiesKilled = enemyKillDTOs;
         GameSessionManager.Instance.FinishGame(request, OnSuccess, OnError);
     }
 

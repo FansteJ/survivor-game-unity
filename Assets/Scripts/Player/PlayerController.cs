@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
         direction = forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > lastJumpTime + jumpCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > lastJumpTime + jumpCooldown && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
             lastJumpTime = Time.time;

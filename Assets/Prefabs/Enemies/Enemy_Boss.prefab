@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_LocalScale.z
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 6
-  stopDistance: 2
+  stopDistance: 2.5
   baseDamage: 100
   currentDamage: 100
   damageCooldown: 1
@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf5524a5f9bfb949a5ab19d079f02f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  enemyTypeId: ghost
-  maxHealth: 2500
+  enemyTypeId: ghost_boss
+  maxHealth: 20000
   currentHealth: 0
   coinDrop: 500
   xpReward: 500

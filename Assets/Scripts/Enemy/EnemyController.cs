@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour, IDamageScaler
 
         if (agent != null)
         {
-            agent.speed = speed;
+            agent.speed = speed * Random.Range(0.8f, 1.2f);
             agent.stoppingDistance = stopDistance;
             agent.enabled = true;
             agent.ResetPath();

@@ -33,6 +33,8 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentWaveIndex >= waves.Length)
         {
+            // reset game, increase difficulty but only after all enemies killed on map
+            Destroy(gameObject);
             currentWaveIndex = waves.Length - 1;
             currentLoop++;
             currentHpMultiplier *= 1.5f;
@@ -50,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
             for(int i = 0; i < difficulty; i++)
             {
                 SpawnRandomEnemyFromWave(currentWave);
-                if (currentWaveIndex == 4)
+                if (currentWaveIndex == waves.Length-1)
                     break;
             }
         }

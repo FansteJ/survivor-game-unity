@@ -181,7 +181,7 @@ public class EnemyHealth : MonoBehaviour
             r.material.color = originalColor;
     }
 
-    public void SetDifficultyParameters(float hpMultiplier, float dmgMultiplier)
+    public void SetDifficultyParameters(float hpMultiplier, float dmgMultiplier) // ovo mozda treba promeniti zbog nove logike igre
     {
         maxHealth = baseMaxHealth * hpMultiplier;
         currentHealth = maxHealth;

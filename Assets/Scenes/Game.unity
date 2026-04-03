@@ -3539,11 +3539,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 7
-  jumpforce: 13
+  jumpforce: 20
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  jumpCooldown: 2
+  jumpCooldown: 1
   cameraTransform: {fileID: 0}
 --- !u!4 &1221838339 stripped
 Transform:
@@ -4072,11 +4072,6 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 8381328626066031310, guid: 44ff7dc367b40344cbf92a752575f1dd, type: 3}
   - waveName: Full Moon
-    waveDuration: 30
-    spawnInterval: 20
-    enemiesToSpawn:
-    - {fileID: 5257660789524335476, guid: 73f3d87f0f90f5548a76080ed83ad0ff, type: 3}
-  - waveName: Full Moon
     waveDuration: 80
     spawnInterval: 1.5
     enemiesToSpawn:
@@ -4101,6 +4096,11 @@ MonoBehaviour:
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 1254494051094020328, guid: e5b44c6ccb500684284aaca1e2b5848a, type: 3}
     - {fileID: 8381328626066031310, guid: 44ff7dc367b40344cbf92a752575f1dd, type: 3}
+  - waveName: Boss Fight
+    waveDuration: 30
+    spawnInterval: 20
+    enemiesToSpawn:
+    - {fileID: 5257660789524335476, guid: 73f3d87f0f90f5548a76080ed83ad0ff, type: 3}
   playerTransform: {fileID: 1221838339}
   spawnRadius: 25
   currentLoop: 0
@@ -4267,7 +4267,7 @@ GameObject:
   - component: {fileID: 1673815280}
   - component: {fileID: 1673815279}
   - component: {fileID: 1673815282}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
