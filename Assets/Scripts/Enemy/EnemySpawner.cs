@@ -24,21 +24,25 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer = 0f;
 
     [Header("Endless Mode Settings")]
-    public int currentLoop = 0;
     public float currentHpMultiplier = 1f;
     public float currentDmgMultiplier = 1f;
-    public int difficulty = 5;
+    public const int START_DIFFICULTY = 1;
+    public int difficulty = START_DIFFICULTY;
 
     void Update()
     {
         if (currentWaveIndex >= waves.Length)
         {
-            // reset game, increase difficulty but only after all enemies killed on map
-            Destroy(gameObject);
-            currentWaveIndex = waves.Length - 1;
-            currentLoop++;
-            currentHpMultiplier *= 1.5f;
-            currentDmgMultiplier *= 1.3f;
+            currentWaveIndex = 0;
+            waveTimer = 0f;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.AdvanceLoop();
+            }
+
+            currentHpMultiplier *= 2f;
+            currentDmgMultiplier *= 1.5f;
+            difficulty = START_DIFFICULTY;
         }
 
         Wave currentWave = waves[currentWaveIndex];
@@ -55,12 +59,14 @@ public class EnemySpawner : MonoBehaviour
                 if (currentWaveIndex == waves.Length-1)
                     break;
             }
+            difficulty++;
         }
 
         if (waveTimer >= currentWave.waveDuration)
         {
             currentWaveIndex++;
             waveTimer = 0f;
+            difficulty = 10;
 
             if (currentWaveIndex < waves.Length)
                 Debug.Log($"New wave begins: {waves[currentWaveIndex].waveName}");
@@ -93,19 +99,24 @@ public class EnemySpawner : MonoBehaviour
 
     private bool SpawnGameObject(GameObject enemyPrefab, Vector3 position)
     {
-        NavMeshHit hit;
+        Vector3 rayStart = new Vector3(position.x, playerTransform.position.y + 50f, position.z);
 
-        if (NavMesh.SamplePosition(position, out hit, 20f, NavMesh.AllAreas))
+        if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, 100f))
         {
-            GameObject spawnedEnemy = PoolManager.Instance.Get(enemyPrefab, hit.position);
+            Vector3 finalSpawnPos = hit.point + Vector3.up * 1f;
+
+            GameObject spawnedEnemy = PoolManager.Instance.Get(enemyPrefab, finalSpawnPos);
             EnemyHealth health = spawnedEnemy.GetComponent<EnemyHealth>();
+
             if (health != null)
             {
                 health.prefab = enemyPrefab;
                 health.SetDifficultyParameters(currentHpMultiplier, currentDmgMultiplier);
             }
+
             return true;
         }
+
         return false;
     }
 }

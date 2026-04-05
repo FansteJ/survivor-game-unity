@@ -1,25 +1,42 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour, IDamageScaler
 {
     private Transform playerTransform;
     private PlayerHealth playerHealth;
 
-    public float speed;
+    [Header("Movement Settings")]
+    public float speed = 3f;
     public float stopDistance = 1.5f;
-    private NavMeshAgent agent;
+    public float groundOffsetY = 0f;
+
+    private Rigidbody rb;
     private Animator animator;
 
+    [Header("Combat Settings")]
     public float baseDamage = 10f;
     public float currentDamage = 10f;
     public float damageCooldown = 1f;
     private float lastDamageTime;
 
+    private float currentRandomizedSpeed;
+
+    private float aiTickRate = 0.2f;
+    private float aiTimer = 0f;
+    private float stopDistanceSqr;
+    private float currentDistanceSqr;
+    private Vector3 currentDirection;
+
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -27,82 +44,96 @@ public class EnemyController : MonoBehaviour, IDamageScaler
             playerTransform = player.transform;
             playerHealth = playerTransform.GetComponent<PlayerHealth>();
         }
+
+        stopDistanceSqr = stopDistance * stopDistance;
     }
 
     private void OnEnable()
     {
         lastDamageTime = Time.time;
+        currentRandomizedSpeed = speed * Random.Range(0.8f, 1.2f);
+        currentDamage = baseDamage;
 
-        if (agent != null)
-        {
-            agent.speed = speed * Random.Range(0.8f, 1.2f);
-            agent.stoppingDistance = stopDistance;
-            agent.enabled = true;
-            agent.ResetPath();
-        }
+        aiTimer = Random.Range(0f, aiTickRate);
     }
 
     void Update()
     {
-        if (!agent.enabled || playerTransform == null) return;
+        if (playerTransform == null) return;
 
-        agent.SetDestination(playerTransform.position);
-
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        aiTimer += Time.deltaTime;
+        if (aiTimer >= aiTickRate)
         {
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-            FaceTarget();
+            Vector3 offset = playerTransform.position - transform.position;
+            currentDistanceSqr = offset.sqrMagnitude;
+
+            offset.y = 0;
+            currentDirection = offset.normalized;
+
+            aiTimer = 0f;
         }
-        else
-        {
-            agent.isStopped = false;
-        }
 
-        animator.SetFloat("Speed", agent.velocity.magnitude);
-
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer <= stopDistance && Time.time >= lastDamageTime + damageCooldown)
+        if (currentDistanceSqr <= stopDistanceSqr && Time.time >= lastDamageTime + damageCooldown)
         {
             AttackPlayer();
         }
+
+        if (animator != null)
+        {
+            float animSpeed = (currentDistanceSqr > stopDistanceSqr) ? currentRandomizedSpeed : 0f;
+            animator.SetFloat("Speed", animSpeed);
+        }
     }
 
-    private void FaceTarget()
+    private void FixedUpdate()
     {
-        Vector3 direction = (playerTransform.position - transform.position).normalized;
+        if (playerTransform == null) return;
 
-        direction.y = 0;
+        if (currentDistanceSqr > stopDistanceSqr)
+        {
+            Vector3 newPosition = transform.position + currentDirection * currentRandomizedSpeed * Time.fixedDeltaTime;
 
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
+            if (Terrain.activeTerrain != null)
+            {
+                float terrainHeight = Terrain.activeTerrain.SampleHeight(newPosition);
+                newPosition.y = terrainHeight + Terrain.activeTerrain.transform.position.y + groundOffsetY;
+            }
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            transform.position = newPosition;
+            FaceTarget(currentDirection);
+        }
+        else
+        {
+            FaceTarget(currentDirection);
+        }
+    }
+
+    private void FaceTarget(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.fixedDeltaTime * 10f);
+        }
     }
 
     private void AttackPlayer()
     {
         lastDamageTime = Time.time;
-        animator.SetTrigger("Attack");
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        }
     }
 
     public void Hit()
     {
         if (playerHealth == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-
-        if (distanceToPlayer <= stopDistance + 0.5f)
+        float distSqr = (playerTransform.position - transform.position).sqrMagnitude;
+        if (distSqr <= (stopDistance + 0.5f) * (stopDistance + 0.5f))
         {
-            playerHealth.TakeDamage(baseDamage);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (agent != null)
-        {
-            agent.enabled = false;
+            playerHealth.TakeDamage(currentDamage);
         }
     }
 

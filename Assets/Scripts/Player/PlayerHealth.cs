@@ -10,6 +10,10 @@ public class PlayerHealth : MonoBehaviour
 
     public event Action OnHealthChange;
 
+    [Header("Regeneration Settings")]
+    public float regenTickRate = 0.5f;
+    private float regenTimer = 0f;
+
     private void Awake()
     {
         if(Instance == null)
@@ -24,9 +28,14 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if(PlayerStats.Instance.HealthRegen > 0)
+        if (PlayerStats.Instance.HealthRegen > 0 && currentHealth < maxHealth)
         {
-            Heal(PlayerStats.Instance.HealthRegen * Time.deltaTime);
+            regenTimer += Time.deltaTime;
+            if (regenTimer >= regenTickRate)
+            {
+                Heal(PlayerStats.Instance.HealthRegen * regenTickRate);
+                regenTimer = 0f;
+            }
         }
     }
 
@@ -46,6 +55,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float value)
     {
+        if (currentHealth >= maxHealth) return;
+
         currentHealth = Mathf.Min(currentHealth + value, maxHealth);
         OnHealthChange?.Invoke();
     }

@@ -11,20 +11,20 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
     Vector3 direction;
+    private Quaternion targetRotation;
 
     private Animator animator;
-
     public Transform cameraTransform;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         cameraTransform = Camera.main.transform;
+
+        targetRotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 forward = cameraTransform.forward;
@@ -33,28 +33,44 @@ public class PlayerController : MonoBehaviour
         right.y = 0;
         forward.Normalize();
         right.Normalize();
-        direction = forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal");
+
+        direction = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
+        direction.Normalize();
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > lastJumpTime + jumpCooldown && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
             lastJumpTime = Time.time;
         }
-        animator.SetFloat("Speed", direction.magnitude);
-        if(direction.magnitude > 0)
+
+        if (direction.magnitude > 0.1f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
+            targetRotation = Quaternion.LookRotation(direction);
         }
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 800f * Time.deltaTime);
+
+        float angleToTarget = Vector3.Angle(transform.forward, direction);
+        float currentSpeed = (direction.magnitude > 0.1f && angleToTarget < 60f) ? 1f : 0f;
+        animator.SetFloat("Speed", currentSpeed);
     }
 
     private void FixedUpdate()
     {
         float currentYVelocity = rb.linearVelocity.y;
+        Vector3 newVelocity = Vector3.zero;
 
-        Vector3 newVelocity = direction * speed;
+        if (direction.magnitude > 0.1f)
+        {
+            float angle = Vector3.Angle(transform.forward, direction);
+
+            if (angle < 60f)
+            {
+                newVelocity = direction * speed;
+            }
+        }
+
         newVelocity.y = currentYVelocity;
-
         rb.linearVelocity = newVelocity;
     }
 

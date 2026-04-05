@@ -1,14 +1,14 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyShooter : MonoBehaviour, IDamageScaler
 {
     private Transform playerTransform;
-    private NavMeshAgent agent;
+    private Rigidbody rb;
     private Animator animator;
 
     [Header("Movement Settings")]
     public float speed = 1.5f;
+    public float groundOffsetY = 0f;
 
     [Header("Shooting Settings")]
     public float shootingRange = 8f;
@@ -20,105 +20,157 @@ public class EnemyShooter : MonoBehaviour, IDamageScaler
     public GameObject projectilePrefab;
     public Transform firePoint;
 
+    private bool canSeePlayer = false;
+
+    private float aiTickRate = 0.3f;
+    private float aiTimer = 0f;
+    private float shootingRangeSqr;
+    private float currentDistanceSqr;
+    private Vector3 currentDirection;
+    private float currentRandomizedSpeed;
+
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
         }
+
+        shootingRangeSqr = shootingRange * shootingRange;
     }
 
     private void OnEnable()
     {
-        if (agent != null)
-        {
-            agent.speed = speed * Random.Range(0.8f, 1.2f);
-        }
+        currentRandomizedSpeed = speed * Random.Range(0.8f, 1.2f);
+        aiTimer = Random.Range(0f, aiTickRate);
+        canSeePlayer = false;
     }
 
     void Update()
     {
-        if (!agent.enabled || playerTransform == null) return;
+        if (playerTransform == null) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        bool canSeePlayer = false;
+        aiTimer += Time.deltaTime;
 
-        if (distanceToPlayer <= shootingRange)
+        if (aiTimer >= aiTickRate)
         {
-            Vector3 targetPos = playerTransform.position + Vector3.up * 1f;
-            Vector3 rayStart = transform.position + Vector3.up * 1f;
+            Vector3 offset = playerTransform.position - transform.position;
+            currentDistanceSqr = offset.sqrMagnitude;
 
-            Vector3 directionToPlayer = (targetPos - rayStart).normalized;
-            rayStart += directionToPlayer * 0.5f;
+            offset.y = 0;
+            currentDirection = offset.normalized;
 
-            RaycastHit[] hits = Physics.RaycastAll(rayStart, directionToPlayer, shootingRange);
+            canSeePlayer = false;
 
-            float playerDistance = Mathf.Infinity;
-            float closestObstacleDistance = Mathf.Infinity;
-
-            foreach (RaycastHit hit in hits)
+            if (currentDistanceSqr <= shootingRangeSqr)
             {
-                if (hit.collider.isTrigger) continue;
-                if (hit.collider.CompareTag("Player"))
-                {
-                    playerDistance = hit.distance;
-                }
-                else if (!hit.collider.CompareTag("Enemy"))
-                {
-                    if (hit.distance < closestObstacleDistance)
-                    {
-                        closestObstacleDistance = hit.distance;
-                    }
-                }
+                CheckLineOfSight();
             }
 
-            if (playerDistance != Mathf.Infinity && playerDistance < closestObstacleDistance)
-            {
-                canSeePlayer = true;
-            }
+            aiTimer = 0f;
         }
 
-        if (distanceToPlayer <= shootingRange && canSeePlayer)
+        if (currentDistanceSqr <= shootingRangeSqr && canSeePlayer && Time.time >= nextFireTime)
         {
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
+            nextFireTime = Time.time + fireRate;
+            if (animator != null) animator.SetTrigger("Attack");
+            Shoot();
+        }
 
-            Vector3 direction = (playerTransform.position - transform.position).normalized;
-            direction.y = 0;
-            transform.rotation = Quaternion.LookRotation(direction);
+        if (animator != null)
+        {
+            float animSpeed = (currentDistanceSqr > shootingRangeSqr || !canSeePlayer) ? currentRandomizedSpeed : 0f;
+            animator.SetFloat("Speed", animSpeed);
+        }
+    }
 
-            if (animator != null) animator.SetFloat("Speed", 0f);
+    private void FixedUpdate()
+    {
+        if (playerTransform == null) return;
 
-            if (Time.time >= nextFireTime)
+        if (currentDistanceSqr > shootingRangeSqr || !canSeePlayer)
+        {
+            Vector3 newPosition = transform.position + currentDirection * currentRandomizedSpeed * Time.fixedDeltaTime;
+
+            if (Terrain.activeTerrain != null)
             {
-                nextFireTime = Time.time + fireRate;
-                if (animator != null) animator.SetTrigger("Attack");
-                Shoot();
+                float terrainHeight = Terrain.activeTerrain.SampleHeight(newPosition);
+                newPosition.y = terrainHeight + Terrain.activeTerrain.transform.position.y + groundOffsetY;
             }
+
+            transform.position = newPosition;
+            FaceTarget(currentDirection);
         }
         else
         {
-            agent.isStopped = false;
-            agent.SetDestination(playerTransform.position);
+            FaceTarget(currentDirection);
+        }
+    }
 
-            if (animator != null) animator.SetFloat("Speed", agent.velocity.magnitude);
+    private void FaceTarget(Vector3 direction)
+    {
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.fixedDeltaTime * 10f);
+        }
+    }
+
+    private void CheckLineOfSight()
+    {
+        Vector3 targetPos = playerTransform.position + Vector3.up * 1f;
+        Vector3 rayStart = transform.position + Vector3.up * 1f;
+        Vector3 directionToPlayer = (targetPos - rayStart).normalized;
+        rayStart += directionToPlayer * 0.5f;
+
+        RaycastHit[] hits = Physics.RaycastAll(rayStart, directionToPlayer, shootingRange);
+        float playerDistance = Mathf.Infinity;
+        float closestObstacleDistance = Mathf.Infinity;
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.isTrigger) continue;
+
+            if (hit.collider.CompareTag("Player"))
+            {
+                playerDistance = hit.distance;
+            }
+            else if (!hit.collider.CompareTag("Enemy"))
+            {
+                if (hit.distance < closestObstacleDistance)
+                {
+                    closestObstacleDistance = hit.distance;
+                }
+            }
+        }
+
+        if (playerDistance != Mathf.Infinity && playerDistance < closestObstacleDistance)
+        {
+            canSeePlayer = true;
         }
     }
 
     private void Shoot()
     {
         if (projectilePrefab == null) return;
-
         Vector3 spawnPos = firePoint != null ? firePoint.position : transform.position + Vector3.up * 0.7f;
-
         GameObject bullet = PoolManager.Instance.Get(projectilePrefab, spawnPos);
         EnemyProjectile proj = bullet.GetComponent<EnemyProjectile>();
-        proj.prefab = projectilePrefab;
-        proj.damage = currentDamage;
+
+        if (proj != null)
+        {
+            proj.prefab = projectilePrefab;
+            proj.damage = currentDamage;
+        }
 
         bullet.transform.LookAt(playerTransform.position + Vector3.up * 1f);
     }

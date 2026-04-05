@@ -171,7 +171,7 @@ public class UpgradeManager : MonoBehaviour
                 upgrade.description = $"Max HP on kill: +{PlayerStats.Instance.Devourer:F1} " +
                     $"-> +{PlayerStats.Instance.Devourer + upgrade.value:F1}";
                 break;
-            case SpecialUpgradeType.LethalStrike:
+            /*case SpecialUpgradeType.LethalStrike:
                 upgrade.value = multiplier * 0.001f * (1f - PlayerStats.Instance.LethalStrikeChance);
                 upgrade.name = "Lethal Strike";
 
@@ -179,7 +179,7 @@ public class UpgradeManager : MonoBehaviour
                 float nextLethalPct = (PlayerStats.Instance.LethalStrikeChance + upgrade.value) * 100f;
 
                 upgrade.description = $"Instant Kill Chance: {currentLethalPct:F2}% -> {nextLethalPct:F2}%";
-                break;
+                break;*/
         }
         return upgrade;
     }

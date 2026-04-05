@@ -12,6 +12,7 @@ public class StaffWeapon : WeaponBase
 
         Collider targetCollider = null;
         float minDistance = Mathf.Infinity;
+        Vector3 rayStartPos = playerTransform.position + Vector3.up * 1f;
 
         foreach (Collider hit in hits)
         {
@@ -22,13 +23,14 @@ public class StaffWeapon : WeaponBase
                     continue;
                 }
 
-                float distance = Vector3.Distance(playerTransform.position, hit.transform.position);
+                Vector3 targetCenter = hit.bounds.center;
+                float distance = Vector3.Distance(rayStartPos, targetCenter);
 
                 if (distance < minDistance)
                 {
-                    Vector3 directionToEnemy = (hit.transform.position - playerTransform.position).normalized;
+                    Vector3 directionToEnemy = (targetCenter - rayStartPos).normalized;
 
-                    if (!Physics.Raycast(playerTransform.position, directionToEnemy, distance, obstacleMask))
+                    if (!Physics.Raycast(rayStartPos, directionToEnemy, distance, obstacleMask))
                     {
                         minDistance = distance;
                         targetCollider = hit;
@@ -39,8 +41,7 @@ public class StaffWeapon : WeaponBase
 
         if (targetCollider != null)
         {
-            Vector3 spawnPosition = playerTransform.position + Vector3.up * 1f;
-            GameObject fireballObj = PoolManager.Instance.Get(projectilePrefab, spawnPosition);
+            GameObject fireballObj = PoolManager.Instance.Get(projectilePrefab, rayStartPos);
 
             Vector3 targetCenter = targetCollider.bounds.center;
 

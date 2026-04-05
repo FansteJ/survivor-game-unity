@@ -150,7 +150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5784329069836609462}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b0496fcccd3cf543be60d60366ff89e, type: 3}
   m_Name: 
@@ -221,6 +221,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -5304396038475686106, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5151492872390713093, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -229,10 +233,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -3692600423840342213, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3188153193986367248, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3018960449897015653, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -3018960449897015653, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 002b67eb5abce8c498a155c3d9610280, type: 2}
+    - target: {fileID: -2268516585682839789, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       propertyPath: m_Name
       value: character-zombie
@@ -248,6 +268,10 @@ PrefabInstance:
     - target: {fileID: 3250163066507786643, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314722597813798244, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5788240856288092216, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       propertyPath: m_Layer
@@ -277,9 +301,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2278318514325544270}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8321000500725728848}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a0c52e14fbc28cf409edb1b56a5d961c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 242675114817675571}
@@ -357,28 +378,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.73, z: 0.52}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!195 &8321000500725728848
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4887620666218667177}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &242675114817675571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -401,7 +400,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
@@ -417,7 +416,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1c8916cbc4339b74aa5474c2e96414ab, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

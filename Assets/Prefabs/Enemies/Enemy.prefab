@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -3692600423840342213, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3018960449897015653, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2268516585682839789, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -103,9 +115,6 @@ PrefabInstance:
       addedObject: {fileID: -528533072128659177}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3252521389075552224}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -8414694992075145342}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f717550c4d9f9f4d8010eabd2f20d7f, type: 3}
       insertIndex: -1
@@ -130,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   speed: 2.5
   stopDistance: 1.45
+  groundOffsetY: 0
   baseDamage: 10
   currentDamage: 10
   damageCooldown: 1
@@ -140,7 +150,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254494051094020328}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7bc5f99bc8843654fa18799438676f3f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -176,28 +186,6 @@ MonoBehaviour:
   xpOrbPrefab: {fileID: 1389164581394651503, guid: e9983340b13cf8d4c961508deb878c31, type: 3}
   prefab: {fileID: 0}
   magnetPrefab: {fileID: 1383855854077609611, guid: 653953586d84b564497c01ed440ba463, type: 3}
---- !u!195 &3252521389075552224
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254494051094020328}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 3.17
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &-8414694992075145342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -220,7 +208,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
@@ -236,7 +224,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d309ad15efe6c0c429b95e6ea7c4fcdd, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

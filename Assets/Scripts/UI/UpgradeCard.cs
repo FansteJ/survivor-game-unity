@@ -73,9 +73,9 @@ public class UpgradeCard : MonoBehaviour
             case SpecialUpgradeType.Devourer:
                 PlayerStats.Instance.AddDevourer(upgrade.value);
                 break;
-            case SpecialUpgradeType.LethalStrike:
+            /*case SpecialUpgradeType.LethalStrike:
                 PlayerStats.Instance.AddLethalStrikeChance(upgrade.value);
-                break;
+                break;*/
         }
     }
 
