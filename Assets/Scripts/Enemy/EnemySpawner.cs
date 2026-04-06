@@ -12,6 +12,8 @@ public class Wave
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance { get; private set; }
+
     [Header("Wave Settings")]
     public Wave[] waves;
 
@@ -29,20 +31,19 @@ public class EnemySpawner : MonoBehaviour
     public const int START_DIFFICULTY = 1;
     public int difficulty = START_DIFFICULTY;
 
+    public bool isWaitingForBossDeath = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Update()
     {
+        if (isWaitingForBossDeath) return;
+
         if (currentWaveIndex >= waves.Length)
         {
-            currentWaveIndex = 0;
-            waveTimer = 0f;
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.AdvanceLoop();
-            }
-
-            currentHpMultiplier *= 2f;
-            currentDmgMultiplier *= 1.5f;
-            difficulty = START_DIFFICULTY;
+            AdvanceToNextLoop();
         }
 
         Wave currentWave = waves[currentWaveIndex];
@@ -71,6 +72,23 @@ public class EnemySpawner : MonoBehaviour
             if (currentWaveIndex < waves.Length)
                 Debug.Log($"New wave begins: {waves[currentWaveIndex].waveName}");
         }
+    }
+
+    public void AdvanceToNextLoop()
+    {
+        isWaitingForBossDeath = false;
+        currentWaveIndex = 0;
+        waveTimer = 0f;
+        spawnTimer = 0f;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.AdvanceLoop();
+        }
+
+        currentHpMultiplier *= 2f;
+        currentDmgMultiplier *= 1.5f;
+        difficulty = START_DIFFICULTY;
     }
 
     private void SpawnRandomEnemyFromWave(Wave wave)
@@ -112,6 +130,11 @@ public class EnemySpawner : MonoBehaviour
             {
                 health.prefab = enemyPrefab;
                 health.SetDifficultyParameters(currentHpMultiplier, currentDmgMultiplier);
+            }
+
+            if (spawnedEnemy.GetComponent<EnemyBoss>() != null)
+            {
+                isWaitingForBossDeath = true;
             }
 
             return true;

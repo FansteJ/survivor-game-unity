@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -24,15 +23,17 @@ public class EnemyHealth : MonoBehaviour
     private Color originalColor;
     private Animator animator;
     private EnemyController controller;
+    private EnemyShooter shooter;
+    private MageEnemyController mageEnemyController;
     private Collider col;
-    private NavMeshAgent agent;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         controller = GetComponent<EnemyController>();
+        shooter = GetComponent<EnemyShooter>();
+        mageEnemyController = GetComponent<MageEnemyController>();
         col = GetComponent<Collider>();
-        agent = GetComponent<NavMeshAgent>();
 
         renderers = GetComponentsInChildren<Renderer>();
         if (renderers.Length > 0)
@@ -49,7 +50,6 @@ public class EnemyHealth : MonoBehaviour
 
         if (col != null) col.enabled = false;
         if (controller != null) controller.enabled = false;
-        if (agent != null) agent.enabled = false;
 
         if (renderers != null)
         {
@@ -60,20 +60,29 @@ public class EnemyHealth : MonoBehaviour
         StartCoroutine(WakeUpSequence());
     }
 
-    private IEnumerator WakeUpSequence()
+    private void OnDisable()
     {
-        yield return null;
-
         if (animator != null)
         {
             animator.SetBool("IsDead", false);
             animator.ResetTrigger("Attack");
-            animator.Play("idle", -1, 0f);
+            animator.Rebind();
         }
+    }
 
-        if (agent != null) agent.enabled = true;
+    private IEnumerator WakeUpSequence()
+    {
+        yield return null;
+
         if (col != null) col.enabled = true;
         if (controller != null) controller.enabled = true;
+        if (shooter != null) shooter.enabled = true;
+        if(mageEnemyController != null) mageEnemyController.enabled = true;
+
+        if (animator != null)
+        {
+            animator.Play("idle", -1, 0f);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -95,7 +104,7 @@ public class EnemyHealth : MonoBehaviour
         }
 
         currentHealth -= damage;
-        if(PlayerStats.Instance.LifeSteal > 0)
+        if (PlayerStats.Instance.LifeSteal > 0)
         {
             PlayerHealth.Instance.Heal(damage * PlayerStats.Instance.LifeSteal);
         }
@@ -133,7 +142,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (col != null) col.enabled = false;
         if (controller != null) controller.enabled = false;
-        if (agent != null) agent.enabled = false;
+        if(shooter != null) shooter.enabled = false;
+        if(mageEnemyController != null) mageEnemyController.enabled = false;
 
         if (PlayerStats.Instance.Devourer > 0)
         {
@@ -143,7 +153,7 @@ public class EnemyHealth : MonoBehaviour
         CoinSpawner.Instance.SpawnCoins(coinDrop, transform.position);
         GameObject orb = PoolManager.Instance.Get(xpOrbPrefab, transform.position);
         XpOrb orbScript = orb.GetComponent<XpOrb>();
-        
+
         orbScript.prefab = xpOrbPrefab;
         orbScript.xpAmount = xpReward;
 
@@ -161,14 +171,6 @@ public class EnemyHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        if (animator != null)
-        {
-            animator.SetBool("IsDead", false);
-            animator.ResetTrigger("Attack");
-            animator.Play("idle", -1, 0f);
-            animator.Update(0f);
-        }
-
         PoolManager.Instance.Return(prefab, gameObject);
     }
 
@@ -181,7 +183,7 @@ public class EnemyHealth : MonoBehaviour
             r.material.color = originalColor;
     }
 
-    public void SetDifficultyParameters(float hpMultiplier, float dmgMultiplier) // ovo mozda treba promeniti zbog nove logike igre
+    public void SetDifficultyParameters(float hpMultiplier, float dmgMultiplier)
     {
         maxHealth = baseMaxHealth * hpMultiplier;
         currentHealth = maxHealth;

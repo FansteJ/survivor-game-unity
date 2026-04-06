@@ -52,7 +52,6 @@ public class EnemyController : MonoBehaviour, IDamageScaler
     {
         lastDamageTime = Time.time;
         currentRandomizedSpeed = speed * Random.Range(0.8f, 1.2f);
-        currentDamage = baseDamage;
 
         aiTimer = Random.Range(0f, aiTickRate);
     }
