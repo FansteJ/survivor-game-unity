@@ -16,13 +16,16 @@ public class MainMenuUIManager : MonoBehaviour
     public Button leaderboardButton;
     public Button logoutButton;
 
-
+    public ShopUIManager shopUIManager;
     void Start()
     {
         UserProfileDTO dto = ApiManager.Instance.CurrentProfile;
         FillUI(dto);
         playButton.onClick.AddListener(StartGame);
-        // shopButton.onClick.AddListener();
+        shopButton.onClick.AddListener(() =>
+        {
+            shopUIManager.OpenShop();
+        });
         // leaderboardButton.onClick.AddListener();
         logoutButton.onClick.AddListener(Logout);
     }
