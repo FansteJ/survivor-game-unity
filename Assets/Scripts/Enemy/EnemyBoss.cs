@@ -6,6 +6,7 @@ public class EnemyBoss : MonoBehaviour
     private EnemyHealth myHealth;
 
     private float currentTime = 0f;
+    private float lifeStealTaken;
 
     void Awake()
     {
@@ -18,6 +19,8 @@ public class EnemyBoss : MonoBehaviour
         if (playerObj != null)
         {
             player = playerObj.GetComponent<PlayerController>();
+            lifeStealTaken = PlayerStats.Instance.LifeSteal / 2f;
+            PlayerStats.Instance.AddLifeSteal(-lifeStealTaken);
         }
 
         if (BossUIManager.Instance != null)
@@ -59,5 +62,8 @@ public class EnemyBoss : MonoBehaviour
         {
             EnemySpawner.Instance.AdvanceToNextLoop();
         }
+
+        PlayerStats.Instance.AddLifeSteal(lifeStealTaken);
+
     }
 }

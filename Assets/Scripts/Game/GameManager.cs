@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
+            Time.timeScale = 1f;
         }
         else
         {

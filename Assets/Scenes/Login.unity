@@ -2379,6 +2379,7 @@ GameObject:
   - component: {fileID: 1834891933}
   - component: {fileID: 1834891934}
   - component: {fileID: 1834891935}
+  - component: {fileID: 1834891936}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2462,6 +2463,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1658df60eb52249a65e2958ce3442d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+--- !u!114 &1834891936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834891929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48816e31536aed4ca62924f14446107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeaderboardManager
 --- !u!1 &1878047445
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,8 +86,8 @@ public class EnemySpawner : MonoBehaviour
             GameManager.Instance.AdvanceLoop();
         }
 
-        currentHpMultiplier *= 2f;
-        currentDmgMultiplier *= 1.5f;
+        currentHpMultiplier *= 2.5f;
+        currentDmgMultiplier *= 2.5f;
         difficulty = START_DIFFICULTY;
     }
 

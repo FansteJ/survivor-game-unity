@@ -17,6 +17,7 @@ public class MainMenuUIManager : MonoBehaviour
     public Button logoutButton;
 
     public ShopUIManager shopUIManager;
+    public LeaderboardUIManager leaderboardUIManager;
     void Start()
     {
         UserProfileDTO dto = ApiManager.Instance.CurrentProfile;
@@ -26,7 +27,10 @@ public class MainMenuUIManager : MonoBehaviour
         {
             shopUIManager.OpenShop();
         });
-        // leaderboardButton.onClick.AddListener();
+        leaderboardButton.onClick.AddListener(() =>
+        {
+            leaderboardUIManager.OpenLeaderboard();
+        });
         logoutButton.onClick.AddListener(Logout);
     }
 
@@ -52,7 +56,19 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void OnSuccessStartGame(string response)
     {
-        SceneManager.LoadScene("Game");
+        PlayerManager.Instance.GetPlayerModifiers(
+            onSuccess: (mods) =>
+            {
+                PlayerManager.Instance.activeModifiers = mods;
+
+                SceneManager.LoadScene("Game");
+            },
+            onError: (error) =>
+            {
+                Debug.LogError("Error: " + error);
+                SceneManager.LoadScene("Game");
+            }
+        );
     }
 
     private void OnErrorStartGame(string error)

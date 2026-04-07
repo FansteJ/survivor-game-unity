@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
 
+    public PlayerModifiers activeModifiers { get; set; }
     void Awake()
     {
         if (Instance == null)
@@ -104,6 +105,7 @@ public class PlayerManager : MonoBehaviour
             if (webRequest.result == UnityWebRequest.Result.Success)
             {
                 PlayerModifiers modifiers = JsonConvert.DeserializeObject<PlayerModifiers>(webRequest.downloadHandler.text);
+                activeModifiers = modifiers;
                 onSuccess(modifiers);
             }
             else

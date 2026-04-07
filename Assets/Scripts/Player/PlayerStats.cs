@@ -40,6 +40,30 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ApplyBackendModifiers();
+    }
+
+    private void ApplyBackendModifiers()
+    {
+        if (PlayerManager.Instance != null && PlayerManager.Instance.activeModifiers != null)
+        {
+            PlayerModifiers mods = PlayerManager.Instance.activeModifiers;
+
+            damageMultiplier = mods.damageMultiplier;
+            xpGainMultiplier = mods.xpMultiplier;
+            goldGainMultiplier = mods.goldMultiplier;
+            luck = mods.luckMultiplier;
+
+            if (mods.startHpBonus > 0)
+            {
+                AddMaxHealth(mods.startHpBonus);
+            }
+
+            Debug.Log($"HP Bonus: {mods.startHpBonus}, Dmg: {damageMultiplier}");
+        }
+    }
     public void AddDamageMultiplier(float value) { damageMultiplier += value; }
     public void AddAttackSpeedMultiplier(float value) { attackSpeedMultiplier += value; }
     public void AddLuck(float value) { luck += value; }

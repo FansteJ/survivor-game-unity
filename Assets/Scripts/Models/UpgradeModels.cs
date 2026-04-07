@@ -31,4 +31,5 @@ public class PlayerModifiers
     public float startHpBonus;
     public int revives;
     public float luckMultiplier;
+    public float speedBonus;
 }
