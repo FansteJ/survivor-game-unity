@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 4474782226031027023}
   - component: {fileID: 53561927963846199}
   m_Layer: 5
-  m_Name: LevelText
+  m_Name: DurationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,4 +531,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LeaderboardEntryUI
   rankText: {fileID: 6931956016368643483}
   usernameText: {fileID: 470807124651827141}
-  levelText: {fileID: 53561927963846199}
+  durationText: {fileID: 53561927963846199}

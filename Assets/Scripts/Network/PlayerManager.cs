@@ -114,4 +114,67 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+
+    public void GetDailyQuests(Action<List<UserQuestDTO>> onSuccess, Action<string> onError)
+    {
+        StartCoroutine(GetDailyQuestsCoroutine(onSuccess, onError));
+    }
+
+    private IEnumerator GetDailyQuestsCoroutine(Action<List<UserQuestDTO>> onSuccess, Action<string> onError)
+    {
+        string token = ApiManager.Instance.GetToken();
+        string url = ApiManager.Instance.baseUrl + "/api/quests";
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            webRequest.SetRequestHeader("Authorization", "Bearer " + token);
+
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.Success)
+            {
+                var quests = JsonConvert.DeserializeObject<List<UserQuestDTO>>(webRequest.downloadHandler.text);
+                onSuccess(quests);
+            }
+            else
+            {
+                onError(webRequest.downloadHandler.text);
+            }
+        }
+    }
+
+    public void ClaimQuestReward(string questId, Action<string> onSuccess, Action<string> onError)
+    {
+        StartCoroutine(ClaimQuestRewardCoroutine(questId, onSuccess, onError));
+    }
+
+    private IEnumerator ClaimQuestRewardCoroutine(string questId, Action<string> onSuccess, Action<string> onError)
+    {
+        string token = ApiManager.Instance.GetToken();
+        string url = ApiManager.Instance.baseUrl + $"/api/quests/{questId}/claim";
+
+        using (UnityWebRequest webRequest = new UnityWebRequest(url, "POST"))
+        {
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("Authorization", "Bearer " + token);
+
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.Success)
+            {
+                ClaimRewardResponse response = JsonConvert.DeserializeObject<ClaimRewardResponse>(webRequest.downloadHandler.text);
+
+                if (ApiManager.Instance.CurrentProfile != null)
+                {
+                    ApiManager.Instance.CurrentProfile.gems = response.newGemBalance;
+                }
+
+                onSuccess("Claimed!");
+            }
+            else
+            {
+                onError(webRequest.downloadHandler.text);
+            }
+        }
+    }
 }

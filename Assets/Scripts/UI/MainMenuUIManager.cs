@@ -15,9 +15,11 @@ public class MainMenuUIManager : MonoBehaviour
     public Button shopButton;
     public Button leaderboardButton;
     public Button logoutButton;
+    public Button questButton;
 
     public ShopUIManager shopUIManager;
     public LeaderboardUIManager leaderboardUIManager;
+    public QuestUIManager questUIManager;
     void Start()
     {
         UserProfileDTO dto = ApiManager.Instance.CurrentProfile;
@@ -30,6 +32,10 @@ public class MainMenuUIManager : MonoBehaviour
         leaderboardButton.onClick.AddListener(() =>
         {
             leaderboardUIManager.OpenLeaderboard();
+        });
+        questButton.onClick.AddListener(() =>
+        {
+            questUIManager.OpenQuests();
         });
         logoutButton.onClick.AddListener(Logout);
     }
@@ -74,5 +80,13 @@ public class MainMenuUIManager : MonoBehaviour
     private void OnErrorStartGame(string error)
     {
         Debug.LogError(error);
+    }
+
+    public void RefreshUI()
+    {
+        if (ApiManager.Instance.CurrentProfile != null)
+        {
+            FillUI(ApiManager.Instance.CurrentProfile);
+        }
     }
 }

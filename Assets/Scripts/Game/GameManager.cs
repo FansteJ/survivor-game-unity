@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         request.gameSessionId = GameSessionManager.Instance.CurrentSessionId;
         request.durationSeconds = (int) duration;
         request.levelReached = ExperienceManager.Instance.CurrentLevel;
+        request.goldEarned = (long)CoinManager.Instance.TotalCoinsCollected;
 
         request.enemiesKilled = killsTracker.Values.ToList();
 

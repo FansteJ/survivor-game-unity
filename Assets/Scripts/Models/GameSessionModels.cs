@@ -15,6 +15,7 @@ public class FinishGameSessionRequest
     public string gameSessionId;
     public int durationSeconds;
     public int levelReached;
+    public long goldEarned;
     public List<EnemyKillDTO> enemiesKilled;
 }
 
