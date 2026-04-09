@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.5.0...v1.6.0) (2026-04-09)
+
+
+### Features
+
+* add Boss UI, fix animations, fix enemy damage scaling ([fa7541f](https://github.com/FansteJ/survivor-game-unity/commit/fa7541f0b59a0e3bf76516ad5a794b5804dbbfa0))
+* add Chaser enemy and Boss enemy, balance update ([fa47c68](https://github.com/FansteJ/survivor-game-unity/commit/fa47c68887e9008f8630f9aa414f760d9ea96d01))
+* add leaderboard panel and connect it with backend ([1527f2b](https://github.com/FansteJ/survivor-game-unity/commit/1527f2b126903de1b418cf77e9dd4377634feb38))
+* add NotificationManager, modify upgrades ([fa7f79b](https://github.com/FansteJ/survivor-game-unity/commit/fa7f79b2b6dba4bc4c11aa85f49120c8cddda7d7))
+* add quest panel and connect it with backend ([2399322](https://github.com/FansteJ/survivor-game-unity/commit/239932233ff6a3b868d9f41f56bdd690995b2a36))
+* add shop UI panel and connect shop with backend ([ed9f9ef](https://github.com/FansteJ/survivor-game-unity/commit/ed9f9efe4f60ef900545c383aa3602609eb8e593))
+* integrate real-time profile updates ([8337ca8](https://github.com/FansteJ/survivor-game-unity/commit/8337ca8e7128f91e0a3cab996bcfd24a1786a8b6))
+* modify waves, balance update, improve LoginUIManager and ChestUIManager ([b18cb68](https://github.com/FansteJ/survivor-game-unity/commit/b18cb6894de3030c6303fd416cb58e55efc496c1))
+* optimize gameplay, modify enemy movement ([26489d1](https://github.com/FansteJ/survivor-game-unity/commit/26489d1fe7371d38d1c048efb8326e9fdc3769cd))
+
 ## [1.5.0](https://github.com/FansteJ/survivor-game-unity/compare/v1.4.0...v1.5.0) (2026-04-01)
 
 
