@@ -80,15 +80,18 @@ public class PlayerHealth : MonoBehaviour
 
         currentHealth -= damage;
         OnHealthChange?.Invoke();
-        if (PlayerStats.Instance.Revives > 0)
+        if(currentHealth <= 0)
         {
-            RevivePlayer();
-        }
-        else
-        {
-            currentHealth = 0;
-            Die();
-        }
+            if (PlayerStats.Instance.Revives > 0)
+            {
+                RevivePlayer();
+            }
+            else
+            {
+                currentHealth = 0;
+                Die();
+            }
+        }   
     }
 
     private void Die()
