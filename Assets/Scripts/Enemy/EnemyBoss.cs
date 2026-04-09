@@ -27,6 +27,11 @@ public class EnemyBoss : MonoBehaviour
         {
             BossUIManager.Instance.ShowBossUI();
         }
+
+        if (NotificationManager.Instance != null)
+        {
+            NotificationManager.Instance.ShowNotification("BOSS SPAWNED!\n<size=50%>50% lifesteal penalty applied, slow applies over time!</size>");
+        }
     }
 
     void Update()
@@ -41,7 +46,7 @@ public class EnemyBoss : MonoBehaviour
         currentTime += Time.deltaTime;
         if (currentTime >= 1f)
         {
-            player.speed = player.speed * 0.99f;
+            player.Speed = player.Speed * 0.99f;
             currentTime = 0f;
         }
     }
@@ -50,7 +55,7 @@ public class EnemyBoss : MonoBehaviour
     {
         if (player != null)
         {
-            player.speed = 7f; // default value
+            player.Speed = 7f; // default value
         }
 
         if (BossUIManager.Instance != null)

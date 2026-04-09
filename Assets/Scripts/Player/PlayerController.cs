@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 7f;
+    private float speed = 7f;
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
     public float jumpforce = 5.0f;
 
     public LayerMask groundLayer;
@@ -77,5 +82,10 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position, Vector3.down, 1.01f, groundLayer);
+    }
+
+    public void AddSpeed(float speed)
+    {
+        this.speed += speed;
     }
 }

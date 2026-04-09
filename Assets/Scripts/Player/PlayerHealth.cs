@@ -14,6 +14,10 @@ public class PlayerHealth : MonoBehaviour
     public float regenTickRate = 0.5f;
     private float regenTimer = 0f;
 
+    [Header("Invulnerability")]
+    private bool isInvulnerable = false;
+    private float invulnerabilityTimer = 0f;
+
     private void Awake()
     {
         if(Instance == null)
@@ -35,6 +39,15 @@ public class PlayerHealth : MonoBehaviour
             {
                 Heal(PlayerStats.Instance.HealthRegen * regenTickRate);
                 regenTimer = 0f;
+            }
+        }
+
+        if (isInvulnerable)
+        {
+            invulnerabilityTimer -= Time.deltaTime;
+            if (invulnerabilityTimer <= 0)
+            {
+                isInvulnerable = false;
             }
         }
     }
@@ -63,9 +76,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
+
         currentHealth -= damage;
         OnHealthChange?.Invoke();
-        if (currentHealth <= 0)
+        if (PlayerStats.Instance.Revives > 0)
+        {
+            RevivePlayer();
+        }
+        else
         {
             currentHealth = 0;
             Die();
@@ -76,5 +95,21 @@ public class PlayerHealth : MonoBehaviour
     {
         Time.timeScale = 0;
         GameOverUIManager.Instance.ShowGameOver();
+    }
+
+    private void RevivePlayer()
+    {
+        PlayerStats.Instance.UseRevive();
+
+        currentHealth = maxHealth * 0.5f;
+
+        OnHealthChange?.Invoke();
+        isInvulnerable = true;
+        invulnerabilityTimer = 2.0f;
+
+        if (NotificationManager.Instance != null)
+        {
+            NotificationManager.Instance.ShowNotification("SECOND CHANCE!");
+        }
     }
 }

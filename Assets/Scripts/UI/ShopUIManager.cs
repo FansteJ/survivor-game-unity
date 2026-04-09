@@ -64,6 +64,7 @@ public class ShopUIManager : MonoBehaviour
         if (mainMenuManager != null)
         {
             mainMenuManager.goldText.SetText(response.remainingGold + " Gold");
+            mainMenuManager.gemsText.SetText(response.remainingGems + " Gems");
         }
 
         LoadShopItems();
@@ -71,7 +72,6 @@ public class ShopUIManager : MonoBehaviour
 
     private void OnError(string error)
     {
-        Debug.LogError("Neuspešna kupovina: " + error);
-        LoadShopItems();
+        Debug.LogError("Error: " + error);
     }
 }

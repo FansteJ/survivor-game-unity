@@ -8,6 +8,7 @@ public class UpgradeShopItemDTO
     public string name;
     public string description;
     public string effectType;
+    public string currencyType;
     public float value;
     public int level;
     public int maxLevel;
@@ -20,6 +21,7 @@ public class BuyUpgradeResponse
 {
     public int newLevel;
     public long remainingGold;
+    public long remainingGems;
 }
 
 [Serializable]
@@ -32,4 +34,6 @@ public class PlayerModifiers
     public int revives;
     public float luckMultiplier;
     public float speedBonus;
+    public float hpRegen;
+    public float lifesteal;
 }

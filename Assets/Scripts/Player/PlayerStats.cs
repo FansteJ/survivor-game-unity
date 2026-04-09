@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     private float critChance = 0.05f;
     private float critDamage = 2.0f;
     private float lethalStrikeChance = 0.00f;
+    private int revives = 0;
 
     public float DamageMultiplier => damageMultiplier;
     public float AttackSpeedMultiplier => attackSpeedMultiplier;
@@ -27,6 +28,8 @@ public class PlayerStats : MonoBehaviour
     public float CritChance => critChance;
     public float CritDamage => critDamage;
     public float LethalStrikeChance => lethalStrikeChance;
+    public int Revives => revives;
+
 
     private void Awake()
     {
@@ -54,7 +57,12 @@ public class PlayerStats : MonoBehaviour
             damageMultiplier = mods.damageMultiplier;
             xpGainMultiplier = mods.xpMultiplier;
             goldGainMultiplier = mods.goldMultiplier;
-            luck = mods.luckMultiplier;
+            luck = mods.luckMultiplier; 
+            lifeSteal = mods.lifesteal;
+            healthRegen += mods.hpRegen;
+            revives = mods.revives;
+            PlayerController controller = GetComponent<PlayerController>();
+            controller.AddSpeed(mods.speedBonus * controller.Speed);
 
             if (mods.startHpBonus > 0)
             {
@@ -76,4 +84,9 @@ public class PlayerStats : MonoBehaviour
     public void AddCritChance(float value) { critChance += value; }
     public void AddCritDamage(float value) { critDamage += value; }
     public void AddLethalStrikeChance(float value) { lethalStrikeChance += value; }
+
+    public void UseRevive()
+    {
+        if (revives > 0) revives--;
+    }
 }

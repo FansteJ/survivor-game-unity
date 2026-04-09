@@ -31,8 +31,14 @@ public class ShopItemUI : MonoBehaviour
         else
         {
             levelText.text = $"Lvl {item.level} -> {item.level + 1}";
-            buyButtonText.text = $"{item.cost} Gold";
-            buyButton.interactable = item.canBuy;
+            if(item.currencyType == "GOLD")
+            {
+                buyButtonText.text = $"{item.cost} Gold";
+            } else if (item.currencyType == "GEMS")
+            {
+                buyButtonText.text = $"{item.cost} Gems";
+            }
+                buyButton.interactable = item.canBuy;
 
             if (item.canBuy)
             {
