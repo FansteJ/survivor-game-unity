@@ -48,6 +48,9 @@ public class ChestSpawner : MonoBehaviour
     {
         existingChests--;
         chestsOpened++;
-        nextChestCost *= 1.2f;
+        if (nextChestCost >= 1000)
+            nextChestCost += 100f;
+        else
+            nextChestCost *= 1.2f;
     }
 }

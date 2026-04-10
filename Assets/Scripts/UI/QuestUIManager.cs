@@ -12,6 +12,7 @@ public class QuestUIManager : MonoBehaviour
     [Header("Main Menu")]
     public GameObject middleSection;
     public GameObject bottomBar;
+    public GameObject quitButton;
 
     private List<GameObject> spawnedItems = new List<GameObject>();
     private bool isLoading = false;
@@ -20,6 +21,7 @@ public class QuestUIManager : MonoBehaviour
     {
         middleSection.SetActive(false);
         bottomBar.SetActive(false);
+        quitButton.SetActive(false);
 
         questPanel.SetActive(true);
         LoadQuests();
@@ -30,6 +32,7 @@ public class QuestUIManager : MonoBehaviour
         questPanel.SetActive(false);
         middleSection.SetActive(true);
         bottomBar.SetActive(true);
+        quitButton.SetActive(true);
     }
 
     private void LoadQuests()

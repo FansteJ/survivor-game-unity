@@ -4,7 +4,7 @@ public class ApiManager : MonoBehaviour
 {
     public static ApiManager Instance { get; private set; }
 
-    public string baseUrl = "http://localhost:8080";
+    public string baseUrl = "https://survivor-game-backend-zq0s.onrender.com";
     private string token {  get; set; }
 
     public UserProfileDTO CurrentProfile { get; private set; }

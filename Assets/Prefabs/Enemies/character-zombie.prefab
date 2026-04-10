@@ -150,7 +150,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5784329069836609462}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b0496fcccd3cf543be60d60366ff89e, type: 3}
   m_Name: 
@@ -334,6 +334,7 @@ MonoBehaviour:
   attackRange: 20
   castTime: 4
   magicCooldown: 5
+  groundOffsetY: 0
   blueLaserVFX: {fileID: 5784329069836609462}
 --- !u!114 &5071839475983038310
 MonoBehaviour:

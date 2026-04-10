@@ -83,6 +83,8 @@ public class AuthManager : MonoBehaviour
                 onSuccess();
             } else
             {
+                Debug.LogError("Network error: " + webRequest.error);
+                Debug.LogError("Response: " + webRequest.downloadHandler.text);
                 onError(webRequest.downloadHandler.text);
             }
         }

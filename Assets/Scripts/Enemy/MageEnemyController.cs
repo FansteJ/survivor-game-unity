@@ -126,7 +126,7 @@ public class MageEnemyController : MonoBehaviour
         isCasting = true;
 
         if (animator != null) animator.SetBool("Attack", true);
-        // if (blueLaserVFX != null) blueLaserVFX.SetActive(true);
+        if (blueLaserVFX != null) blueLaserVFX.SetActive(true);
 
         float timer = 0f;
 
@@ -136,7 +136,7 @@ public class MageEnemyController : MonoBehaviour
             {
                 isCasting = false;
                 if (animator != null) animator.SetBool("Attack", false);
-                // if (blueLaserVFX != null) blueLaserVFX.SetActive(false);
+                if (blueLaserVFX != null) blueLaserVFX.SetActive(false);
                 yield break;
             }
 
@@ -153,7 +153,7 @@ public class MageEnemyController : MonoBehaviour
         }
 
         if (animator != null) animator.SetBool("Attack", false);
-        // if (blueLaserVFX != null) blueLaserVFX.SetActive(false);
+        if (blueLaserVFX != null) blueLaserVFX.SetActive(false);
 
         if (playerHealth != null)
         {
@@ -167,5 +167,10 @@ public class MageEnemyController : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
+
+        if (blueLaserVFX != null)
+        {
+            blueLaserVFX.SetActive(false);
+        }
     }
 }

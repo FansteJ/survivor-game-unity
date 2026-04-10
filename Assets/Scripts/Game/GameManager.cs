@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         if (GameSessionManager.Instance == null || GameSessionManager.Instance.CurrentSessionId == null)
         {
             Debug.LogWarning("No active game session, skipping FinishGame");
+            Time.timeScale = 1f;
             SceneManager.LoadScene("MainMenu");
             return;
         }
@@ -87,7 +88,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Run saved!");
 
         ApiManager.Instance.SetProfile(updatedProfile);
-   
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 

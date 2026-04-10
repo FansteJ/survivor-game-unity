@@ -38,7 +38,6 @@ public class GameOverUIManager : MonoBehaviour
 
     private void MainMenu()
     {
-        Time.timeScale = 1;
         mainMenuButton.interactable = false;
         GameManager.Instance.SaveRunData();
     }

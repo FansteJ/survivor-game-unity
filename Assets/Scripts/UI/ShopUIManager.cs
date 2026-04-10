@@ -12,6 +12,7 @@ public class ShopUIManager : MonoBehaviour
     [Header("Main Menu")]
     public GameObject middleSection;
     public GameObject bottomBar;
+    public GameObject quitButton;
 
     private List<GameObject> spawnedItems = new List<GameObject>();
 
@@ -19,6 +20,7 @@ public class ShopUIManager : MonoBehaviour
     {
         middleSection.SetActive(false);
         bottomBar.SetActive(false);
+        quitButton.SetActive(false);
 
         shopPanel.SetActive(true);
         LoadShopItems();
@@ -30,6 +32,7 @@ public class ShopUIManager : MonoBehaviour
 
         middleSection.SetActive(true);
         bottomBar.SetActive(true);
+        quitButton.SetActive(true);
     }
 
     private void LoadShopItems()

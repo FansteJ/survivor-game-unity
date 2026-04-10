@@ -12,6 +12,7 @@ public class LeaderboardUIManager : MonoBehaviour
     [Header("Main Menu")]
     public GameObject middleSection;
     public GameObject bottomBar;
+    public GameObject quitButton;
 
     private List<GameObject> spawnedItems = new List<GameObject>();
 
@@ -19,6 +20,7 @@ public class LeaderboardUIManager : MonoBehaviour
     {
         middleSection.SetActive(false);
         bottomBar.SetActive(false);
+        quitButton.SetActive(false);
 
         leaderboardPanel.SetActive(true);
         LoadLeaderboardItems();
@@ -29,6 +31,7 @@ public class LeaderboardUIManager : MonoBehaviour
         leaderboardPanel.SetActive(false);
         middleSection.SetActive(true);
         bottomBar.SetActive(true);
+        quitButton.SetActive(true);
     }
 
     private void LoadLeaderboardItems()
